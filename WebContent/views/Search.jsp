@@ -14,7 +14,7 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Search.css">
-	<script language="javascript"
+	 <script language="javascript"
 		src="<%=request.getContextPath()%>/js/Search.js"></script>
 </head>
 <body onload="checkView('${chooseView}','${endPage}')">
@@ -22,8 +22,8 @@
 		<h3>Hello ${userName}</h3>
 		<hr style="padding: 0.1%; background-color: red;" />
 		
-		<input type="text" id="page" name="page" ReadOnly value="${page}" />
-		<input type="text" id="endPage" name="endPage" ReadOnly value="${endPage}" />
+		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
+		<input type="hidden" id="endPage" name="endPage" ReadOnly value="${endPage}" />
 		<input type="hidden" id="listNodeChecked" name="listNodeChecked" ReadOnly value="" />
 		<label for="cars">Choose View:</label>
 

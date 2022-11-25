@@ -43,10 +43,7 @@
 									<div id="password_error">Please fill you password</div>
 									<div id="password_error1">Password requires 6 characters</div>
 								</div>
-								<div class="form-check form-check-inline mb-0">
-									<input type="checkbox" class="form-check-input" name="remember"
-										id="remember" /> <label for="remember">Remember</label>
-								</div>
+							
 								<button onclick="validate();email_Verify();password_Verify()"
 									class="btn btn-lg btn-success btn-block" type="submit"
 									id="twofuns">Login</button>

@@ -64,7 +64,7 @@ public class SearchCompany extends HttpServlet {
 			session.setAttribute("chooseView", chooseView);
 		}
 		
-		if (buttonAddDelete.equals("")) {
+		if (buttonAddDelete!=null) {
 			if (buttonAddDelete.equals("add")) {
 				request.getRequestDispatcher("/views/Edit.jsp").forward(request, response);
 				return;
