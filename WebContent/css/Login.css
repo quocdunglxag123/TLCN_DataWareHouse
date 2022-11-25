@@ -1,0 +1,18 @@
+@charset "UTF-8";
+body {
+	padding-top: 10%;
+	background-color: rgb(245, 245, 245);
+}
+
+form label {
+	display: inline-block;
+	width: 100px;
+}
+.form-login #email_error, .form-login #password_error, .form-login #email_error1,
+	.form-login #password_error1 {
+	margin-top: 5px;
+	width: 345px;
+	font-size: 18px;
+	color: #C62828;
+	display: none;
+}
