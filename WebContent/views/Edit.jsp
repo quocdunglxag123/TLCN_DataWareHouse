@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,35 +30,78 @@
 					<div class="panel-body">
 						<p style="margin: 0; padding: 0; color: red">${message}</p>
 						<form action="EditCompany" method="post" class="form-login" id="form-login" name="form">
-							<fieldset>
-								<div class="form-group">
-									<input class="form-control" id="companyId" name="companyId" type="text" value="${company.id}" readonly >
-								</div>
-								<div class="form-group">
-									<input class="form-control"  placeholder="Symbol" id="companySymbol" name="companySymbol" type="text" value="${company.symbol}" required >
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Name"  name="companyName" value="${company.name}" >
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Major"  name="companyMajor" value="${company.major}" >
-									
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Phone"  name="companyPhone" value="${company.phone}" >
-									
-								</div>
-								<div class="form-group"  >
-									<textarea style="resize: none;" name="companyInfo" rows="4" cols="40">${company.info}</textarea>
-									<%-- <input class="form-control" placeholder="Info"  name="companyInfo" value="${company.info}" > --%>
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Address"  name="companyAddress" value="${company.address}" >
-								</div>
-								<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<c:if test="${chooseView == 'viewCompany'}">
+								<fieldset>
+									<div class="form-group">
+										<input class="form-control" id="companyId" name="companyId" type="text" value="${company.id}" readonly >
+									</div>
+									<div class="form-group">
+										<input class="form-control"  placeholder="Symbol" id="companySymbol" name="companySymbol" type="text" value="${company.symbol}" required >
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Name"  name="companyName" value="${company.name}" >
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Major"  name="companyMajor" value="${company.major}" >
+										
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Phone"  name="companyPhone" value="${company.phone}" >
+											
+									</div>
+									<div class="form-group"  >
+										<textarea style="resize: none;" name="companyInfo" rows="4" cols="40">${company.info}</textarea>
+										<%-- <input class="form-control" placeholder="Info"  name="companyInfo" value="${company.info}" > --%>
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Address"  name="companyAddress" value="${company.address}" >
+									</div>
+									<button value="edit" name="buttonEdit" type="submit">Submit</button>
 
-							</fieldset>
-						
+								</fieldset>
+							</c:if>
+							<c:if test="${chooseView == 'viewDateTrade'}">
+								<fieldset>
+									<div class="form-group">
+										<input class="form-control" id="companyId" name="companyId" type="text" value="${dimDate.id}" readonly >
+									</div>
+									<div class="form-group">
+										<input class="form-control"  placeholder="Symbol" id="companySymbol" name="companySymbol" type="text" value="${dimDate.dateTrade}" required >
+									</div>
+									<button value="edit" name="buttonEdit" type="submit">Submit</button>
+
+								</fieldset>
+							</c:if>
+							<c:if test="${chooseView == 'viewFactTrade'}">
+								<fieldset>
+									<div class="form-group">
+										<input class="form-control" id="companyId" name="companyId" type="text" value="${company.id}" readonly >
+									</div>
+									<div class="form-group">
+										<input class="form-control"  placeholder="Symbol" id="companySymbol" name="companySymbol" type="text" value="${company.symbol}" required >
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Name"  name="companyName" value="${company.name}" >
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Major"  name="companyMajor" value="${company.major}" >
+										
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Phone"  name="companyPhone" value="${company.phone}" >
+											
+									</div>
+									<div class="form-group"  >
+										<textarea style="resize: none;" name="companyInfo" rows="4" cols="40">${company.info}</textarea>
+										<%-- <input class="form-control" placeholder="Info"  name="companyInfo" value="${company.info}" > --%>
+									</div>
+									<div class="form-group">
+										<input class="form-control" placeholder="Address"  name="companyAddress" value="${company.address}" >
+									</div>
+									<button value="edit" name="buttonEdit" type="submit">Submit</button>
+
+								</fieldset>
+							</c:if>
 						</form>
 					</div>
 				</div>
