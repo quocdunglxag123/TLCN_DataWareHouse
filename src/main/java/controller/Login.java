@@ -26,6 +26,8 @@ public class Login extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		clearAllSession(session);
 		request.getRequestDispatcher("/views/Login.jsp").forward(request, response);
 	}
 
@@ -43,13 +45,11 @@ public class Login extends HttpServlet {
 			if (userDB.getUserId() != null) {
 				session.setAttribute("user", userDB);
 				session.setAttribute("userName", userDB.getUserName());
-				session.setAttribute("page", "0");
-				session.setAttribute("chooseView", "viewCompany");
-				session.setAttribute("isReturnSearch", "0");
 				request.getRequestDispatcher("SearchCompany").forward(request, response);
 				return;
 			}
 		}
+		
 		request.getRequestDispatcher("/views/Login.jsp").forward(request, response);
 
 	}
@@ -63,13 +63,23 @@ public class Login extends HttpServlet {
 		session.setAttribute("page", "0");
 		session.setAttribute("user", "");
 		session.setAttribute("userName", "");
-	}
+		session.setAttribute("chooseView", "viewCompany");
+		session.setAttribute("isReturnSearch", "0");
+		System.out.println("Clear: "+ session.getAttribute("user"));
 
+	}
+	/**
+	 * check Login
+	 * 
+	 * @param HttpSession session
+	 * @return boolean login or not
+	 */
 	public static boolean checkLogin(HttpSession session) {
-		if (session.getAttribute("user") != null) {
-			return true;
+		System.out.println("Check: "+ session.getAttribute("user"));
+		if (session.getAttribute("user") == null || session.getAttribute("user").equals("")) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 }

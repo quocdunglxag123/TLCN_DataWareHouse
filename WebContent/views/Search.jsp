@@ -20,6 +20,7 @@
 <body onload="checkView('${chooseView}','${endPage}')">
 	<form action="SearchCompany" id="ViewCompany" method="post" onsubmit="listNodeCheckedLogic()" class="form-login">
 		<h3>Hello ${userName}</h3>
+		<a href="Login">Logout</a>
 		<hr style="padding: 0.1%; background-color: red;" />
 		
 		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
@@ -165,7 +166,7 @@
 			</tr>
 		</table>
 		</c:if>
-		<a href="/Project_DataEngineering/views/Edit.jsp"><button type="button" name="buttonAddDelete" value="add">Add New</button></a>
+		<a href="EditCompany"><button type="button" name="buttonAddDelete" value="add">Add New</button></a>
 		<button type="submit" name="buttonAddDelete" value="delete">Delete</button>
 	</form>
 </body>

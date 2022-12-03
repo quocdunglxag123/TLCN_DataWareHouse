@@ -28,7 +28,7 @@
 					</div>
 					<div class="panel-body">
 						<p style="margin: 0; padding: 0; color: red">${message}</p>
-						<form action="/Project_DataEngineering/EditCompany" method="post" class="form-login" id="form-login" name="form">
+						<form action="EditCompany" method="post" class="form-login" id="form-login" name="form">
 							<c:if test="${chooseView == 'viewCompany'}">
 								<fieldset>
 									<div class="form-group">
@@ -54,7 +54,6 @@
 									<div class="form-group">
 										<input class="form-control" placeholder="Address"  name="companyAddress" value="${company.address}" >
 									</div>
-									<button value="edit" name="buttonEdit" type="submit">Submit</button>
 
 								</fieldset>
 							</c:if>
@@ -66,7 +65,6 @@
 									<div class="form-group">
 										<input class="form-control"  placeholder="Date Trade" id="dateTrade" name="dateTrade" type="text" value="${dateTradeDto.dateTrade}" required >
 									</div>
-									<button value="edit" name="buttonEdit" type="submit">Submit</button>
 
 								</fieldset>
 							</c:if>
@@ -114,10 +112,9 @@
 									<div class="form-group">
 										<input class="form-control"  placeholder="total_marketcapitalization Trade" id="total_marketcapitalization" name="total_marketcapitalization" type="text" value="${factTrade.total_marketcapitalization}">
 									</div>
-									<button value="edit" name="buttonEdit" type="submit">Submit</button>
-
 								</fieldset>
 							</c:if>
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
 							<button type="reset">Reset Value</button>
 							<a href="SearchCompany"><button type="button">Cancel</button></a>
 						</form>

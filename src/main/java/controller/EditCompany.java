@@ -51,7 +51,7 @@ public class EditCompany extends HttpServlet {
 			if (chooseView.equals("viewCompany")) {
 				// Get View Company --> Dim_Company
 				String companyId = (String) request.getParameter("companyId");
-
+	
 				if (buttonEdit != null) {
 					// set Data company from input edit view
 					Company companyInput = new Company();
@@ -76,14 +76,15 @@ public class EditCompany extends HttpServlet {
 					
 				}
 				// get company by Id To show Edit
-				Company company = daoEditCompany.getCompanyById(companyId);
-				request.setAttribute("company", company);
+				if(companyId != null) {
+					Company company = daoEditCompany.getCompanyById(companyId);
+					request.setAttribute("company", company);
+				}
 
 			} else if (chooseView.equals("viewDateTrade")) {
 				// Get View Date Trade --> Fact_Trade
 				DateTrade dateTradeInput = new DateTrade();
 				String dateTradeId = (String) request.getParameter("dateTradeId");
-
 				
 				if (buttonEdit != null) {
 					// Set data date from input edit view
@@ -101,8 +102,10 @@ public class EditCompany extends HttpServlet {
 					}
 				}
 				// Get date trade by Id To show Edit
-				DateTrade dateTradeDto = daoDateTradeImpl.getDateTradeById(dateTradeId);
-				request.setAttribute("dateTradeDto", dateTradeDto);
+				if (dateTradeId != null) {
+					DateTrade dateTradeDto = daoDateTradeImpl.getDateTradeById(dateTradeId);
+					request.setAttribute("dateTradeDto", dateTradeDto);
+				}
 			} else if (chooseView.equals("viewFactTrade")) {
 				// Get View Fact Trade --> Fact_Trade
 				FactTrade factTradeInput = new FactTrade();
@@ -139,8 +142,10 @@ public class EditCompany extends HttpServlet {
 					}
 				}
 				// Get date trade by Id To show Edit
-				FactTrade factTrade = daoFactTradeImpl.getFactTradeById(factTradeId);
-				request.setAttribute("factTrade", factTrade);
+				if (factTradeId != null) {
+					FactTrade factTrade = daoFactTradeImpl.getFactTradeById(factTradeId);
+					request.setAttribute("factTrade", factTrade);
+				}
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
