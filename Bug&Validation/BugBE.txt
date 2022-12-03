@@ -1,0 +1,5 @@
+Bug:
++ Cannot insert/Update Vietnamese language
++ cannot delete All Dim (foreign key)
++ Not Load New Data On Page When CRUD Successfully
++ Duplicate Fact_Trade

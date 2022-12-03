@@ -8,7 +8,6 @@ import java.util.List;
 
 import connection.DBConnection;
 import dao.DaoFactTrade;
-import model.Company;
 import model.FactTrade;
 
 public class DaoFactTradeImpl implements DaoFactTrade {
@@ -115,7 +114,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	@Override
 	public FactTrade getFactTradeById(String id) {
 		FactTrade FactTrade = new FactTrade();
-		String query = "select * from Dim_FactTrade where id =?";
+		String query = "select * from Fact_Trade where id =?";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -139,8 +138,8 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 */
 	@Override
 	public void editFactTrade(FactTrade factTrade) {
-		String query = "update Dim_Company "
-				+ "set id_date = ?,id_company= ?, price_reference =?, price_close =?, price_ceiling=?, price_floor=?, "
+		String query = "update Fact_Trade "
+				+ "set id_date = ?,id_company= ?, price_reference =?, price_open =?,price_close =?, price_ceiling=?, price_floor=?, "
 				+ "mean=?, volatility=?, volatility_percent=?, total_volume=?, total_price=?, total_marketcapitalization=? "
 				+ "where id = ?;";
 		try {

@@ -6,7 +6,7 @@ import java.sql.Connection;
 
 public class DBConnection {
 	public static Connection getConnection() throws Exception {
-		String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
+		String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName+"";
 		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		return DriverManager.getConnection(url, userID, password);
 	}

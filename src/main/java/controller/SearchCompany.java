@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DaoDateTrade;
 import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
 import dao.Impl.DaoFactTradeImpl;
@@ -44,85 +43,70 @@ public class SearchCompany extends HttpServlet {
 		}
 
 		// get input from jsp
-		String page = request.getParameter("page");
+		String page = request.getParameter("page");//trang page hien thi
 		String buttonAddDelete = request.getParameter("buttonAddDelete");
-		String listNodeChecked = request.getParameter("listNodeChecked");
 		String chooseView = (String) request.getParameter("chooseView");
 
-		// Truong hop page gui ve tu jsp khac null
+		
 		if (page != null) {
+			// Truong hop page gui ve tu jsp khac null
 			session.setAttribute("page", page);
 		} else {
 			// Truong hop page gui ve tu jsp la null
 			page = (String) session.getAttribute("page");
 		}
 		if (chooseView == null) {
+			//Truong hop chooseView Null--> Login To Search
 			chooseView = (String) session.getAttribute("chooseView");
 		} else if (!chooseView.equals((String) session.getAttribute("chooseView"))) {
+			//Truong hop chooseView khac voi chooseView on session --> Thay doi View
 			page = "0";
 			session.setAttribute("page", page);
 			session.setAttribute("chooseView", chooseView);
 		}
 		
 		if (buttonAddDelete!=null) {
-			if (buttonAddDelete.equals("add")) {
-				request.getRequestDispatcher("/views/Edit.jsp").forward(request, response);
-				return;
+			//Truong hop button add or delete duoc click
+			if (session.getAttribute("isReturnSearch").equals("0")) {
+				//Truong hop add or delete
+				if (buttonAddDelete.equals("add")) {
+					//Truong hop button add
+					//request.getRequestDispatcher("/views/Edit.jsp").forward(request, response);
+					//return;
+				}else {
+					//Truong hop button Delete
+					request.getRequestDispatcher("DeleteRecord").forward(request, response);
+					return;
+				}
+			}else {
+				//Set lai gia tri isReturnSearch on session sau khi delete or add return
+				session.setAttribute("isReturnSearch", "0");
 			}
+			
 		}
 
-		// Truong hop chosse view company
+		//Logic Show View
 		if (chooseView.equals("viewCompany")) {
+			// Truong hop chosse view company
 			List<Company> companies = daoCompanyImpl.getCompanyByPage(page);
-			int endPage = daoCompanyImpl.getEndPageCompany();
-			// Truong hop nhap vao button tren man hinh search
-			if (buttonAddDelete != null) {
-				// truong hop nhap button delete
-				if (buttonAddDelete.equals("delete")) {
-					// ********Delete False Because "The DELETE statement conflicted with the
-					// REFERENCE constraint "Fact_Company"" *******
-					// daoCompanyImpl.deleteCompany(listNodeChecked);
-				}
-			}
+			int endPage = daoCompanyImpl.getEndPageCompany();			
 			request.setAttribute("list", companies);
 			request.setAttribute("endPage", endPage);
-		}
-
-		// Truong hop chosse view Date Trade
-		if (chooseView.equals("viewDateTrade")) {
+		}else if (chooseView.equals("viewDateTrade")) {
+			// Truong hop chosse view Date Trade
 			List<DateTrade> dateTrades = daoDateTradeImpl.getDateTradeByPage(page);
 			int endPage = daoDateTradeImpl.getEndPageDateTrade();
-			// Truong hop nhap vao button tren man hinh search
-			if (buttonAddDelete != null) {
-				// truong hop nhap button delete
-				if (buttonAddDelete.equals("delete")) {
-					// ********Delete False Because "The DELETE statement conflicted with the
-					// REFERENCE constraint "Fact_Company"" *******
-					// daoCompanyImpl.deleteCompany(listNodeChecked);
-				}
-
-			}
 			request.setAttribute("list", dateTrades);
 			request.setAttribute("endPage", endPage);
-		}
-		// Truong hop chosse view Fact-Trade
-		if (chooseView.equals("viewFactTrade")) {
+		}else if (chooseView.equals("viewFactTrade")) {
+			// Truong hop chosse view Fact-Trade
 			List<FactTrade> factTrades = daoFactTradeImpl.getFactTradeByPage(page);
 			int endPage = daoFactTradeImpl.getEndPageFactTrade();
-			// Truong hop nhap vao button tren man hinh search
-			if (buttonAddDelete != null) {
-				// truong hop nhap button delete
-				if (buttonAddDelete.equals("delete")) {
-					// ********Delete False Because "The DELETE statement conflicted with the
-					// REFERENCE constraint "Fact_Company"" *******
-					daoFactTradeImpl.deleteFactTrade(listNodeChecked);
-				}
-
-			}
 			request.setAttribute("list", factTrades);
 			request.setAttribute("endPage", endPage);
 		}
 
+		//Set Value To Search JSP
 		request.setAttribute("chooseView", chooseView);
 		request.setAttribute("page", page);
 		request.setAttribute("userName", (String) session.getAttribute("userName"));

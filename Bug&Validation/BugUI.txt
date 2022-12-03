@@ -1,0 +1,6 @@
+Validate:
+ - Search Screen:
+	+ Not Check Id and click Delete --> Alert("Cannot Delete Because Id CheckBox Is Not Check ")
+ - All Screen:
+ 	+ When Add/Edit/Delete success --> Alert("<Add/Edit/Delete> Successfully")
+ 
