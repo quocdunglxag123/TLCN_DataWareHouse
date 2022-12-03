@@ -18,6 +18,7 @@
 		src="<%=request.getContextPath()%>/js/Search.js"></script>
 </head>
 <body onload="checkView('${chooseView}','${endPage}')">
+<jsp include>
 	<form action="SearchCompany" id="ViewCompany" method="post" onsubmit="listNodeCheckedLogic()" class="form-login">
 		<h3>Hello ${userName}</h3>
 		<hr style="padding: 0.1%; background-color: red;" />
