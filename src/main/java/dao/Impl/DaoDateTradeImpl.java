@@ -112,7 +112,7 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	@Override
 	public DateTrade getDateTradeById(String id) {
 		DateTrade dateTrade = new DateTrade();
-		String query = "select * from Dim_Company where id =?";
+		String query = "select * from Dim_Date where id =?";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -152,7 +152,7 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	 */
 	@Override
 	public void addDateTrade(DateTrade dateTrade) {
-		String query = "INSERT INTO Dim_Company(dateTrades) VALUES (?)";
+		String query = "INSERT INTO Dim_Date(dateTrades) VALUES (?)";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);

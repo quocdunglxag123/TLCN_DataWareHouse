@@ -45,6 +45,7 @@ public class Login extends HttpServlet {
 				session.setAttribute("userName", userDB.getUserName());
 				session.setAttribute("page", "0");
 				session.setAttribute("chooseView", "viewCompany");
+				session.setAttribute("isReturnSearch", "0");
 				request.getRequestDispatcher("SearchCompany").forward(request, response);
 				return;
 			}

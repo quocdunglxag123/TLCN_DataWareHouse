@@ -1,4 +1,3 @@
-
 //--------------------------Xu Ly Check Box---------------------------------------
 //Kiem tra check Root
 function checkRoot() {

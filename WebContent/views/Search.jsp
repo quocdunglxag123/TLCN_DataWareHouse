@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
+
+<meta  charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>View Data</title>
 <link
@@ -101,7 +101,7 @@
 								<td class="td-son"><input type="checkbox" id="node"  onChange="checkNode()"
 									name="node" value="${item.id}"></td>
 								<td class="td-son"><a
-									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
+									href="EditCompany?dateId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.dateTrade}</td>
 								
 							</tr>
@@ -144,7 +144,7 @@
 								<td class="td-son"><input type="checkbox" id="node"  onChange="checkNode()"
 									name="node" value="${item.id}"></td>
 								<td class="td-son"><a
-									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
+									href="EditCompany?factTradeId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.id_date}</td>
 								<td class="td-son">${item.id_company}</td>
 								<td class="td-son">${item.price_reference}</td>
@@ -165,7 +165,7 @@
 			</tr>
 		</table>
 		</c:if>
-		<button type="submit" name="buttonAddDelete" value="add">Add New</button>
+		<a href="/Project_DataEngineering/views/Edit.jsp"><button type="button" name="buttonAddDelete" value="add">Add New</button></a>
 		<button type="submit" name="buttonAddDelete" value="delete">Delete</button>
 	</form>
 </body>
