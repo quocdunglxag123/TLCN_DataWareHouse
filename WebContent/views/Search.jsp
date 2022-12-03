@@ -10,7 +10,8 @@
 <title>View Data</title>
 
 
-<link rel="stylesheet" href="search.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Search.css">
 </head>
 <body onload="checkView('${chooseView}','${endPage}')">
 	
