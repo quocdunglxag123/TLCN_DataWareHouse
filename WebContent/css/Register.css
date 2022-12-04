@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 @charset "UTF-8";
 body {
 	padding-top: 2%;
@@ -34,7 +35,7 @@ form label {
   flex-direction: column;
   position: absolute;
   place-content: center;
-  height: 35%;
+  height: 47%;
   width: 35%;
 }
 @media (max-width: 900px) {
@@ -59,7 +60,7 @@ form label {
 }
 .left {
   background: white;
-  height: calc(100% - 40px);
+  height: 60%;
   top: 20px;
   position: relative;
   width: 50%;
@@ -91,7 +92,7 @@ form label {
   box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
   color: #F1F1F2;
   position: relative;
-  width: 50%;
+  width: 70%;
   border: none;
   border-radius: 5%;
 }
@@ -101,6 +102,9 @@ form label {
     height: 100%;
     width: 100%;
     max-height: 350px;
+  }
+  p .a{
+    margin: 50%;
   }
 }
 svg {
@@ -155,14 +159,14 @@ input {
 a{
     color: #d0d0d2;
     text-decoration: none;
-    margin: 8% 10%;
-
+    margin: 8% 28% 15%;
 }
 a:hover {
     color: #f2f2f2;
 }
-p{
+p .a{
   text-align: center;
+    margin-bottom: 10%;
 }
 .cicle-1{
   position: absolute;

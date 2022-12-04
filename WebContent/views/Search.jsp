@@ -5,7 +5,7 @@
 <html>
 <head>
 
-<meta  charset="UTF-8" name="viewport"
+<meta charset="UTF-8" name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>View Data</title>
 <link
@@ -14,58 +14,81 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Search.css">
-	 <script language="javascript"
-		src="<%=request.getContextPath()%>/js/Search.js"></script>
+<script language="javascript"
+	src="<%=request.getContextPath()%>/js/Search.js"></script>
 </head>
 <body onload="checkView('${chooseView}','${endPage}')">
-	<form action="SearchCompany" id="ViewCompany" method="post" onsubmit="listNodeCheckedLogic()" class="form-login">
-		<h3>Hello ${userName}</h3>
-		<a href="Login">Logout</a>
-		<hr style="padding: 0.1%; background-color: red;" />
-		
+	<form action="SearchCompany" id="ViewCompany" method="post"
+		onsubmit="listNodeCheckedLogic()" class="form-login">
+		<div class="header">
+			<div class="left">
+				<h3>Hello ${userName}</h3>
+			</div>
+			<div class="right">
+				<a href="Login" class="logout">Logout</a>
+			</div>
+		</div>
+
 		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
-		<input type="hidden" id="endPage" name="endPage" ReadOnly value="${endPage}" />
-		<input type="hidden" id="listNodeChecked" name="listNodeChecked" ReadOnly value="" />
-		<label for="cars">Choose View:</label>
+		<input type="hidden" id="endPage" name="endPage" ReadOnly
+			value="${endPage}" /> <input type="hidden" id="listNodeChecked"
+			name="listNodeChecked" ReadOnly value="" />
+		<div class="select">
+			<label for="cars">ChooseView:</label> <select name="chooseView"
+				id="chooseView">
+				<option value="viewCompany">View Company</option>
+				<option value="viewDateTrade">View Date</option>
+				<option value="viewFactTrade">View Fact</option>
+			</select>
+			<button type="submit">choose</button>
+		</div>
 
-		<select name="chooseView" id="chooseView">
-  			<option value="viewCompany">View Company</option>
-  			<option value="viewDateTrade">View Date</option>
-  			<option value="viewFactTrade">View Fact</option>
-		</select>
-		<button type="submit">choose</button>
-		<hr style="padding: 0.1%; background-color: red;" />
-	
-		<button onClick="firstPageLogic()" id="firstPage" type="button"><<</button>
-		<button onClick="previousPageLogic()" id="previousPage" type="button"><</button>
-		<button onClick="nextPageLogic('${endPage}')" id="nextPage" type="button">></button>
-		<button onClick="lastPageLogic('${endPage}')" id="lastPage" type="button">>></button>
+		<div class="crud">
+			<a href="EditCompany"><button type="button"
+					name="buttonAddDelete" value="add">Add New</button></a>
+			<button type="submit" name="buttonAddDelete" value="delete">Delete</button>
+		</div>
 
-		<hr style="padding: 0.1%; background-color: red;" />
+		<div class="btn">
+			<div class="gr-1">
+				<button onClick="firstPageLogic()" id="firstPage" type="button">&lt;&lt;</button>
+				<button onClick="previousPageLogic()" id="previousPage"
+					type="button">&lt;</button>
+			</div>
+			<div class="gr-2">
+				<button onClick="nextPageLogic('${endPage}')" id="nextPage"
+					type="button">&gt;</button>
+				<button onClick="lastPageLogic('${endPage}')" id="lastPage"
+					type="button">&gt;&gt;</button>
+			</div>
+		</div>
+
+
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
-		<table class="table-main">
-			<tr class="tr-main">
-				<th class="th-main">View Company List</th>
-			</tr>
-			<tr class="tr-main">
-				<td class="td-main">
-					<table class="table-son">
-						<tr class="tr-son">
-							<th class="th-son"><input type="checkbox" id="root"
+
+			<div class="container">
+				<h2>View Company List</h2>
+				<table class="responsive-table">
+					<thead>
+						<tr class="table-header">
+							<th class="col col-1"><input type="checkbox" id="root"
 								name="root" onChange="checkRoot()"></th>
-							<th class="th-son">ID</th>
-							<th class="th-son">Symbol</th>
-							<th class="th-son">Name</th>
-							<th class="th-son">Major</th>
-							<th class="th-son">Phone</th>
-							<th class="th-son">Info</th>
-							<th class="th-son">Address</th>
+							<th class="col col-2">ID</th>
+							<th class="col col-3">Symbol</th>
+							<th class="col col-4">Name</th>
+							<th class="col col-5">Major</th>
+							<th class="col col-6">Phone</th>
+							<th class="col col-7">Info</th>
+							<th class="col col-8">Address</th>
 						</tr>
-						<c:forEach items="${list}" var="item">
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="item" >
+
 							<tr class="tr-son">
-								<td class="td-son"><input type="checkbox" id="node"  onChange="checkNode()"
-									name="node" value="${item.id}"></td>
+								<td class="td-son"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
 									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.symbol}</td>
@@ -76,74 +99,76 @@
 								<td class="td-son">${item.address}</td>
 							</tr>
 						</c:forEach>
-					</table> 
-				</td>
-			</tr>
-		</table>
+
+					</tbody>
+				</table>
+			</div>
+			
 		</c:if>
-		
+
 		<!-- View Date -->
 		<c:if test="${chooseView == 'viewDateTrade'}">
-		<table class="table-main">
-			<tr class="tr-main">
-				<th class="th-main">View Date Trade List</th>
-			</tr>
-			<tr class="tr-main">
-				<td class="td-main">
-					<table class="table-son">
-						<tr class="tr-son">
-							<th class="th-son"><input type="checkbox" id="root"
+
+			<div class="container">
+				<h2>View Date Trade List</h2>
+				<table class="responsive-table">
+					<thead>
+						<tr class="table-header">
+							<th class="col col-1"><input type="checkbox" id="root"
 								name="root" onChange="checkRoot()"></th>
-							<th class="th-son">ID</th>
-							<th class="th-son">Date Trade</th>
+							<th class="col col-2">ID</th>
+							<th class="col col-3">Date Trade</th>
 						</tr>
+					</thead>
+					<tbody>
 						<c:forEach items="${list}" var="item">
+
 							<tr class="tr-son">
-								<td class="td-son"><input type="checkbox" id="node"  onChange="checkNode()"
-									name="node" value="${item.id}"></td>
+								<td class="td-son"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
 									href="EditCompany?dateId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.dateTrade}</td>
-								
 							</tr>
 						</c:forEach>
-					</table> 
-				</td>
-			</tr>
-		</table>
+
+					</tbody>
+				</table>
+			</div>
 		</c:if>
-		
+
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
-		<table class="table-main">
-			<tr class="tr-main">
-				<th class="th-main">View Fact Trade List</th>
-			</tr>
-			<tr class="tr-main">
-				<td class="td-main">
-					<table class="table-son">
-						<tr class="tr-son">
-							<th class="th-son"><input type="checkbox" id="root"
+
+			<div class="container">
+				<h2>View Fact Trade List</h2>
+				<table class="responsive-table">
+					<thead>
+						<tr class="table-header">
+							<th class="col col-1"><input type="checkbox" id="root"
 								name="root" onChange="checkRoot()"></th>
-							<th class="th-son">ID</th>
-							<th class="th-son">Id Date</th>
-							<th class="th-son">Id Company</th>
-							<th class="th-son">Price Reference</th>
-							<th class="th-son">Price Open</th>
-							<th class="th-son">Price Close</th>
-							<th class="th-son">Price Ceiling</th>
-							<th class="th-son">Price Floor</th>
-							<th class="th-son">Mean</th>
-							<th class="th-son">Volatility</th>
-							<th class="th-son">Volatility Percent</th>
-							<th class="th-son">Total Volume</th>
-							<th class="th-son">Total Price</th>
-							<th class="th-son">Total Marketcapitalization</th>
+							<th class="col col-2">ID</th>
+							<th class="col col-3">Id Date</th>
+							<th class="col col-4">Id Company</th>
+							<th class="col col-5">Price Reference</th>
+							<th class="col col-6">Price Open</th>
+							<th class="col col-7">Price Close</th>
+							<th class="col col-8">Price Ceiling</th>
+							<th class="col col-9">Price Floor</th>
+							<th class="col col-10">Mean</th>
+							<th class="col col-11">Volatility</th>
+							<th class="col col-12">Volatility Percent</th>
+							<th class="col col-13">Total Volume</th>
+							<th class="col col-14">Total Price</th>
+							<th class="col col-15">Total Marketcapitalization</th>
 						</tr>
+					</thead>
+					<tbody>
 						<c:forEach items="${list}" var="item">
+
 							<tr class="tr-son">
-								<td class="td-son"><input type="checkbox" id="node"  onChange="checkNode()"
-									name="node" value="${item.id}"></td>
+								<td class="td-son"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
 									href="EditCompany?factTradeId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.id_date}</td>
@@ -161,13 +186,12 @@
 								<td class="td-son">${item.total_marketcapitalization}</td>
 							</tr>
 						</c:forEach>
-					</table> 
-				</td>
-			</tr>
-		</table>
+
+					</tbody>
+				</table>
+			</div>
 		</c:if>
-		<a href="EditCompany"><button type="button" name="buttonAddDelete" value="add">Add New</button></a>
-		<button type="submit" name="buttonAddDelete" value="delete">Delete</button>
+
 	</form>
 </body>
 </html>
