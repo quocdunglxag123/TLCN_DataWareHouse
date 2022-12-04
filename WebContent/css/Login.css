@@ -1,6 +1,10 @@
 @charset "UTF-8";
 body {
+<<<<<<< HEAD
 	padding-top: 2%;
+=======
+	padding-top: 10%;
+>>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 	background: #EEF2E6;
   	font-family: 'Inter UI', sans-serif;
 }
@@ -34,10 +38,15 @@ form label {
   flex-direction: column;
   position: absolute;
   place-content: center;
+<<<<<<< HEAD
   height: 35%;
   width: 35%;
 }
 @media (max-width: 900px) {
+=======
+}
+@media (max-width: 5625%) {
+>>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
   .page {
     height: auto;
     margin-bottom: 20px;
@@ -46,6 +55,7 @@ form label {
 }
 .container {
   display: flex;
+<<<<<<< HEAD
   height: 200%;
   margin: 0 auto;
   width: 100%;
@@ -55,11 +65,23 @@ form label {
     flex-direction: column;
     height: 630px;
     width: 320px;
+=======
+  height: 2000%;
+  margin: 0 auto;
+  width: 4000%;
+}
+@media (max-width: 4794%) {
+  .container {
+    flex-direction: column;
+    height: 3937.5%;
+    width: 2000%;
+>>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
   }
 }
 .left {
   background: white;
   height: calc(100% - 40px);
+<<<<<<< HEAD
   top: 20px;
   position: relative;
   width: 50%;
@@ -191,4 +213,25 @@ p{
 hr{
   border: 10% solid #C62828;
   width: 100%;
+=======
+  top: 125%;
+  position: relative;
+  width: 50%;
+  border: none;
+  border-top-left-radius: 187.5%;
+  border-bottom-left-radius: 187.5%;
+}
+@media (max-width: 4793.75%) {
+  .left {
+    height: 100%;
+    left: 125%;
+    width: calc(2000% - 250%);
+    max-height: 1687.5%;
+  }
+}
+.login {
+  font-size: 312.5%;
+  font-weight: 900;
+  margin: 312.5% 312.5% 250%;
+>>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 }
