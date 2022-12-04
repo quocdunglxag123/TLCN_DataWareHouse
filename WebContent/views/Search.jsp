@@ -4,20 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 
 <meta charset="UTF-8" name="viewport"
-=======
-<meta charset="UTF-8">
-<meta name="viewport"
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>View Data</title>
-
+<link
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Search.css">
-<<<<<<< HEAD
 <script language="javascript"
 	src="<%=request.getContextPath()%>/js/Search.js"></script>
 </head>
@@ -71,48 +67,6 @@
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
 
-=======
-</head>
-<body onload="checkView('${chooseView}','${endPage}')">
-	
-<jsp include>
-	<div class="header">
-		<h3>Hello ${userName}</h3>
-	</div>
-	<form action="SearchCompany" id="ViewCompany" method="post" onsubmit="listNodeCheckedLogic()" class="form-login">
-		
-		
-		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
-		<input type="hidden" id="endPage" name="endPage" ReadOnly value="${endPage}" />
-		<input type="hidden" id="listNodeChecked" name="listNodeChecked" ReadOnly value="" />
-		<div class="select">
-			<label for="cars">Choose View:</label>
-			<select name="chooseView" id="chooseView">
-				<option value="viewCompany" >View Company</option>
-				<option value="viewDateTrade" >View Date</option>
-				<option value="viewFactTrade" >View Fact</option>
-		  	</select>
-		  	<button class="btn-choose" type="submit">choose</button>
-		</div>
-		<div class="crud">
-			<button type="submit" class="btn-add" name="buttonAddDelete" value="add">Add New</button>
-			<button type="submit" class="btn-delete" name="buttonAddDelete" value="delete">Delete</button>
-		</div>
-		<div class="btn">
-			<div class="gr-1">
-				<button onClick="firstPageLogic()" id="firstPage" class="btn-2" type="button">&lt;&lt;</button>
-			<button onClick="previousPageLogic()" id="previousPage" class="btn-1" type="button">&lt;</button>
-			</div>
-			<div class="gr-2">
-				<button onClick="nextPageLogic('${endPage}')" id="nextPage" class="btn-1" type="button">&gt;</button>
-			<button onClick="lastPageLogic('${endPage}')" id="lastPage" class="btn-2" type="button">&gt;&gt;</button>
-			</div>
-		</div>	
-		
-
-		<!-- View Company -->
-		<c:if test="${chooseView == 'viewCompany'}">
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 			<div class="container">
 				<h2>View Company List</h2>
 				<table class="responsive-table">
@@ -130,12 +84,8 @@
 						</tr>
 					</thead>
 					<tbody>
-<<<<<<< HEAD
 						<c:forEach items="${list}" var="item" >
 
-=======
-						<c:forEach items="${list}" var="item" class="table-row">
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 							<tr class="tr-son">
 								<td class="td-son"><input type="checkbox" id="node"
 									onChange="checkNode()" name="node" value="${item.id}"></td>
@@ -149,25 +99,16 @@
 								<td class="td-son">${item.address}</td>
 							</tr>
 						</c:forEach>
-<<<<<<< HEAD
 
 					</tbody>
 				</table>
 			</div>
 			
-=======
-					</tbody>
-				</table>
-			</div>		
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 		</c:if>
 
 		<!-- View Date -->
 		<c:if test="${chooseView == 'viewDateTrade'}">
-<<<<<<< HEAD
 
-=======
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 			<div class="container">
 				<h2>View Date Trade List</h2>
 				<table class="responsive-table">
@@ -180,28 +121,17 @@
 						</tr>
 					</thead>
 					<tbody>
-<<<<<<< HEAD
 						<c:forEach items="${list}" var="item">
 
-=======
-						<c:forEach items="${list}" var="item" class="table-row">
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 							<tr class="tr-son">
 								<td class="td-son"><input type="checkbox" id="node"
 									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
-<<<<<<< HEAD
 									href="EditCompany?dateId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.dateTrade}</td>
 							</tr>
 						</c:forEach>
 
-=======
-											href="EditCompany?companyId=${item.id}">${item.id}</a></td>
-								<td class="td-son">${item.dateTrade}</td>										
-							</tr>
-						</c:forEach>
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 					</tbody>
 				</table>
 			</div>
@@ -209,10 +139,7 @@
 
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
-<<<<<<< HEAD
 
-=======
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 			<div class="container">
 				<h2>View Fact Trade List</h2>
 				<table class="responsive-table">
@@ -237,17 +164,13 @@
 						</tr>
 					</thead>
 					<tbody>
-<<<<<<< HEAD
 						<c:forEach items="${list}" var="item">
 
-=======
-						<c:forEach items="${list}" var="item" class="table-row">
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 							<tr class="tr-son">
 								<td class="td-son"><input type="checkbox" id="node"
 									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
-									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
+									href="EditCompany?factTradeId=${item.id}">${item.id}</a></td>
 								<td class="td-son">${item.id_date}</td>
 								<td class="td-son">${item.id_company}</td>
 								<td class="td-son">${item.price_reference}</td>
@@ -263,19 +186,12 @@
 								<td class="td-son">${item.total_marketcapitalization}</td>
 							</tr>
 						</c:forEach>
-<<<<<<< HEAD
 
-=======
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 					</tbody>
 				</table>
 			</div>
 		</c:if>
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 0a657576867f3c0e8079bbe34ed363208918a5f6
 	</form>
 </body>
 </html>
