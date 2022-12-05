@@ -18,13 +18,13 @@
 </head>
 <body onload="checkStatus()">
 	<div class="background">
-		<img src="img/STOCKtrade1.png" width="200" height="175" alt="logo">
+		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png" width="200" height="175" alt="logo">
 	</div>
 	<div class="cicle-1"></div>
 	<div class="cicle-2"></div>
 	<div class="container">
 		<div class="panel-heading">
-			<h3 class="panel-title" id="status">Status</h3>
+			<h3 class="panel-title" id="status">Edit Company</h3>
 		</div>
 		<div class="panel-body">
 			<form action="EditCompany" method="post" class="form-login"

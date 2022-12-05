@@ -17,7 +17,7 @@
 </head>
 <body>
 	<div class="background">
-	    <img src="img/STOCKtrade1.png" width="200" height="175" alt="logo">
+		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png" width="15%" height="15%" alt="logo">
 	</div>
 	<div class="cicle-1"></div>
 	<div class="cicle-2"></div>
