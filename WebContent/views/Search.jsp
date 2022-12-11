@@ -38,9 +38,9 @@
 		onsubmit="listNodeCheckedLogic()" class="form-login">
 		<nav class="navbar navbar-light bg-light justify-content-between">
 			<a class="navbar-brand">Hello ${userName}</a>
-			<form class="form-inline">
+			<div class="form-inline">
 				<a href="Login" class="logout">Logout</a>
-			</form>
+			</div>
 		</nav>
 		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
 		<input type="hidden" id="endPage" name="endPage" ReadOnly

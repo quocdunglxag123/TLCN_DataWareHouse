@@ -65,7 +65,6 @@ public class Login extends HttpServlet {
 		session.setAttribute("userName", "");
 		session.setAttribute("chooseView", "viewCompany");
 		session.setAttribute("isReturnSearch", "0");
-		System.out.println("Clear: "+ session.getAttribute("user"));
 
 	}
 	/**
@@ -75,7 +74,6 @@ public class Login extends HttpServlet {
 	 * @return boolean login or not
 	 */
 	public static boolean checkLogin(HttpSession session) {
-		System.out.println("Check: "+ session.getAttribute("user"));
 		if (session.getAttribute("user") == null || session.getAttribute("user").equals("")) {
 			return false;
 		}
