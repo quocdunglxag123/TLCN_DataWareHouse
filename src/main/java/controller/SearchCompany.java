@@ -102,6 +102,13 @@ public class SearchCompany extends HttpServlet {
 			// Truong hop chosse view Fact-Trade
 			List<FactTrade> factTrades = daoFactTradeImpl.getFactTradeByPage(page);
 			int endPage = daoFactTradeImpl.getEndPageFactTrade();
+			List<String> elementFactChart = daoFactTradeImpl.getFactTradeToChart();
+			
+			request.setAttribute("companyNameDataChart", elementFactChart.get(0));
+			request.setAttribute("totalVolumeDataChart", elementFactChart.get(1));
+			request.setAttribute("totalPriceDataChart", elementFactChart.get(2));
+			request.setAttribute("totalMarketCapitalizationDataChart", elementFactChart.get(3));
+
 			request.setAttribute("list", factTrades);
 			request.setAttribute("endPage", endPage);
 		}

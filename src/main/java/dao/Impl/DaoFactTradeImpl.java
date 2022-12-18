@@ -33,9 +33,9 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(new FactTrade(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
-						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(7),
-						rs.getBigDecimal(8), rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11),
-						rs.getBigDecimal(12), rs.getBigDecimal(13)));
+						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
+						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
+						rs.getBigDecimal(13), rs.getBigDecimal(14)));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -43,6 +43,43 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 		return list;
 	}
 
+	
+	/**
+	 * Get element Fact to Chart
+	 * 
+	 * @return list thong tin fact Chart
+	 */
+	@Override
+	public List<String> getFactTradeToChart() {
+		List<String> listElementFactChart = new ArrayList<>();
+		StringBuilder companyNameChart = new StringBuilder();
+		StringBuilder totalVolumeChart = new StringBuilder();
+		StringBuilder totalPriceChart = new StringBuilder();
+		StringBuilder totalMarketCapitalizationChart = new StringBuilder();
+		
+		String query = "select name, total_volume, total_price, total_marketcapitalization "
+				+ "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id ";
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				companyNameChart.append(","+rs.getString(1));
+				totalVolumeChart.append(","+Integer.toString(rs.getInt(2)));
+				totalPriceChart.append(","+Integer.toString(rs.getInt(3)));
+				totalMarketCapitalizationChart.append(","+Integer.toString(rs.getInt(4)));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalVolumeChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalPriceChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalMarketCapitalizationChart.toString().replaceFirst(",", ""));
+		return listElementFactChart;
+	}
+
+	
 	/**
 	 * get end page FactTrade
 	 * 
@@ -122,9 +159,9 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				FactTrade = new FactTrade(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
-						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(7),
-						rs.getBigDecimal(8), rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11),
-						rs.getBigDecimal(12), rs.getBigDecimal(13));
+						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
+						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
+						rs.getBigDecimal(13), rs.getBigDecimal(14));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
