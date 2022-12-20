@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="background">
-		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png" width="15%" height="15%" alt="logo">
+		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png" width="150px" height="150px" alt="logo">
 	</div>
 	<div class="cicle-1"></div>
 	<div class="cicle-2"></div>

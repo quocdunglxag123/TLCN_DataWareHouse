@@ -83,7 +83,7 @@
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
 
-			<div class="container">
+			<div class="form w-100">
 				<h2>View Company List</h2>
 				<table class="table table-striped">
 					<thead>
@@ -125,7 +125,7 @@
 		<!-- View Date -->
 		<c:if test="${chooseView == 'viewDateTrade'}">
 
-			<div class="container">
+			<div class="from w-100">
 				<h2>View Date Trade List</h2>
 				<table class="table table-striped">
 					<thead>
@@ -155,7 +155,7 @@
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
 
-			<div class="container">
+			<div class="form w-100">
 				<h2>View Fact Trade List</h2>
 				<table class="table table-striped">
 					<thead class="table-header">

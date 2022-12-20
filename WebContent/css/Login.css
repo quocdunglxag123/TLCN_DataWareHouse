@@ -37,13 +37,13 @@ form label {
   height: 35%;
   width: 35%;
 }
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
   .page {
-    height: auto;
+    height: 100%;
     margin-bottom: 20px;
     padding-bottom: 20px;
   }
-}
+} */
 .container {
   display: flex;
   height: 200%;
@@ -53,7 +53,7 @@ form label {
 @media (max-width: 767px) {
   .container {
     flex-direction: column;
-    height: 630px;
+    height: 670px;
     width: 320px;
   }
 }
@@ -64,6 +64,7 @@ form label {
   position: relative;
   width: 50%;
   border: none;
+  min-width: 250px;
   border-top-left-radius: 12%;
   border-bottom-left-radius: 12%;
 }
@@ -73,6 +74,7 @@ form label {
     left: 20px;
     width: calc(100% - 40px);
     max-height: 270px;
+    border-radius: 12%;
   }
 }
 .login {
@@ -91,6 +93,7 @@ form label {
   box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
   color: #F1F1F2;
   position: relative;
+  min-width: 300px;
   width: 50%;
   border: none;
   border-radius: 5%;
@@ -100,7 +103,7 @@ form label {
     flex-shrink: 0;
     height: 100%;
     width: 100%;
-    max-height: 350px;
+    max-height: 400px;
   }
 }
 svg {
@@ -185,10 +188,16 @@ p{
 }
 .background{
   z-index: 5;
-  margin-top: 5%;
+  margin-top: 4%;
   margin-left: 10%;
 }
 hr{
   border: 10% solid #C62828;
   width: 100%;
 }
+/* @media (max-width: 1200px){
+	.background{
+		width: 100px;
+		height: 100px;
+	}
+} */
