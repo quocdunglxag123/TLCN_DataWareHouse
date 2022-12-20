@@ -92,7 +92,7 @@
 
 			<div class="form w-100">
 				<h2>View Company List</h2>
-				<table class="table table-striped">
+				<table class="table ">
 					<thead>
 						<tr class="table-header">
 							<th scope="col"><input type="checkbox" id="root" name="root"
@@ -114,12 +114,12 @@
 									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
 									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
-								<td scope="row">${item.symbol}</td>
-								<td scope="row">${item.name}</td>
-								<td scope="row">${item.major}</td>
-								<td scope="row">${item.phone}</td>
-								<td scope="row">${item.info}</td>
-								<td scope="row">${item.address}</td>
+								<td scope="row"><p>${item.symbol}</p></td>
+								<td scope="row"><p>${item.name} </p> </td>
+								<td scope="row"> <p>${item.major} </p> </td>
+								<td scope="row"><p>${item.phone} </p> </td>
+								<td scope="row"><p>${item.info} </p> </td>
+								<td scope="row"><p> ${item.address}</p> </td>
 							</tr>
 						</c:forEach>
 
@@ -134,7 +134,7 @@
 
 			<div class="from w-100">
 				<h2>View Date Trade List</h2>
-				<table class="table table-striped">
+				<table class="table ">
 					<thead>
 						<tr class="table-header">
 							<th scope="col"><input type="checkbox" id="root" name="root"
@@ -188,7 +188,7 @@
 			<!-- Area Table Data -->
 			<div class="form w-100">
 				<h2>View Fact Trade List</h2>
-				<table class="table table-striped">
+				<table class="table ">
 					<thead class="table-header">
 						<tr>
 							<th scope="col"><input type="checkbox" id="root" name="root"

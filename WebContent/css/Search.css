@@ -47,3 +47,29 @@ h2{
 	padding-left:1%;
 	padding-right:1%;
 }
+.table{
+	border: 1px solid #428bca;
+	border-radius: 10px;
+	border-collapse: collapse;
+	overflow: hidden;
+	table-layout: auto;
+}
+
+th{
+  padding: 1em;
+  background: #243c68;
+  border-bottom: 2px solid white; 
+	color:#fff;
+	height: 23px;
+
+}
+tr:hover {
+	background-color: #428bca;
+	color: #fff;	 }
+p{
+	white-space: nowrap;
+    max-width: 270px;
+	width:100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
