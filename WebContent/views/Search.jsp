@@ -32,59 +32,87 @@
 	href="<%=request.getContextPath()%>/css/Search.css">
 <script language="javascript"
 	src="<%=request.getContextPath()%>/js/Search.js"></script>
-	
-	
+
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 <body onload="checkView('${chooseView}','${endPage}')">
 	<form action="SearchCompany" id="ViewCompany" method="post"
 		onsubmit="listNodeCheckedLogic()" class="form-login">
-		<nav class="navbar navbar-light bg-light justify-content-between">
+		<!-- menucustorm -->
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<ul>
+				<li><a class="navbar-brand">Hello ${userName}</a></li>
+				<li><a class="navbar-brand">Menu Chart</a>
+					<ul>
+						<li><button type="button" id="btn-chart" onClick="totalVolumePieChart()">totalVolumePieChart</button></li>
+						<li><button type="button" id="btn-chart" onClick="totalPricePieChart()">totalPriceChart</button></li>
+						<li><button type="button" id="btn-chart"
+								onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button></li>
+						<li><button type="button" id="btn-chart" onClick="totalVolumeBarChart()">totalVolumeBarChart</button></li>
+						<li><button type="button" id="btn-chart" onClick="totalPriceBarChart()">totalPriceBarChart</button></li>
+						<li><button type="button" id="btn-chart"
+								onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button></li>
+					</ul>
+				</li>
+				<li><a href="Login" class="logout navbar-brand">Logout</a></li>
+			</ul>
+		</div>
+
+
+
+		<%-- <nav class="navbar navbar-light bg-light justify-content-between">
 			<a class="navbar-brand">Hello ${userName}</a>
 			<div class="form-inline">
 				<a href="Login" class="logout">Logout</a>
 			</div>
-		</nav>
+		</nav> --%>
 		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
 		<input type="hidden" id="endPage" name="endPage" ReadOnly
 			value="${endPage}" /> <input type="hidden" id="listNodeChecked"
 			name="listNodeChecked" ReadOnly value="" />
 		<div class="select">
-			<label for="cars">ChooseView:</label> 
-			<select name="chooseView" id="chooseView" class="form-select" aria-label="Default select example">
+			<span style="font-size: 30px; cursor: pointer" onclick="openNav()">
+				<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
+				width="75px" height="75px" alt="logo">
+			</span> <label for="cars">ChooseView:</label> <select name="chooseView"
+				id="chooseView" class="form-select"
+				aria-label="Default select example">
 				<option value="viewCompany">View Company</option>
 				<option value="viewDateTrade">View Date</option>
 				<option value="viewFactTrade">View Fact</option>
 			</select>
-			<button type="submit" class="btn btn-outline-secondary">Choose</button>
+			<button type="submit" class="btn">Choose</button>
+			<div class="crud">
+				<a href="EditCompany">
+					<button type="button" class="btn btn-primary"
+						name="buttonAddDelete" value="add">Add new</button>
+				</a>
+				<button type="submit" class="btn btn-danger" name="buttonAddDelete"
+					value="delete">Delete</button>
+			</div>
 		</div>
 
-		<div class="crud">
-			<a href="EditCompany">
-			<button type="button" class="btn btn-primary" name="buttonAddDelete" value="add">Add new</button>
-			</a>
-			<button type="submit" class="btn btn-danger" name="buttonAddDelete" value="delete">Delete</button>
-		</div>
-		<br></br>
-		
 		<div class="btn-page">
 			<div class="gr-1">
-				<button onClick="firstPageLogic()" id="firstPage" type="button"  class="btn">&lt;&lt;</button>
-				<button onClick="previousPageLogic()" id="previousPage"  class="btn"
+				<button onClick="firstPageLogic()" id="firstPage" type="button"
+					class="btn">&lt;&lt;</button>
+				<button onClick="previousPageLogic()" id="previousPage" class="btn"
 					type="button">&lt;</button>
 			</div>
 
 			<div class="gr-2">
-				<button onClick="nextPageLogic('${endPage}')" id="nextPage" class="btn"
-					type="button">&gt;</button>
-				<button onClick="lastPageLogic('${endPage}')" id="lastPage" class="btn"
-					type="button">&gt;&gt;</button>
+				<button onClick="nextPageLogic('${endPage}')" id="nextPage"
+					class="btn" type="button">&gt;</button>
+				<button onClick="lastPageLogic('${endPage}')" id="lastPage"
+					class="btn" type="button">&gt;&gt;</button>
 			</div>
 		</div>
-		<!-- Hide All Chart -->
-		<button type="button" onClick="hideChart()">hide</button>
+
 
 
 		<!-- View Company -->
@@ -115,11 +143,13 @@
 								<td class="td-son"><a
 									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
 								<td scope="row"><p>${item.symbol}</p></td>
-								<td scope="row"><p>${item.name} </p> </td>
-								<td scope="row"> <p>${item.major} </p> </td>
-								<td scope="row"><p>${item.phone} </p> </td>
-								<td scope="row"><p>${item.info} </p> </td>
-								<td scope="row"><p> ${item.address}</p> </td>
+								<td scope="row"><p>${item.name}</p></td>
+								<td scope="row">
+									<p>${item.major}</p>
+								</td>
+								<td scope="row"><p>${item.phone}</p></td>
+								<td scope="row"><p>${item.info}</p></td>
+								<td scope="row"><p>${item.address}</p></td>
 							</tr>
 						</c:forEach>
 
@@ -161,33 +191,65 @@
 
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
+			<!-- menuchart -->
+			<div id="myMenuChart" class="menuChart">
+				<a href="javascript:void(0)" class="closebtn" onclick="closeChart()">&times;</a>
+				<!-- Hide All Chart -->
+				<button type="button" onClick="hideChart()">hide</button>
+
+				<button type="button" onClick="totalVolumePieChart()">totalVolumePieChart</button>
+				<button type="button" onClick="totalPricePieChart()">totalPriceChart</button>
+				<button type="button" onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button>
+				<button type="button" onClick="totalVolumeBarChart()">totalVolumeBarChart</button>
+				<button type="button" onClick="totalPriceBarChart()">totalPriceBarChart</button>
+				<button type="button" onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button>
+
+
+
+
+				<div id="totalVolumePieChartArea"
+					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+				<div id="totalPricePieChartArea"
+					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+				<div id="totalMarketCapitalizationPieChartArea"
+					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+				<div id="totalVolumeBarChartArea"
+					style="width: 100%; max-width: 700px; display: none"></div>
+				<div id="totalPriceBarChartArea"
+					style="width: 100%; max-width: 700px; display: none"></div>
+				<div id="totalMarketCapitalizationBarChartArea"
+					style="width: 100%; max-width: 700px; display: none"></div>
+			</div>
 
 			<!-- Area Chart Analysis -->
-			<div>
-			<button type="button" onClick="totalVolumePieChart()">totalVolumePieChart</button>
-			<button type="button" onClick="totalPricePieChart()">totalPriceChart</button>
-			<button type="button" onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button>
-			<button type="button" onClick="totalVolumeBarChart()">totalVolumeBarChart</button>
-			<button type="button" onClick="totalPriceBarChart()">totalPriceBarChart</button>
-			<button type="button" onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button>
-			
-			
-		
-			
-			<div id="totalVolumePieChartArea" style="width:100%; max-width:600px; height:500px;display:none"></div>
-			<div id="totalPricePieChartArea" style="width:100%; max-width:600px; height:500px;display:none"></div>
-			<div id="totalMarketCapitalizationPieChartArea" style="width:100%; max-width:600px; height:500px;display:none"></div>
-			<div id="totalVolumeBarChartArea"  style="width:100%;max-width:700px;display:none"></div>
-			<div id="totalPriceBarChartArea"  style="width:100%;max-width:700px;display:none"></div>
-			<div id="totalMarketCapitalizationBarChartArea"  style="width:100%;max-width:700px;display:none"></div>
-			
-			
-			
-			
-			</div>
+			<!-- <div>
+				<button type="button" onClick="totalVolumePieChart()">totalVolumePieChart</button>
+				<button type="button" onClick="totalPricePieChart()">totalPriceChart</button>
+				<button type="button" onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button>
+				<button type="button" onClick="totalVolumeBarChart()">totalVolumeBarChart</button>
+				<button type="button" onClick="totalPriceBarChart()">totalPriceBarChart</button>
+				<button type="button" onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button>
+
+
+
+
+				<div id="totalVolumePieChartArea"
+					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+				<div id="totalPricePieChartArea"
+					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+				<div id="totalMarketCapitalizationPieChartArea"
+					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+				<div id="totalVolumeBarChartArea"
+					style="width: 100%; max-width: 700px; display: none"></div>
+				<div id="totalPriceBarChartArea"
+					style="width: 100%; max-width: 700px; display: none"></div>
+				<div id="totalMarketCapitalizationBarChartArea"
+					style="width: 100%; max-width: 700px; display: none"></div>
+			</div>  -->
 			<!-- Area Table Data -->
 			<div class="form w-100">
 				<h2>View Fact Trade List</h2>
+				<span style="font-size: 30px; cursor: pointer" onclick="openChart()">&#9776;</span>
 				<table class="table ">
 					<thead class="table-header">
 						<tr>
@@ -238,14 +300,20 @@
 			</div>
 		</c:if>
 	</form>
-	
-<div id="totalVolumePieChartArea" style="width:100%; max-width:600px; height:500px;display:none"></div>
-			<div id="totalPricePieChartArea" style="width:100%; max-width:600px; height:500px;display:none"></div>
-			<div id="totalMarketCapitalizationPieChartArea" style="width:100%; max-width:600px; height:500px;display:none"></div>
-			<div id="totalVolumeBarChartArea"  style="width:100%;max-width:700px;display:none"></div>
-			<div id="totalPriceBarChartArea"  style="width:100%;max-width:700px;display:none"></div>
-			<div id="totalMarketCapitalizationBarChartArea"  style="width:100%;max-width:700px;display:none"></div>
-<script>
+
+	<div id="totalVolumePieChartArea"
+		style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+	<div id="totalPricePieChartArea"
+		style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+	<div id="totalMarketCapitalizationPieChartArea"
+		style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+	<div id="totalVolumeBarChartArea"
+		style="width: 100%; max-width: 700px; display: none"></div>
+	<div id="totalPriceBarChartArea"
+		style="width: 100%; max-width: 700px; display: none"></div>
+	<div id="totalMarketCapitalizationBarChartArea"
+		style="width: 100%; max-width: 700px; display: none"></div>
+	<script>
 //Hide all chart
 function hideChart(){
 	document.getElementById("totalVolumePieChartArea").style.display="none";
@@ -273,11 +341,11 @@ function totalVolumePieChart(){
 	
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart") %>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalVolumeChart and add to array
 	var totalVolumeChart = new Array();
-	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeDataChart") %>";
+	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeDataChart")%>";
 
 	totalVolumeChart = totalVolumeChartTemp.split(',');
 	totalVolumeChart =totalVolumeChart.map(parseFloat); 
@@ -313,11 +381,11 @@ function totalPricePieChart(){
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart") %>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalVolumeChart and add to array
 	var totalPriceChart = new Array();
-	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceDataChart") %>";
+	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceDataChart")%>";
 	totalPriceChart = totalPriceChartTemp.split(',');
 	totalPriceChart =totalPriceChart.map(parseFloat); 
     //Mege 2 array tren thanh 1 array
@@ -353,11 +421,11 @@ function totalMarketCapitalizationPieChart(){
 		
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart") %>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalMarketCapitalizationChart and add to array
 	var totalMarketCapitalizationChart = new Array();
-	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart") %>";
+	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart")%>";
 	totalMarketCapitalizationChart = totalMarketCapitalizationChartTemp.split(',');
 	totalMarketCapitalizationChart =totalMarketCapitalizationChart.map(parseFloat); 
     //Mege 2 array tren thanh 1 array
@@ -396,11 +464,11 @@ function totalVolumeBarChart(){
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart") %>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalVolumeChart and add to array
 	var totalVolumeChart = new Array();
-	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeDataChart") %>";
+	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeDataChart")%>";
 	totalVolumeChart = totalVolumeChartTemp.split(',');
 	totalVolumeChart =totalVolumeChart.map(parseFloat); 
 	totalVolumeChartArrayTemp = totalVolumeChart.map(parseFloat); 
@@ -472,11 +540,11 @@ function totalPriceBarChart(){
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart") %>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalPriceChart and add to array
 	var totalChart = new Array();
-	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceDataChart") %>";
+	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceDataChart")%>";
 	totalPriceChart = totalPriceChartTemp.split(',');
 	totalPriceChart =totalPriceChart.map(parseFloat); 
 	totalPriceChartArrayTemp = totalPriceChart.map(parseFloat); 
@@ -548,69 +616,85 @@ function totalMarketCapitalizationBarChart(){
 	document.getElementById("totalPriceBarChartArea").style.display="none";
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart") %>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalMarketCapitalizationChart and add to array
 	var totalChart = new Array();
-	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart") %>";
-	totalMarketCapitalizationChart = totalMarketCapitalizationChartTemp.split(',');
-	totalMarketCapitalizationChart =totalMarketCapitalizationChart.map(parseFloat); 
-	totalMarketCapitalizationChartArrayTemp = totalMarketCapitalizationChart.map(parseFloat); 
+	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart")%>
+		";
+			totalMarketCapitalizationChart = totalMarketCapitalizationChartTemp
+					.split(',');
+			totalMarketCapitalizationChart = totalMarketCapitalizationChart
+					.map(parseFloat);
+			totalMarketCapitalizationChartArrayTemp = totalMarketCapitalizationChart
+					.map(parseFloat);
 
-	var countTop=0;
-	var top10IndexTotalMarketCapitalizationChart= new Array();
-	
-	//Loop get top 10 index with is max total Price
-	while(countTop<10){
-		var maxIndex= -1;
-		var max_totalMarketCapitalizationChart =totalMarketCapitalizationChartArrayTemp[0];
-		for(let i=0;i<totalMarketCapitalizationChartArrayTemp.length;i++){
-			if(max_totalMarketCapitalizationChart<=totalMarketCapitalizationChartArrayTemp[i] ){
-				//Truong hop trong co phan tu >= max value
-				max_totalMarketCapitalizationChart = totalMarketCapitalizationChartArrayTemp[i];
-				maxIndex=i;
+			var countTop = 0;
+			var top10IndexTotalMarketCapitalizationChart = new Array();
+
+			//Loop get top 10 index with is max total Price
+			while (countTop < 10) {
+				var maxIndex = -1;
+				var max_totalMarketCapitalizationChart = totalMarketCapitalizationChartArrayTemp[0];
+				for (let i = 0; i < totalMarketCapitalizationChartArrayTemp.length; i++) {
+					if (max_totalMarketCapitalizationChart <= totalMarketCapitalizationChartArrayTemp[i]) {
+						//Truong hop trong co phan tu >= max value
+						max_totalMarketCapitalizationChart = totalMarketCapitalizationChartArrayTemp[i];
+						maxIndex = i;
+					}
+				}
+				if (maxIndex != -1) {
+					//Truong hop co maxIndex
+					console.log(maxIndex);
+					top10IndexTotalMarketCapitalizationChart[countTop] = maxIndex;
+					totalMarketCapitalizationChartArrayTemp[maxIndex] = -1;
+					countTop++;
+				}
 			}
-		}
-		if(maxIndex != -1){
-			//Truong hop co maxIndex
-			console.log(maxIndex);
-			top10IndexTotalMarketCapitalizationChart[countTop]= maxIndex;
-			totalMarketCapitalizationChartArrayTemp[maxIndex] = -1;
-			countTop++;
-		}
-	}
-	
-	var data = [{
-	  x: [
-		  companyNameChart[top10IndexTotalMarketCapitalizationChart[9]],
-		  companyNameChart[top10IndexTotalMarketCapitalizationChart[8]],
-		  companyNameChart[top10IndexTotalMarketCapitalizationChart[7]],
-	      companyNameChart[top10IndexTotalMarketCapitalizationChart[6]],
-	      companyNameChart[top10IndexTotalMarketCapitalizationChart[5]],
-	      companyNameChart[top10IndexTotalMarketCapitalizationChart[4]],
-	      companyNameChart[top10IndexTotalMarketCapitalizationChart[3]],
-	      companyNameChart[top10IndexTotalMarketCapitalizationChart[2]],
-		  companyNameChart[top10IndexTotalMarketCapitalizationChart[1]],
-		  companyNameChart[top10IndexTotalMarketCapitalizationChart[0]],
-		  ],
-	  y: [
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[9]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[8]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[7]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[6]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[5]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[4]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[3]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[2]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[1]],
-		  totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[0]],
-	  	],
-	  type: "bar"  }];
-	var layout = {title:"Top 10 Total MarketCapitalization"};
 
-	Plotly.newPlot("totalMarketCapitalizationBarChartArea", data, layout);  
-}
-</script>
+			var data = [ {
+				x : [
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[9]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[8]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[7]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[6]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[5]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[4]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[3]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[2]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[1]],
+						companyNameChart[top10IndexTotalMarketCapitalizationChart[0]], ],
+				y : [
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[9]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[8]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[7]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[6]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[5]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[4]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[3]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[2]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[1]],
+						totalMarketCapitalizationChart[top10IndexTotalMarketCapitalizationChart[0]], ],
+				type : "bar"
+			} ];
+			var layout = {
+				title : "Top 10 Total MarketCapitalization"
+			};
+
+			Plotly.newPlot("totalMarketCapitalizationBarChartArea", data,
+					layout);
+		}
+	</script>
+	<script>
+		function openNav() {
+		  document.getElementById("mySidenav").style.width = "25%";
+		}
+		
+		function closeNav() {
+		  document.getElementById("mySidenav").style.width = "0";
+		}
+
+	</script>
 </body>
 
 </html>

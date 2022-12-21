@@ -1,75 +1,163 @@
-.navbar-brand{
+.navbar-brand {
 	font-size: 300%;
 	margin-right: 50%;
 }
-.logout{
+
+.logout {
 	font-size: 200%;
 }
-.select{
+
+.select {
 	margin-left: 15%;
 }
-label{
+
+label {
 	font-size: 120%;
 }
-select{
+
+select {
 	width: 15%;
 	height: 35px;
 	margin-left: 1%;
 }
-.crud{
+
+.crud {
 	float: right;
 	margin-right: 15%;
+	margin-top: 3%;
 }
-.btn-page{
+
+.btn-page {
 	width: 100%;
-	margin-top:1%;
+	margin-top: 0.5%;
 }
-#previousPage, #nextPage{
-	width: 3%;	
+
+#previousPage, #nextPage {
+	width: 3%;
 }
-#firstPage, #lastPage{
+
+#firstPage, #lastPage {
 	width: 6%
 }
-.gr-1, .gr-2{
+
+.gr-1, .gr-2 {
 	display: inline;
 }
-.gr-1{
+
+.gr-1 {
 	margin-right: 40%;
 	margin-left: 20%;
 }
-h2{
+
+h2 {
 	text-align: center;
 }
 
-.form{
+.form {
 	margin-left: auto;
 	margin-right: auto;
-	padding-left:1%;
-	padding-right:1%;
+	padding-left: 1%;
+	padding-right: 1%;
 }
-.table{
-	border: 1px solid #428bca;
-	border-radius: 10px;
+
+.table {
+	border: 2px solid #243c68;
 	border-collapse: collapse;
 	overflow: hidden;
 	table-layout: auto;
 }
 
-th{
-  padding: 1em;
-  background: #243c68;
-  border-bottom: 2px solid white; 
-	color:#fff;
-	height: 23px;
-
+th {
+	padding: 1em;
+	background: #243c68;
+	border-bottom: 2px solid white;
+	color: #fff;
 }
+
 tr:hover {
 	background-color: #428bca;
-	color: #fff;	 }
-p{
+	color: #fff;
+}
+
+p {
 	white-space: nowrap;
-    max-width: 270px;
-	width:100%;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	max-width: 270px;
+	width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.background {
+	z-index: 5;
+	margin-top: 4%;
+	margin-left: 10%;
+}
+
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #243c68;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+	color: #fff;
+	max-width: 400px;
+}
+
+.sidenav a {
+	text-decoration: none;
+	font-size: 25px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+	color: #fff;
+	padding: 8px 8px 8px 20px;
+	
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 18%;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
+@media screen and (max-width: 200px) {
+  .sidenav {width: 35%;}
+}
+ul, li{
+	list-style: none;
+}
+#btn-chart{
+	color: #fff;
+	background-color: #243c68;
+	border: none;
+	margin: 2%;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+li ul{
+	display: none;
+    position: relative;
+}
+ li:hover > ul{
+    display:  block;
 }
