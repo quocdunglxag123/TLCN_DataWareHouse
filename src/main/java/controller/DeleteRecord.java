@@ -43,12 +43,11 @@ public class DeleteRecord extends HttpServlet {
 		session.setAttribute("returnSearch", "delete");
 		// Truong hop chosse view company
 		if (chooseView.equals("viewCompany")) {
-
+			daoCompanyImpl.deleteCompany(listNodeChecked);
 		}
-
 		// Truong hop chosse view Date Trade
 		if (chooseView.equals("viewDateTrade")) {
-
+			daoDateTradeImpl.deleteDateTrade(listNodeChecked);
 		}
 		// Truong hop chosse view Fact-Trade
 		if (chooseView.equals("viewFactTrade")) {

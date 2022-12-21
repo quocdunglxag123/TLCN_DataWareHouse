@@ -17,14 +17,26 @@ public class FactTrade {
 	private BigDecimal total_volume;
 	private BigDecimal total_price;
 	private BigDecimal total_marketcapitalization;
+	private int isDelete;
+	
+
+	public int getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
 
 	public FactTrade() {
 	}
 
+	
+
 	public FactTrade(int id, int id_date, int id_company, BigDecimal price_reference, BigDecimal price_open,
 			BigDecimal price_close, BigDecimal price_ceiling, BigDecimal price_floor, BigDecimal mean,
 			BigDecimal volatility, BigDecimal volatility_percent, BigDecimal total_volume, BigDecimal total_price,
-			BigDecimal total_marketcapitalization) {
+			BigDecimal total_marketcapitalization, int isDelete) {
 		super();
 		this.id = id;
 		this.id_date = id_date;
@@ -40,6 +52,7 @@ public class FactTrade {
 		this.total_volume = total_volume;
 		this.total_price = total_price;
 		this.total_marketcapitalization = total_marketcapitalization;
+		this.isDelete = isDelete;
 	}
 
 	public int getId() {

@@ -29,7 +29,8 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 		String query = "select F.id,DD.datetrade, DC.symbol, F.price_reference, F.price_open, F.price_close\r\n"
 				+ ", F.price_ceiling, F.price_floor, F.mean, F.volatility, F.volatility_percent, F.total_volume,\r\n"
 				+ " F.total_price, F.total_marketcapitalization\r\n"
-				+ "from Fact_Trade as F, Dim_Company as DC, Dim_Date as DD where F.id_company = DC.id and F.id_date=DD.id"
+				+ "from Fact_Trade as F, Dim_Company as DC, Dim_Date as DD "
+				+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0"
 				+ " ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
 		try {
 			conn = DBConnection.getConnection();
@@ -63,7 +64,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 		StringBuilder totalMarketCapitalizationChart = new StringBuilder();
 		
 		String query = "select name, total_volume, total_price, total_marketcapitalization "
-				+ "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id ";
+				+ "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id where F.isDelete=0 ";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -94,7 +95,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	public int getEndPageFactTrade() {
 		int endPage = 0;
 		int count = 0;
-		String query = "select count(*) from Fact_Trade where id != 0";
+		String query = "select count(*) from Fact_Trade where id != 0 and isDelete=0";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -119,21 +120,24 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 */
 	@Override
 	public void deleteFactTrade(String ids) {
+		if (ids == "") {
+			return;
+		}
 		String[] s = ids.split(",");
 		int[] idArray = new int[s.length];
+		
 		for (int i = 0; i < s.length; i++) {
 			idArray[i] = Integer.parseInt(s[i]);
 		}
-		StringBuilder query = new StringBuilder("Delete from Fact_Trade where id in (?");
-		if (idArray.length > 0) {
-			for (int i = 1; i < idArray.length; i++) {
-				query.append(",?");
-			}
+		StringBuilder query = new StringBuilder("update Fact_Trade set isDelete = 1 where id in (");
+		for (int i = 0; i < idArray.length; i++) {
+			query.append(",?");
 		}
+		
 		query.append(")");
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query.toString());
+			ps = conn.prepareStatement(query.toString().replaceFirst(",", ""));
 			int i = 1;
 			for (int id : idArray) {
 				ps.setInt(i, id);
@@ -166,7 +170,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 				FactTrade = new FactTrade(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
 						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
 						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
-						rs.getBigDecimal(13), rs.getBigDecimal(14));
+						rs.getBigDecimal(13), rs.getBigDecimal(14),rs.getInt(15));
 			}
 		} catch (Exception e) {
 			System.out.println(e);

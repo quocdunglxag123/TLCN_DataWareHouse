@@ -26,7 +26,7 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	public List<DateTrade> getDateTradeByPage(String page) {
 		List<DateTrade> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		String query = "select * from Dim_Date where id != 0 ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
+		String query = "select * from Dim_Date where id != 0 and isDelete=0 ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -50,7 +50,7 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	public int getEndPageDateTrade() {
 		int endPage = 0;
 		int count = 0;
-		String query = "select count(*) from Dim_Date where id != 0";
+		String query = "select count(*) from Dim_Date where id != 0 and isDelete=0";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -75,21 +75,23 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	 */
 	@Override
 	public void deleteDateTrade(String ids) {
+		if (ids == "") {
+			return;
+		}
 		String[] s= ids.split(",");
 		int[] idArray = new int[s.length];
 		for (int i = 0; i < s.length; i++) {
 			idArray[i] = Integer.parseInt(s[i]);
 		}
-		StringBuilder query = new StringBuilder("Delete from Dim_Date where id in (?");
-		if (idArray.length>0) {
-			for (int i = 1; i <idArray.length; i++) {
-				query.append(",?");
-			}
+		StringBuilder query = new StringBuilder("update Dim_Date set isDelete = 1 where id in (");
+		for (int i = 0; i <idArray.length; i++) {
+			query.append(",?");
 		}
+
 		query.append(")");
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query.toString());
+			ps = conn.prepareStatement(query.toString().replaceFirst(",", ""));
 			int i=1;
 			for (int id : idArray) {
 				ps.setInt(i, id);
