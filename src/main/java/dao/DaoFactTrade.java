@@ -2,10 +2,11 @@ package dao;
 
 import java.util.List;
 
+import dto.FactTradeDto;
 import model.FactTrade;
 
 public interface DaoFactTrade {
-	List<FactTrade> getFactTradeByPage(String page);
+	List<FactTradeDto> getFactTradeByPage(String page);
 	List<String> getFactTradeToChart();
 	int getEndPageFactTrade();
 	void deleteFactTrade(String ids);

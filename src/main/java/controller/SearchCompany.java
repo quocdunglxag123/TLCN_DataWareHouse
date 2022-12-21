@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
 import dao.Impl.DaoFactTradeImpl;
+import dto.FactTradeDto;
 import model.Company;
 import model.DateTrade;
 import model.FactTrade;
@@ -100,7 +101,7 @@ public class SearchCompany extends HttpServlet {
 			request.setAttribute("endPage", endPage);
 		}else if (chooseView.equals("viewFactTrade")) {
 			// Truong hop chosse view Fact-Trade
-			List<FactTrade> factTrades = daoFactTradeImpl.getFactTradeByPage(page);
+			List<FactTradeDto> factTrades = daoFactTradeImpl.getFactTradeByPage(page);
 			int endPage = daoFactTradeImpl.getEndPageFactTrade();
 			List<String> elementFactChart = daoFactTradeImpl.getFactTradeToChart();
 			

@@ -8,6 +8,7 @@ import java.util.List;
 
 import connection.DBConnection;
 import dao.DaoFactTrade;
+import dto.FactTradeDto;
 import model.FactTrade;
 
 public class DaoFactTradeImpl implements DaoFactTrade {
@@ -22,17 +23,21 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 * @return list thong tin FactTrade
 	 */
 	@Override
-	public List<FactTrade> getFactTradeByPage(String page) {
-		List<FactTrade> list = new ArrayList<>();
+	public List<FactTradeDto> getFactTradeByPage(String page) {
+		List<FactTradeDto> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		String query = "select * from Fact_Trade ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
+		String query = "select F.id,DD.datetrade, DC.symbol, F.price_reference, F.price_open, F.price_close\r\n"
+				+ ", F.price_ceiling, F.price_floor, F.mean, F.volatility, F.volatility_percent, F.total_volume,\r\n"
+				+ " F.total_price, F.total_marketcapitalization\r\n"
+				+ "from Fact_Trade as F, Dim_Company as DC, Dim_Date as DD where F.id_company = DC.id and F.id_date=DD.id"
+				+ " ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
 			ps.setInt(1, pageDB);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				list.add(new FactTrade(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
+				list.add(new FactTradeDto(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getBigDecimal(4),
 						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
 						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
 						rs.getBigDecimal(13), rs.getBigDecimal(14)));

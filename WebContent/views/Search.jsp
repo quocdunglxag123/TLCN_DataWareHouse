@@ -191,62 +191,7 @@
 
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
-			<!-- menuchart -->
-			<!-- <div id="myMenuChart" class="menuChart">
-				<a href="javascript:void(0)" class="closebtn" onclick="closeChart()">&times;</a>
-				Hide All Chart
-				<button type="button" onClick="hideChart()">hide</button>
-
-				<button type="button" onClick="totalVolumePieChart()">totalVolumePieChart</button>
-				<button type="button" onClick="totalPricePieChart()">totalPriceChart</button>
-				<button type="button" onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button>
-				<button type="button" onClick="totalVolumeBarChart()">totalVolumeBarChart</button>
-				<button type="button" onClick="totalPriceBarChart()">totalPriceBarChart</button>
-				<button type="button" onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button>
-
-
-
-
-				<div id="totalVolumePieChartArea"
-					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-				<div id="totalPricePieChartArea"
-					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-				<div id="totalMarketCapitalizationPieChartArea"
-					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-				<div id="totalVolumeBarChartArea"
-					style="width: 100%; max-width: 700px; display: none"></div>
-				<div id="totalPriceBarChartArea"
-					style="width: 100%; max-width: 700px; display: none"></div>
-				<div id="totalMarketCapitalizationBarChartArea"
-					style="width: 100%; max-width: 700px; display: none"></div>
-			</div> -->
-
-			<!-- Area Chart Analysis -->
-			<!-- <div>
-				<button type="button" onClick="totalVolumePieChart()">totalVolumePieChart</button>
-				<button type="button" onClick="totalPricePieChart()">totalPriceChart</button>
-				<button type="button" onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button>
-				<button type="button" onClick="totalVolumeBarChart()">totalVolumeBarChart</button>
-				<button type="button" onClick="totalPriceBarChart()">totalPriceBarChart</button>
-				<button type="button" onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button>
-
-
-
-
-				<div id="totalVolumePieChartArea"
-					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-				<div id="totalPricePieChartArea"
-					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-				<div id="totalMarketCapitalizationPieChartArea"
-					style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-				<div id="totalVolumeBarChartArea"
-					style="width: 100%; max-width: 700px; display: none"></div>
-				<div id="totalPriceBarChartArea"
-					style="width: 100%; max-width: 700px; display: none"></div>
-				<div id="totalMarketCapitalizationBarChartArea"
-					style="width: 100%; max-width: 700px; display: none"></div>
-			</div>  -->
-			<!-- Area Table Data -->
+		
 			<div class="form w-100">
 				<h2>View Fact Trade List</h2>
 				<table class="table ">
@@ -278,8 +223,8 @@
 									onChange="checkNode()" name="node" value="${item.id}"></td>
 								<td class="td-son"><a
 									href="EditCompany?factTradeId=${item.id}">${item.id}</a></td>
-								<td scope="row">${item.id_date}</td>
-								<td scope="row">${item.id_company}</td>
+								<td scope="row">${item.dateTrade}</td>
+								<td scope="row">${item.companyName}</td>
 								<td scope="row">${item.price_reference}</td>
 								<td scope="row">${item.price_open}</td>
 								<td scope="row">${item.price_close}</td>
@@ -619,8 +564,7 @@ function totalMarketCapitalizationBarChart(){
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalMarketCapitalizationChart and add to array
 	var totalChart = new Array();
-	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart")%>
-		";
+	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart")%>";
 			totalMarketCapitalizationChart = totalMarketCapitalizationChartTemp
 					.split(',');
 			totalMarketCapitalizationChart = totalMarketCapitalizationChart
