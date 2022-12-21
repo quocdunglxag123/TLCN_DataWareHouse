@@ -16,7 +16,6 @@ import dao.Impl.DaoFactTradeImpl;
 import dto.FactTradeDto;
 import model.Company;
 import model.DateTrade;
-import model.FactTrade;
 
 /**
  * Servlet implementation class View

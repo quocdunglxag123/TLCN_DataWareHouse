@@ -218,6 +218,11 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 */
 	@Override
 	public void addFactTrade(FactTrade factTrade) {
+		boolean flagCheckIdDimCompanyDelete = checkIdDimCompanyDelete(factTrade);
+		boolean flagCheckIdDimDateDelete = checkIdDimDateDelete(factTrade);
+		if (flagCheckIdDimCompanyDelete || flagCheckIdDimDateDelete) {
+			return;
+		}
 		String query = "INSERT  INTO  Fact_Trade "
 				+ "(id_date,id_company ,price_reference,price_open ,price_close ,price_ceiling ,"
 				+ "price_floor,mean,volatility,volatility_percent,total_volume,total_price,total_marketcapitalization ) "
@@ -243,6 +248,50 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+	/**
+	 * check Id  Dim Company is Delete before insert or edit
+	 * 
+	 * @param FactTrade thong tin FactTrade
+	 * 
+	 * @return boolean thong tin true(is delete)/ flase(not delete)
+	 */
+	private boolean  checkIdDimCompanyDelete(FactTrade factTrade){
+		String query = "select * from Dim_Company where id =? and isDelete= 0";
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, factTrade.getId_company());
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return true;
+	}
+	/**
+	 * check Id Dim Company is Delete before insert or edit
+	 * 
+	 * @param FactTrade thong tin FactTrade
+	 * 
+	 * @return boolean thong tin true(is delete)/ false(not delete)
+	 */
+	private boolean  checkIdDimDateDelete(FactTrade factTrade){
+		String query = "select * from Dim_Date where id =? and isDelete= 0";
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, factTrade.getId_date());
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return true;
 	}
 
 	
