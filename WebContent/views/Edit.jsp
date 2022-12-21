@@ -47,6 +47,7 @@
 h1 {
 	text-align: center;
 }
+
 input, textaria {
 	padding: 2%;
 	width: 100%;
@@ -75,7 +76,7 @@ button {
 	font-size: 100%;
 	font-family: Raleway;
 	cursor: pointer;
-	border-radius:5%;
+	border-radius: 5%;
 }
 
 button:hover {
@@ -153,61 +154,64 @@ button:hover {
 							name="companyAddress" value="${company.address}">
 					</div>
  --%>
-
 					<h1>Edit Company</h1>
 					<!-- One "tab" for each step in the form: -->
 					<div class="tab">
-						Company ID			
+						Company ID
 						<p>
-							<input placeholder="Company ID" id="companyId" name="companyId"
-							type="text" value="${company.id}" readonly>
+							<textarea class="form-control" id="companyId" name="companyId"
+								type="text" style="resize: none;" name="companyInfo" rows="1"
+								cols="40" readonly>${company.id}</textarea>
 						</p>
 						Symbol
 						<p>
-							<input placeholder="Symbol" id="companySymbol" name="companySymbol" 
-							type="text" value="${company.symbol}" required>
+							<input placeholder="Symbol" id="companySymbol"
+								name="companySymbol" type="text" value="${company.symbol}"
+								required>
 						</p>
 						Name
 						<p>
 							<input placeholder="Name" name="companyName"
-							 value="${company.name}">
+								value="${company.name}" required>
 						</p>
 					</div>
 					<div class="tab">
 						Major
 						<p>
-							<input placeholder="Major"
-							name="companyMajor" value="${company.major}">
+							<input placeholder="Major" name="companyMajor"
+								value="${company.major}" required>
 						</p>
 						Phone
 						<p>
-							<input placeholder="Phone"
-							name="companyPhone" value="${company.phone}">
+							<input placeholder="Phone" name="companyPhone"
+								value="${company.phone}" required>
 						</p>
 					</div>
 					<div class="tab">
 						Information
 						<p>
 							<textarea style="resize: none;" name="companyInfo" rows="4"
-							cols="40">${company.info}</textarea>
+								cols="40" required>${company.info}</textarea>
 						</p>
 						Address
 						<p>
-							<input placeholder="Address"
-							name="companyAddress" value="${company.address}">
+							<input placeholder="Address" name="companyAddress"
+								value="${company.address}" required>
 						</p>
 					</div>
 					<div style="overflow: auto;">
-						<div >
-							<button type="button" id="prevBtn" onclick="nextPrev(-1)" style="float: left;">Previous</button>
-							<button type="button" id="nextBtn" onclick="nextPrev(1)" style="float: right;">Next</button>
+						<div>
+							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
+								style="float: left;">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1)"
+								style="float: right;">Next</button>
 						</div>
 						<br></br>
 						<div class="form-group" style="float: right;">
-					<button value="edit" name="buttonEdit" type="submit">Submit</button>
-					<button type="reset">Reset Value</button>
-					<a href="SearchCompany"><button type="button">Cancel</button></a>
-				</div>
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
 					</div>
 					<!-- Circles which indicates the steps of the form: -->
 					<div style="text-align: center; margin-top: 4%;">
@@ -216,7 +220,7 @@ button:hover {
 					</div>
 				</c:if>
 				<c:if test="${chooseView == 'viewDateTrade'}">
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<input class="form-control" id="dateTradeId" name="dateTradeId"
 							type="text" value="${dateTradedto.id}" readonly>
 					</div>
@@ -224,10 +228,33 @@ button:hover {
 						<input class="form-control" placeholder="Date Trade"
 							id="dateTrade" name="dateTrade" type="text"
 							value="${dateTradeDto.dateTrade}" required>
+					</div> --%>
+					
+					<h1>Edit Date Trade</h1>
+					<!-- One "tab" for each step in the form: -->
+					<div class="tab">
+						Date Trade ID
+						<p>
+							<textarea class="form-control" id="dateTradeId" name="dateTradeId"
+								type="text" style="resize: none;" name="companyInfo" rows="1"
+								cols="40" readonly>${dateTradedto.id}</textarea>
+						</p>
+						Date Trade
+						<p>
+							<input placeholder="Date Trade" id="dateTrade" name="dateTrade" type="text"
+								value="${dateTradeDto.dateTrade}" required>
+						</p>
+					</div>
+					<div style="overflow: auto;">
+						<div class="form-group" style="float: right;">
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
 					</div>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactTrade'}">
-					<div class="form-group">
+					<%-- <div class="form-group">
 						<input class="form-control" id="factTradeId" name="factTradeId"
 							type="text" value="${factTrade.id}" readonly>
 					</div>
@@ -295,9 +322,111 @@ button:hover {
 							placeholder="total_marketcapitalization Trade"
 							id="total_marketcapitalization" name="total_marketcapitalization"
 							type="text" value="${factTrade.total_marketcapitalization}">
+					</div> --%>
+					<h1>Edit Fact Company</h1>
+					<!-- One "tab" for each step in the form: -->
+					<div class="tab">
+						Fact Trade ID
+						<p>
+							<textarea class="form-control" id="factTradeId" name="factTradeId"
+							type="text" style="resize: none;" name="companyInfo" rows="1"
+							cols="40" readonly>${factTrade.id}</textarea>
+						</p>
+						Date Trade ID
+						<p>
+							<input placeholder="id_date Trade" id="id_date" name="id_date" type="text"
+							value="${factTrade.id_date}" required>
+						</p>
+						Company Trade ID
+						<p>
+							<input placeholder="id_company Trade" id="id_company" name="id_company" type="text"
+							value="${factTrade.id_company}" required>
+						</p>
+					</div>
+					<div class="tab">
+						Price Reference Trade
+						<p>
+							<input placeholder="price_reference Trade" id="price_reference" name="price_reference" type="text"
+							value="${factTrade.price_reference}">
+						</p>
+						Price Open Trade
+						<p>
+							<input placeholder="price_open Trade" id="price_open" name="price_open" type="text"
+							value="${factTrade.price_open}">
+						</p>
+						Price Close Trade
+						<p>
+							<input placeholder="price_close Trade" id="price_close" name="price_close" type="text"
+							value="${factTrade.price_close}">
+						</p>
+					</div>
+					<div class="tab">
+						Price Ceiling Trade
+						<p>
+							<input placeholder="price_ceiling Trade" id="price_ceiling" name="price_ceiling" type="text"
+							value="${factTrade.price_ceiling}">
+						</p>
+						Price Floor Trade
+						<p>
+						
+							<input placeholder="price_floor Trade"	id="price_floor" name="price_floor" type="text"
+							value="${factTrade.price_floor}">
+						</p>
+						Mean Trade
+						<p>
+							<input placeholder="mean Trade" id="mean" name="mean" type="text" value="${factTrade.mean}">
+						</p>
+					</div>
+					<div class="tab">
+						Volatility Trade
+						<p>
+							<input placeholder="volatility Trade" id="volatility" name="volatility" type="text"
+							value="${factTrade.volatility}">
+						</p>
+						Volatility Percent Trade
+						<p>
+							<input placeholder="volatility_percent Trade" id="volatility_percent" name="volatility_percent" type="text"
+							value="${factTrade.volatility_percent}">
+						</p>						
+					</div>
+					<div class="tab">
+						Total Volume Trade
+							<p>
+								<input placeholder="total_volume Trade" id="total_volume" name="total_volume" type="text"
+								value="${factTrade.total_volume}">
+							</p>
+						Total Price Trade
+						<p>
+							<input placeholder="total_price Trade"	id="total_price" name="total_price" type="text"
+							value="${factTrade.total_price}">
+						</p>
+						Total Marketcapitalization Trade
+						<p>
+							<input placeholder="total_marketcapitalization Trade" id="total_marketcapitalization" name="total_marketcapitalization"
+							type="text" value="${factTrade.total_marketcapitalization}">
+						</p>						
+					</div>
+					<div style="overflow: auto;">
+						<div>
+							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
+								style="float: left;">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1)"
+								style="float: right;">Next</button>
+						</div>
+						<br></br>
+						<div class="form-group" style="float: right;">
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align: center; margin-top: 4%;">
+						<span class="step"></span> <span class="step"></span> <span
+							class="step"></span> <span class="step"></span> <span class="step"></span>
 					</div>
 				</c:if>
-<!-- 				<div class="form-group">
+				<!-- 				<div class="form-group">
 					<button value="edit" name="buttonEdit" type="submit">Submit</button>
 					<button type="reset">Reset Value</button>
 					<a href="SearchCompany"><button type="button">Cancel</button></a>
@@ -308,7 +437,7 @@ button:hover {
 	<script language="javascript"
 		src="<%=request.getContextPath()%>/js/Edit.js"></script>
 
-	<script>
+	<!-- <script>
 		var currentTab = 0; // Current tab is set to be the first tab (0)
 		showTab(currentTab); // Display the current tab
 
@@ -372,6 +501,82 @@ button:hover {
 			}
 			return valid; // return the valid status
 		}
+ 
+		function fixStepIndicator(n) {
+			// This function removes the "active" class of all steps...
+			var i, x = document.getElementsByClassName("step");
+			for (i = 0; i < x.length; i++) {
+				x[i].className = x[i].className.replace(" active", "");
+			}
+			//... and adds the "active" class on the current step:
+			x[n].className += " active";
+		}
+	</script> -->
+	<script>
+		var currentTab = 0; // Current tab is set to be the first tab (0)
+		showTab(currentTab); // Display the current tab
+
+		function showTab(n) {
+			// This function will display the specified tab of the form...
+			var x = document.getElementsByClassName("tab");
+			x[n].style.display = "block";
+			//... and fix the Previous/Next buttons:
+			if (n == 0) {
+				document.getElementById("prevBtn").style.display = "none";
+			} else {
+				document.getElementById("prevBtn").style.display = "inline";
+			}
+			if (n === (x.length - 1)) {
+			    document.getElementById("nextBtn").style.display = "none";
+			  } else {
+			  	document.getElementById("nextBtn").style.display = "inline";
+			    document.getElementById("nextBtn").innerHTML = "Next";
+			  }
+			//... and run a function that will display the correct step indicator:
+			fixStepIndicator(n)
+		}
+
+		function nextPrev(n) {
+			// This function will figure out which tab to display
+			var x = document.getElementsByClassName("tab");
+			// Exit the function if any field in the current tab is invalid:
+			if (n == 1 && !validateForm())
+				return false;
+			// Hide the current tab:
+			x[currentTab].style.display = "none";
+			// Increase or decrease the current tab by 1:
+			currentTab = currentTab + n;
+			// if you have reached the end of the form...
+			if (currentTab >= x.length) {
+				// ... the form gets submitted:
+				document.getElementById("regForm").submit();
+				return false;
+			}
+			// Otherwise, display the correct tab:
+			showTab(currentTab);
+		}
+
+		function validateForm() {
+			// This function deals with validation of the form fields
+			var x, y, i, valid = true;
+			x = document.getElementsByClassName("tab");
+			y = x[currentTab].getElementsByTagName("input");
+			// A loop that checks every input field in the current tab:
+			for (i = 0; i < y.length; i++) {
+				// If a field is empty...
+				if (y[i].value == "") {
+					// add an "invalid" class to the field:
+					y[i].className += " invalid";
+					// and set the current valid status to false
+					valid = false;
+				}
+			}
+			// If the valid status is true, mark the step as finished and valid:
+			if (valid) {
+				document.getElementsByClassName("step")[currentTab].className += " finish";
+			}
+			return valid; // return the valid status
+		}
 
 		function fixStepIndicator(n) {
 			// This function removes the "active" class of all steps...
@@ -383,6 +588,7 @@ button:hover {
 			x[n].className += " active";
 		}
 	</script>
+
 
 </body>
 </html>

@@ -192,9 +192,9 @@
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
 			<!-- menuchart -->
-			<div id="myMenuChart" class="menuChart">
+			<!-- <div id="myMenuChart" class="menuChart">
 				<a href="javascript:void(0)" class="closebtn" onclick="closeChart()">&times;</a>
-				<!-- Hide All Chart -->
+				Hide All Chart
 				<button type="button" onClick="hideChart()">hide</button>
 
 				<button type="button" onClick="totalVolumePieChart()">totalVolumePieChart</button>
@@ -219,7 +219,7 @@
 					style="width: 100%; max-width: 700px; display: none"></div>
 				<div id="totalMarketCapitalizationBarChartArea"
 					style="width: 100%; max-width: 700px; display: none"></div>
-			</div>
+			</div> -->
 
 			<!-- Area Chart Analysis -->
 			<!-- <div>
@@ -249,7 +249,6 @@
 			<!-- Area Table Data -->
 			<div class="form w-100">
 				<h2>View Fact Trade List</h2>
-				<span style="font-size: 30px; cursor: pointer" onclick="openChart()">&#9776;</span>
 				<table class="table ">
 					<thead class="table-header">
 						<tr>

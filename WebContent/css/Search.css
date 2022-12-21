@@ -74,7 +74,10 @@ th {
 	color: #fff;
 }
 
-tr:hover {
+tr td a{
+	color: #333;
+}
+tr:hover,tr td a:hover {
 	background-color: #428bca;
 	color: #fff;
 }
