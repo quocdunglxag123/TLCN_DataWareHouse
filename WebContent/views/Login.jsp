@@ -30,22 +30,22 @@
 			<div class="right">
 				<form action="Login" method="post" class="form-login" id="form-login"
 								name="form"
-								onsubmit="return validate();email_Verify();password_Verify()">
+								onsubmit="return validate()">
 						<div class="form-group">
 							<input class="form-control" placeholder="User ID" name="userId"
-								id="userId" type="text" maxlength="50" autocomplete="off">
-							<div id="email_error">Please fill you email</div>
-							<div id="email_error1">Email requires 10 characters</div>
+								id="userId" type="text" maxlength="50" autocomplete="off" required>
+							<div id="userId_error" style="font-size: 13px; color: red"></div>
+							<div id="userId_error1" style="font-size: 13px; color: red"></div>
 						</div>
 						<div class="form-group">
 							<input class="form-control" placeholder="Password"
-								autocomplete="off" id="password" name="password"
-								type="password" value="" maxlength="50">
-							<div id="password_error">Please fill you password</div>
-							<div id="password_error1">Password requires 6 characters</div>
+								autocomplete="off" id="password"  name="password"
+								type="password" value="" maxlength="50" >
+							<div id="password_error" style="font-size: 13px; color: red"></div>
+							<div id="password_error1" style="font-size: 13px; color: red"></div>
 						</div>
             			<hr>
-						<button onclick="validate();email_Verify();password_Verify()"
+						<button onclick="validate();userId_validate();password_validate()"
 							class="btn btn-lg btn-success btn-block" type="submit"
 							id="twofuns">Login</button>
 					<a href="Register" type="link">Create your account</a>

@@ -121,14 +121,14 @@ path {
   stroke-dasharray: 240 1386;
 }
 form {
-  margin: 15%;
+  margin: 10%;
   position: absolute;
 }
 
 input:focus {
   color:  #c2c2c5;
-  display: block;
-}
+/*   display: block;
+ */}
 input {
   background: transparent;
   border: 0;
@@ -138,7 +138,9 @@ input {
   line-height: 20%;
   outline: none !important;
   width: 100%;
-  margin-bottom: 10%;
+}
+.form-group{
+	margin-bottom: 5%;
 }
 
 #twofuns {
@@ -150,7 +152,8 @@ input {
   line-height: 30px;
   outline: none !important;
   width: 100%;
-  margin-top: 8%;
+  margin-top: 7%;
+  margin-bottom: 3%;
 }
 #twofuns:active {
   color: #d0d0d2;
@@ -197,4 +200,9 @@ p .a{
 hr{
   border: 10% solid #C62828;
   width: 100%;
+  margin-top: 3%;
+}
+.error{
+	font-size:10px !important;
+	color: red !important;
 }

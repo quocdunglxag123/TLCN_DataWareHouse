@@ -19,7 +19,8 @@
 </head>
 <body>
 	<div class="background">
-		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png" width="150px" height="150px" alt="logo">
+		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
+			width="150px" height="150px" alt="logo">
 	</div>
 	<div class="cicle-1"></div>
 	<div class="cicle-2"></div>
@@ -37,32 +38,34 @@
 					<div class="form-group">
 						<input class="form-control" placeholder="User ID" name="userId"
 							id="userId" type="text" maxlength="50" autocomplete="off">
-						<div id="email_error">Please fill you email</div>
-						<div id="email_error1">Email requires 10 characters</div>
+						<div id="userId_error" class="error"></div>
+						<div id="userId_error1" class="error"></div>
 					</div>
 					<div class="form-group">
 						<input class="form-control" placeholder="Password"
 							autocomplete="off" id="password" name="password" type="password"
 							value="" maxlength="50">
-						<div id="password_error">Please fill you password</div>
-						<div id="password_error1">Password requires 6 characters</div>
+						<div id="password_error" class="error"></div>
+						<div id="password_error1" class="error"></div>
 					</div>
 					<div class="form-group">
 						<input class="form-control" placeholder="Confirm Password"
 							autocomplete="off" id="confirmPassword" name="confirmPassword"
 							type="password" value="" maxlength="50">
-						<div id="password_error">Please confirm fill you password</div>
-						<div id="password_error1">Password requires 6 characters</div>
+						<div id="rePassword_error" class="error"></div>
+						<div id="rePassword_error1" class="error"></div>
+						<div id="match" class="error"></div>
 					</div>
 					<div class="form-group">
 						<input class="form-control" placeholder="User Name"
 							name="userName" id="userName" type="text" maxlength="50"
 							autocomplete="off">
-						<div id="email_error">Please Fill You User Name</div>
-						<div id="email_error1">Email requires 10 characters</div>
+						<div id="name_error" class="error"></div>
+						<div id="name_error1" class="error"></div>
 					</div>
 					<hr>
-					<button onclick="validate();email_Verify();password_Verify()"
+					<button
+						onclick="validate();userId_validate();password_validate();rePassword_validate();userName_validate()"
 						class="btn btn-lg btn-success btn-block" type="submit"
 						id="twofuns">Register</button>
 					<a href="Login" type="link">Return Login</a>
@@ -72,7 +75,7 @@
 	</div>
 
 	<script language="javascript"
-		src="<%=request.getContextPath()%>/js/Login.js"></script>
+		src="<%=request.getContextPath()%>/js/Register.js"></script>
 
 </body>
 </html>
