@@ -23,18 +23,23 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 * @return list thong tin FactTrade
 	 */
 	@Override
-	public List<FactTradeDto> getFactTradeByPage(String page) {
+	public List<FactTradeDto> getFactTradeByPage(String page,String search) {
 		List<FactTradeDto> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		String query = "select F.id,DD.datetrade, DC.symbol, F.price_reference, F.price_open, F.price_close\r\n"
+		StringBuilder query =new StringBuilder( "select F.id,DD.datetrade, DC.symbol, F.price_reference, F.price_open, F.price_close\r\n"
 				+ ", F.price_ceiling, F.price_floor, F.mean, F.volatility, F.volatility_percent, F.total_volume,\r\n"
 				+ " F.total_price, F.total_marketcapitalization\r\n"
 				+ "from Fact_Trade as F, Dim_Company as DC, Dim_Date as DD "
-				+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0"
-				+ " ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
+				+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0 ");
+				
+				if (search != "" && search != null) {
+					query.append("and  DC.symbol like "+"'%"+search+"%'");
+				}	
+				
+				query.append(" ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			ps.setInt(1, pageDB);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -92,13 +97,19 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 * @return endPage chi so end page
 	 */
 	@Override
-	public int getEndPageFactTrade() {
+	public int getEndPageFactTrade(String search) {
 		int endPage = 0;
 		int count = 0;
-		String query = "select count(*) from Fact_Trade where id != 0 and isDelete=0";
+		StringBuilder query =new StringBuilder( "select count(*)"
+				+ "from Fact_Trade as F, Dim_Company as DC, Dim_Date as DD "
+				+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0 ");
+				
+				if (search != "" && search != null) {
+					query.append("and  DC.symbol like "+"'%"+search+"%'");
+				}	
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 			rs.next();
 			count = rs.getInt(1);

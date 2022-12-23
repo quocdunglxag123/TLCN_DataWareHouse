@@ -23,13 +23,19 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	 * @return list thong tin DateTrade
 	 */
 	@Override
-	public List<DateTrade> getDateTradeByPage(String page) {
+	public List<DateTrade> getDateTradeByPage(String page,String search) {
 		List<DateTrade> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		String query = "select * from Dim_Date where id != 0 and isDelete=0 ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
+		StringBuilder query = new StringBuilder("select * from Dim_Date where id != 0 and isDelete=0 ");
+				
+		if (search != "" && search != null) {
+			query.append("and datetrade like "+"'%"+search+"%'");
+		}
+					
+		query.append(" ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			ps.setInt(1, pageDB);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -47,13 +53,17 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	 * @return endPage chi so end page
 	 */
 	@Override
-	public int getEndPageDateTrade() {
+	public int getEndPageDateTrade(String search) {
 		int endPage = 0;
 		int count = 0;
-		String query = "select count(*) from Dim_Date where id != 0 and isDelete=0";
+		StringBuilder query = new StringBuilder("select count(*) from Dim_Date where id != 0 and isDelete=0");
+		if (search != "" && search != null) {
+			query.append(" and datetrade like '%"+ search + "%'");
+		}
+		
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 			rs.next();
 			count = rs.getInt(1);
