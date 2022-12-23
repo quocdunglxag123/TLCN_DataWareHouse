@@ -44,6 +44,7 @@ public class SearchCompany extends HttpServlet {
 
 		// get input from jsp
 		String page = request.getParameter("page");//trang page hien thi
+		
 		String buttonAddDelete = request.getParameter("buttonAddDelete");
 		String chooseView = (String) request.getParameter("chooseView");
 

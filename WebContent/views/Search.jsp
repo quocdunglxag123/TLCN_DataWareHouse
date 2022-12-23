@@ -74,7 +74,7 @@
 		<div id="totalVolumeBarChartArea" class="barChart"></div>
 		<div id="totalPriceBarChartArea" class="barChart"></div>
 		<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div>
-
+		
 
 		<%-- <nav class="navbar navbar-light bg-light justify-content-between">
 			<a class="navbar-brand">Hello ${userName}</a>
@@ -125,7 +125,7 @@
 		</div>
 
 
-
+	<input type="text" name="search"/>
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
 
