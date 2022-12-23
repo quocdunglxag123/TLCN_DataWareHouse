@@ -12,10 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
+import dao.Impl.DaoExchangeImpl;
+import dao.Impl.DaoFactBusinessResultImpl;
 import dao.Impl.DaoFactTradeImpl;
+import dto.FactBusinessResultDto;
 import dto.FactTradeDto;
 import model.Company;
 import model.DateTrade;
+import model.Exchange;
 
 /**
  * Servlet implementation class View
@@ -26,7 +30,10 @@ public class SearchCompany extends HttpServlet {
 	DaoCompanyImpl daoCompanyImpl = new DaoCompanyImpl();
 	DaoDateTradeImpl daoDateTradeImpl = new DaoDateTradeImpl();
 	DaoFactTradeImpl daoFactTradeImpl = new DaoFactTradeImpl();
-
+	DaoExchangeImpl daoExchangeImpl = new DaoExchangeImpl();
+	DaoFactBusinessResultImpl daoFactBusinessResultImpl = new DaoFactBusinessResultImpl();
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -45,7 +52,7 @@ public class SearchCompany extends HttpServlet {
 		// get input from jsp
 		String page = request.getParameter("page");//trang page hien thi
 		String search = request.getParameter("search");//search page
-		String buttonAddDelete = request.getParameter("buttonAddDelete");
+		String buttonDelete = request.getParameter("buttonDelete");
 		String chooseView = (String) request.getParameter("chooseView");
 
 		
@@ -66,21 +73,17 @@ public class SearchCompany extends HttpServlet {
 			session.setAttribute("chooseView", chooseView);
 		}
 		
-		if (buttonAddDelete!=null) {
-			//Truong hop button add or delete duoc click
+		if (buttonDelete!=null) {
+			//Truong hop button delete duoc click
 			if (session.getAttribute("isReturnSearch").equals("0")) {
-				//Truong hop add or delete
-				if (buttonAddDelete.equals("add")) {
-					//Truong hop button add
-					//request.getRequestDispatcher("/views/Edit.jsp").forward(request, response);
-					//return;
-				}else {
+				//Truong hop  delete
+				if (buttonDelete.equals("delete")) {
 					//Truong hop button Delete
 					request.getRequestDispatcher("DeleteRecord").forward(request, response);
 					return;
 				}
 			}else {
-				//Set lai gia tri isReturnSearch on session sau khi delete or add return
+				//Set lai gia tri isReturnSearch on session sau khi delete
 				session.setAttribute("isReturnSearch", "0");
 			}
 			
@@ -88,31 +91,49 @@ public class SearchCompany extends HttpServlet {
 
 		//Logic Show View
 		if (chooseView.equals("viewCompany")) {
-			// Truong hop chosse view company
+			// Truong hop choose view company
 			List<Company> companies = daoCompanyImpl.getCompanyByPage(page,search);
 			int endPage = daoCompanyImpl.getEndPageCompany(search);			
 			request.setAttribute("list", companies);
 			request.setAttribute("endPage", endPage);
 		}else if (chooseView.equals("viewDateTrade")) {
-			// Truong hop chosse view Date Trade
+			// Truong hop choose view Date Trade
 			List<DateTrade> dateTrades = daoDateTradeImpl.getDateTradeByPage(page,search);
 			int endPage = daoDateTradeImpl.getEndPageDateTrade(search);
 			request.setAttribute("list", dateTrades);
 			request.setAttribute("endPage", endPage);
 		}else if (chooseView.equals("viewFactTrade")) {
-			// Truong hop chosse view Fact-Trade
+			// Truong hop choose view Fact-Trade
 			List<FactTradeDto> factTrades = daoFactTradeImpl.getFactTradeByPage(page,search);
 			int endPage = daoFactTradeImpl.getEndPageFactTrade(search);
 			
 			request.setAttribute("list", factTrades);
 			request.setAttribute("endPage", endPage);
+		}else if (chooseView.equals("viewExchange")) {
+			// Truong hop choose view Exchange
+			List<Exchange> exchanges = daoExchangeImpl.getExchangeByPage(page,search);
+			int endPage = daoFactTradeImpl.getEndPageFactTrade(search);
+			
+			request.setAttribute("list", exchanges);
+			request.setAttribute("endPage", endPage);
+		}else if (chooseView.equals("viewFactBusinessResult")) {
+			// Truong hop choose view Fact-Trade
+			List<FactBusinessResultDto> factBusinessResults = daoFactBusinessResultImpl.getFactBusinessResultByPage(page,search);
+			int endPage = daoFactTradeImpl.getEndPageFactTrade(search);
+			
+			request.setAttribute("list", factBusinessResults);
+			request.setAttribute("endPage", endPage);
 		}
-		List<String> elementFactChart = daoFactTradeImpl.getFactTradeToChart();
 		
+		
+		//Data Fact Trade To analystic --> send to js to show chart
+		List<String> elementFactChart = daoFactTradeImpl.getFactTradeToChart();
 		request.setAttribute("companyNameDataChart", elementFactChart.get(0));
 		request.setAttribute("totalVolumeDataChart", elementFactChart.get(1));
 		request.setAttribute("totalPriceDataChart", elementFactChart.get(2));
 		request.setAttribute("totalMarketCapitalizationDataChart", elementFactChart.get(3));
+		
+		
 		//Set Value To Search JSP
 		request.setAttribute("chooseView", chooseView);
 		request.setAttribute("page", page);
