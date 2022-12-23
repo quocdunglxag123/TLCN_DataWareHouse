@@ -104,11 +104,17 @@ function checkView(chooseView, endPage){
 	if(chooseView==='viewCompany'){
 		selected.options.selectedIndex=0;
 	}
-	if(chooseView==='viewDateTrade'){
+	if(chooseView==='viewExchange'){
 		selected.options.selectedIndex=1;
 	}
-	if(chooseView==='viewFactTrade'){
+	if(chooseView==='viewDateTrade'){
 		selected.options.selectedIndex=2;
+	}
+	if(chooseView==='viewFactTrade'){
+		selected.options.selectedIndex=3;
+	}
+	if(chooseView==='viewFactBusinessResult'){
+		selected.options.selectedIndex=4;
 	}
 	if(parseInt(page)===0){
 		enableLastPage();

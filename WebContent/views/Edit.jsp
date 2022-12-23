@@ -121,6 +121,33 @@ button:hover {
 		<div class="panel-body">
 			<form action="EditCompany" method="post" class="form-login"
 				id="form-login" name="form">
+				<c:if test="${chooseView == 'viewExchange'}">
+					<label style="background-color:red">
+						${exchange.id} <br />
+						${exchange.symbol}<br />
+						${exchange.name}<br />
+						${exchange.info}<br />
+					</label>
+					
+				</c:if>
+				<c:if test="${chooseView == 'viewFactBusinessResult'}">
+					<label style="background-color:red">
+					${factBusinessResult.id}<br />
+					${factBusinessResult.id_date}<br />
+					${factBusinessResult.id_company}<br />
+					${factBusinessResult.id_exchange}<br />
+					${factBusinessResult.status}<br />
+					${factBusinessResult.profit}<br />
+					${factBusinessResult.previous_period}<br />
+					${factBusinessResult.same_period}<br />
+					${factBusinessResult.profit_cummulative}<br />
+					${factBusinessResult.eps_profit}<br />
+					${factBusinessResult.eps_cummulative}<br />
+					${factBusinessResult.price_earning_ratio}<br />
+					</label>	
+				</c:if>
+				
+				
 				<c:if test="${chooseView == 'viewCompany'}">
 					<%-- <div class="form-group">
 						<input class="form-control" id="companyId" name="companyId"

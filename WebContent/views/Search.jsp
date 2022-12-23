@@ -98,16 +98,18 @@
 				id="chooseView" class="form-select"
 				aria-label="Default select example">
 				<option value="viewCompany">View Company</option>
+				<option value="viewExchange">View Exchange</option>
 				<option value="viewDateTrade">View Date</option>
-				<option value="viewFactTrade">View Fact</option>
+				<option value="viewFactTrade">View Fact Trade</option>
+				<option value="viewFactBusinessResult">View Business Result</option>
 			</select>
 			<button type="submit" class="btn">Choose</button>
 			<div class="crud">
 				<a href="EditCompany">
 					<button type="button" class="btn btn-primary"
-						name="buttonAddDelete" value="add">Add new</button>
+						name="buttonAddDelete">Add new</button>
 				</a>
-				<button type="submit" class="btn btn-danger" name="buttonAddDelete"
+				<button type="submit" class="btn btn-danger" name="buttonDelete"
 					value="delete">Delete</button>
 			</div>
 		</div>
@@ -174,6 +176,42 @@
 			</div>
 
 		</c:if>
+		<!-- View Exchange -->
+		<c:if test="${chooseView == 'viewExchange'}">
+
+			<div class="form w-100">
+				<h2>View Exchange List</h2>
+				<table class="table ">
+					<thead>
+						<tr class="table-header">
+							<th scope="col"><input type="checkbox" id="root" name="root"
+								onChange="checkRoot()"></th>
+							<th scope="col">ID</th>
+							<th scope="col">Symbol</th>
+							<th scope="col">Name</th>
+							<th scope="col">Info</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="item">
+
+							<tr class="tr-son">
+								<td scope="row"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
+								<td class="td-son"><a
+									href="EditCompany?exchangeId=${item.id}">${item.id}</a></td>
+								<td scope="row"><p>${item.symbol}</p></td>
+								<td scope="row"><p>${item.name}</p></td>
+								<td scope="row"><p>${item.info}</p></td>
+
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
+
+		</c:if>
 
 		<!-- View Date -->
 		<c:if test="${chooseView == 'viewDateTrade'}">
@@ -205,7 +243,7 @@
 			</div>
 		</c:if>
 
-		<!-- View Company -->
+		<!-- View Fact Trade -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
 		
 			<div class="form w-100">
@@ -252,6 +290,56 @@
 								<td scope="row">${item.total_volume}</td>
 								<td scope="row">${item.total_price}</td>
 								<td scope="row">${item.total_marketcapitalization}</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
+		</c:if>
+			<!-- View Fact BusinessResult -->
+		<c:if test="${chooseView == 'viewFactBusinessResult'}">
+		
+			<div class="form w-100">
+				<h2>View Fact Business Result List</h2>
+				<table class="table ">
+					<thead class="table-header">
+						<tr>
+							<th scope="col"><input type="checkbox" id="root" name="root"
+								onChange="checkRoot()"></th>
+							<th scope="col">ID</th>
+							<th scope="col">Date Trade</th>
+							<th scope="col">Company Name</th>
+							<th scope="col">Exchange Name</th>
+							<th scope="col">Status</th>
+							<th scope="col">Profit</th>
+							<th scope="col">Previous Period</th>
+							<th scope="col">Same Period</th>
+							<th scope="col">Profit Cummulative</th>
+							<th scope="col">Eps Profit</th>
+							<th scope="col">Eps Cummulative</th>
+							<th scope="col">Price Earning Ratio</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="item">
+
+							<tr class="tr-son">
+								<td scope="row"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
+								<td class="td-son"><a
+									href="EditCompany?factBusinessResultId=${item.id}">${item.id}</a></td>
+								<td scope="row">${item.dateTrade}</td>
+								<td scope="row">${item.companyName}</td>
+								<td scope="row">${item.exchangeName}</td>
+								<td scope="row">${item.status}</td>
+								<td scope="row">${item.profit}</td>
+								<td scope="row">${item.previous_period}</td>
+								<td scope="row">${item.same_period}</td>
+								<td scope="row">${item.profit_cummulative}</td>
+								<td scope="row">${item.eps_profit}</td>
+								<td scope="row">${item.eps_cummulative}</td>
+								<td scope="row">${item.price_earning_ratio}</td>
 							</tr>
 						</c:forEach>
 

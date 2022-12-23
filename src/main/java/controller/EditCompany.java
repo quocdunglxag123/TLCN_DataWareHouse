@@ -187,7 +187,6 @@ public class EditCompany extends HttpServlet {
 				// Get View Fact BusinessResult --> Fact_BusinessResult
 				FactBusinessResult factBusinessResultInput = new FactBusinessResult();
 				String factBusinessResultId = (String) request.getParameter("factBusinessResultId");
-
 				if (buttonEdit != null) {
 					// Set data fact BusinessResult from input edit view
 					factBusinessResultInput.setId_date(Integer.parseInt(request.getParameter("id_date")));

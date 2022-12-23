@@ -54,7 +54,6 @@ public class SearchCompany extends HttpServlet {
 		String search = request.getParameter("search");//search page
 		String buttonDelete = request.getParameter("buttonDelete");
 		String chooseView = (String) request.getParameter("chooseView");
-
 		
 		if (page != null) {
 			// Truong hop page gui ve tu jsp khac null
@@ -72,7 +71,6 @@ public class SearchCompany extends HttpServlet {
 			session.setAttribute("page", page);
 			session.setAttribute("chooseView", chooseView);
 		}
-		
 		if (buttonDelete!=null) {
 			//Truong hop button delete duoc click
 			if (session.getAttribute("isReturnSearch").equals("0")) {
@@ -119,7 +117,7 @@ public class SearchCompany extends HttpServlet {
 		}else if (chooseView.equals("viewFactBusinessResult")) {
 			// Truong hop choose view Fact-Trade
 			List<FactBusinessResultDto> factBusinessResults = daoFactBusinessResultImpl.getFactBusinessResultByPage(page,search);
-			int endPage = daoFactTradeImpl.getEndPageFactTrade(search);
+			int endPage = daoFactBusinessResultImpl.getEndPageFactBusinessResult(search);
 			
 			request.setAttribute("list", factBusinessResults);
 			request.setAttribute("endPage", endPage);
