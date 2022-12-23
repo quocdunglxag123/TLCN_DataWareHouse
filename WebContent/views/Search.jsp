@@ -244,20 +244,22 @@
 			</div>
 		</c:if>
 	</form>
-
-	<div id="totalVolumePieChartArea"
-		style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+	
+  <div id="totalVolumePieChartArea"
+		 class="popup" style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+	 	
 	<div id="totalPricePieChartArea"
-		style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+		class="popup" style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
 	<div id="totalMarketCapitalizationPieChartArea"
-		style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
+		class="popup"style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
 	<div id="totalVolumeBarChartArea"
-		style="width: 100%; max-width: 700px; display: none"></div>
+		class="popup" style="width: 100%; max-width: 700px; display: none"></div>
 	<div id="totalPriceBarChartArea"
-		style="width: 100%; max-width: 700px; display: none"></div>
+		class="popup" style="width: 100%; max-width: 700px; display: none"></div>
 	<div id="totalMarketCapitalizationBarChartArea"
-		style="width: 100%; max-width: 700px; display: none"></div>
-	<script>
+		class="popup" style="width: 100%; max-width: 700px; display: none"></div>
+		
+<script>
 //Hide all chart
 function hideChart(){
 	document.getElementById("totalVolumePieChartArea").style.display="none";
@@ -284,6 +286,7 @@ function totalVolumePieChart(){
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
 	
 	//Get String companyNameChart and add to array
+	alert(1);
 	var companyNameChart = new Array();
 	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');

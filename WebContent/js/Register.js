@@ -87,8 +87,10 @@ function validate() {
 		emp = true;
 	}
 
-
-	return false;
+	if(emp)
+	{	
+		return false;
+	}
 
 }
 

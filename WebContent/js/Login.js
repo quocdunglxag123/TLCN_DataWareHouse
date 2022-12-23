@@ -95,7 +95,9 @@ function validate(){
 		password_error1.style.display = "block";
 		emp = true;
 	}
+	if(emp){
 	return false;
+	}
 	
 }
 

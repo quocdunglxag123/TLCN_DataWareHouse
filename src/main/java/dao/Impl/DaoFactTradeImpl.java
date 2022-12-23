@@ -64,7 +64,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 		StringBuilder totalMarketCapitalizationChart = new StringBuilder();
 		
 		String query = "select name, total_volume, total_price, total_marketcapitalization "
-				+ "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id where F.isDelete=0 ";
+				+ "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id where Fact_Trade.isDelete=0 ";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
