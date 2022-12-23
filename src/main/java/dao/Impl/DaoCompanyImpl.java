@@ -22,13 +22,22 @@ public class DaoCompanyImpl implements DaoCompany {
 	 * @return list thong tin company
 	 */
 	@Override
-	public List<Company> getCompanyByPage(String page) {
+	public List<Company> getCompanyByPage(String page,String search) {
 		List<Company> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		String query = "select * from Dim_Company where id != 0 and isDelete=0 ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;";
+		StringBuilder query = new StringBuilder(
+				"select * "
+				+ "from Dim_Company "
+				+ "where id != 0 and isDelete=0 ");
+				
+		if (search != "" && search != null) {
+			query.append("and symbol like "+"'%"+search+"%'");
+		}
+		query.append(" ORDER BY id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
+						
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			ps.setInt(1, pageDB);
 			rs = ps.executeQuery();
 			while (rs.next()) {
@@ -47,13 +56,16 @@ public class DaoCompanyImpl implements DaoCompany {
 	 * @return endPage chi so end page
 	 */
 	@Override
-	public int getEndPageCompany() {
+	public int getEndPageCompany(String search) {
 		int endPage = 0;
 		int count = 0;
-		String query = "select count(*) from Dim_Company where id != 0 and isDelete=0";
+		StringBuilder query = new StringBuilder("select count(*) from Dim_Company where id != 0 and isDelete=0");
+		if (search != "" && search != null) {
+			query.append(" and symbol like '%"+ search + "%'");
+		}
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 			rs.next();
 			count = rs.getInt(1);

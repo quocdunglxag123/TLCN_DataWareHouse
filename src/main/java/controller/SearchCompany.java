@@ -44,7 +44,7 @@ public class SearchCompany extends HttpServlet {
 
 		// get input from jsp
 		String page = request.getParameter("page");//trang page hien thi
-		
+		String search = request.getParameter("search");//search page
 		String buttonAddDelete = request.getParameter("buttonAddDelete");
 		String chooseView = (String) request.getParameter("chooseView");
 
@@ -89,20 +89,20 @@ public class SearchCompany extends HttpServlet {
 		//Logic Show View
 		if (chooseView.equals("viewCompany")) {
 			// Truong hop chosse view company
-			List<Company> companies = daoCompanyImpl.getCompanyByPage(page);
-			int endPage = daoCompanyImpl.getEndPageCompany();			
+			List<Company> companies = daoCompanyImpl.getCompanyByPage(page,search);
+			int endPage = daoCompanyImpl.getEndPageCompany(search);			
 			request.setAttribute("list", companies);
 			request.setAttribute("endPage", endPage);
 		}else if (chooseView.equals("viewDateTrade")) {
 			// Truong hop chosse view Date Trade
-			List<DateTrade> dateTrades = daoDateTradeImpl.getDateTradeByPage(page);
-			int endPage = daoDateTradeImpl.getEndPageDateTrade();
+			List<DateTrade> dateTrades = daoDateTradeImpl.getDateTradeByPage(page,search);
+			int endPage = daoDateTradeImpl.getEndPageDateTrade(search);
 			request.setAttribute("list", dateTrades);
 			request.setAttribute("endPage", endPage);
 		}else if (chooseView.equals("viewFactTrade")) {
 			// Truong hop chosse view Fact-Trade
-			List<FactTradeDto> factTrades = daoFactTradeImpl.getFactTradeByPage(page);
-			int endPage = daoFactTradeImpl.getEndPageFactTrade();
+			List<FactTradeDto> factTrades = daoFactTradeImpl.getFactTradeByPage(page,search);
+			int endPage = daoFactTradeImpl.getEndPageFactTrade(search);
 			
 			request.setAttribute("list", factTrades);
 			request.setAttribute("endPage", endPage);
