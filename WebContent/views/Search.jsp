@@ -30,6 +30,9 @@
 
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Search.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/Chart.css">
+	
 <script language="javascript"
 	src="<%=request.getContextPath()%>/js/Search.js"></script>
 
@@ -62,7 +65,15 @@
 				<li><a href="Login" class="logout navbar-brand">Logout</a></li>
 			</ul>
 		</div>
-
+		
+		<div id="totalVolumePieChartArea"  class="pieChart">		
+			<button onclick="hideChart()">xxxxx</button>
+		</div>
+		<div id="totalPricePieChartArea"  class="pieChart"></div>
+		<div id="totalMarketCapitalizationPieChartArea" class="pieChart" ></div>
+		<div id="totalVolumeBarChartArea" class="barChart"></div>
+		<div id="totalPriceBarChartArea" class="barChart"></div>
+		<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div>
 
 
 		<%-- <nav class="navbar navbar-light bg-light justify-content-between">
@@ -244,20 +255,7 @@
 			</div>
 		</c:if>
 	</form>
-	
-  <div id="totalVolumePieChartArea"
-		 class="popup" style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-	 	
-	<div id="totalPricePieChartArea"
-		class="popup" style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-	<div id="totalMarketCapitalizationPieChartArea"
-		class="popup"style="width: 100%; max-width: 600px; height: 500px; display: none"></div>
-	<div id="totalVolumeBarChartArea"
-		class="popup" style="width: 100%; max-width: 700px; display: none"></div>
-	<div id="totalPriceBarChartArea"
-		class="popup" style="width: 100%; max-width: 700px; display: none"></div>
-	<div id="totalMarketCapitalizationBarChartArea"
-		class="popup" style="width: 100%; max-width: 700px; display: none"></div>
+
 		
 <script>
 //Hide all chart
@@ -286,7 +284,6 @@ function totalVolumePieChart(){
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
 	
 	//Get String companyNameChart and add to array
-	alert(1);
 	var companyNameChart = new Array();
 	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
 	companyNameChart = companyNameTemp.split(',');
