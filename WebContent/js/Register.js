@@ -18,7 +18,7 @@ confirmPassword.addEventListener('textInput', rePassword_validate);
 //match.addEventListener('textInput', match_validate);
 userName.addEventListener('textInput', userId_validate);
 
-
+//kiểm tra các điều kiện sai
 function validate() {
 	var emp = false;
 	var userId = document.getElementById('userId').value;
@@ -94,6 +94,7 @@ function validate() {
 
 }
 
+//xác nhận điều kiện userId hợp lệ
 function userId_validate() {
 	var userId = document.getElementById('userId').value;
 	if (userId.length >= 3) {
@@ -102,6 +103,8 @@ function userId_validate() {
 		return true;
 	}
 }
+
+//xác nhận điều kiện password hợp lệ
 function password_validate() {
 	var password = document.getElementById('password').value;
 	if (password.length >= 6) {
@@ -110,6 +113,8 @@ function password_validate() {
 		return true;
 	}
 }
+
+//xác nhận điều kiện confirm password 
 function rePassword_validate() {
 	var confirmPassword = document.getElementById('confirmPassword').value;
 	if (confirmPassword.length >= 6) {
@@ -119,6 +124,8 @@ function rePassword_validate() {
 		return true;
 	}
 }
+
+//xác nhận userName hợp lệ
 function userName_validate() {
 	var userName = document.getElementById('userName').value;
 	if (userName.length >= 6) {
