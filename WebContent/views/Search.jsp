@@ -66,10 +66,10 @@
 			</ul>
 		</div>
 		
-		<div id="totalVolumePieChartArea"  class="pieChart">		
-			<button onclick="hideChart()">xxxxx</button>
+		<div id="totalVolumePieChartArea" class="pieChart">		
+			<button onclick="hideChart()">X</button>
 		</div>
-		<div id="totalPricePieChartArea"  class="pieChart"></div>
+		<div id="totalPricePieChartArea"  class="pieChart"> <a id="totalVolumePieChartArea" class="pieChart" onclick="hideChart()">&times;</a></div>
 		<div id="totalMarketCapitalizationPieChartArea" class="pieChart" ></div>
 		<div id="totalVolumeBarChartArea" class="barChart"></div>
 		<div id="totalPriceBarChartArea" class="barChart"></div>
@@ -87,10 +87,10 @@
 			value="${endPage}" /> <input type="hidden" id="listNodeChecked"
 			name="listNodeChecked" ReadOnly value="" />
 		<div class="select">
-			<span style="font-size: 30px; cursor: pointer" onclick="openNav()">
-				<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
 				width="75px" height="75px" alt="logo">
-			</span> <label for="cars">ChooseView:</label> <select name="chooseView"
+			 <label for="cars">ChooseView:</label> <select name="chooseView"
 				id="chooseView" class="form-select"
 				aria-label="Default select example">
 				<option value="viewCompany">View Company</option>
@@ -125,7 +125,7 @@
 		</div>
 
 	<!-- Search Page -->
-	<input type="text" name="search"/>
+	<input type="text" name="search" plac/>
 	<button type="submit" name="search" value="search">Search</button>
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">

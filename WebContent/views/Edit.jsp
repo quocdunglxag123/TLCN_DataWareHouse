@@ -58,7 +58,7 @@ input, textaria {
 }
 
 /* Mark input boxes that gets an error on validation: */
-input.invalid {
+input.invalid, textaria.invalid{
 	background-color: #ffdddd;
 }
 
@@ -347,63 +347,63 @@ button:hover {
 						Price Reference Trade
 						<p>
 							<input placeholder="price_reference Trade" id="price_reference" name="price_reference" type="text"
-							value="${factTrade.price_reference}">
+							value="${factTrade.price_reference}" required>
 						</p>
 						Price Open Trade
 						<p>
-							<input placeholder="price_open Trade" id="price_open" name="price_open" type="text"
+							<input placeholder="price_open Trade" id="price_open" name="price_open" type="text" required
 							value="${factTrade.price_open}">
 						</p>
 						Price Close Trade
 						<p>
-							<input placeholder="price_close Trade" id="price_close" name="price_close" type="text"
+							<input placeholder="price_close Trade" id="price_close" name="price_close" type="text" required
 							value="${factTrade.price_close}">
 						</p>
 					</div>
 					<div class="tab">
 						Price Ceiling Trade
 						<p>
-							<input placeholder="price_ceiling Trade" id="price_ceiling" name="price_ceiling" type="text"
+							<input placeholder="price_ceiling Trade" id="price_ceiling" name="price_ceiling" type="text" required
 							value="${factTrade.price_ceiling}">
 						</p>
 						Price Floor Trade
 						<p>
-						
-							<input placeholder="price_floor Trade"	id="price_floor" name="price_floor" type="text"
+						 
+							<input placeholder="price_floor Trade"	id="price_floor" name="price_floor" type="text" required
 							value="${factTrade.price_floor}">
 						</p>
 						Mean Trade
 						<p>
-							<input placeholder="mean Trade" id="mean" name="mean" type="text" value="${factTrade.mean}">
+							<input placeholder="mean Trade" id="mean" name="mean" type="text" value="${factTrade.mean}" required>
 						</p>
 					</div>
 					<div class="tab">
 						Volatility Trade
 						<p>
-							<input placeholder="volatility Trade" id="volatility" name="volatility" type="text"
+							<input placeholder="volatility Trade" id="volatility" name="volatility" type="text" required
 							value="${factTrade.volatility}">
 						</p>
 						Volatility Percent Trade
 						<p>
-							<input placeholder="volatility_percent Trade" id="volatility_percent" name="volatility_percent" type="text"
+							<input placeholder="volatility_percent Trade" id="volatility_percent" name="volatility_percent" type="text" required
 							value="${factTrade.volatility_percent}">
 						</p>						
 					</div>
 					<div class="tab">
 						Total Volume Trade
 							<p>
-								<input placeholder="total_volume Trade" id="total_volume" name="total_volume" type="text"
+								<input placeholder="total_volume Trade" id="total_volume" name="total_volume" type="text" required
 								value="${factTrade.total_volume}">
 							</p>
 						Total Price Trade
 						<p>
-							<input placeholder="total_price Trade"	id="total_price" name="total_price" type="text"
+							<input placeholder="total_price Trade"	id="total_price" name="total_price" type="text" required
 							value="${factTrade.total_price}">
 						</p>
 						Total Marketcapitalization Trade
 						<p>
 							<input placeholder="total_marketcapitalization Trade" id="total_marketcapitalization" name="total_marketcapitalization"
-							type="text" value="${factTrade.total_marketcapitalization}">
+							type="text" value="${factTrade.total_marketcapitalization}" required>
 						</p>						
 					</div>
 					<div style="overflow: auto;">
