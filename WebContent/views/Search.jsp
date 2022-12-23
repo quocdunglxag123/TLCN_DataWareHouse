@@ -124,8 +124,9 @@
 			</div>
 		</div>
 
-
+	<!-- Search Page -->
 	<input type="text" name="search"/>
+	<button type="submit" name="search" value="search">Search</button>
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
 
