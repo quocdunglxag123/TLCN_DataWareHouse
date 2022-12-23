@@ -31,18 +31,19 @@
 				<form action="Login" method="post" class="form-login" id="form-login"
 								name="form"
 								onsubmit="return validate()">
+						<div class="error">${errorLogin}</div>
 						<div class="form-group">
 							<input class="form-control" placeholder="User ID" name="userId"
 								id="userId" type="text" maxlength="50" autocomplete="off" required>
-							<div id="userId_error" style="font-size: 13px; color: red"></div>
-							<div id="userId_error1" style="font-size: 13px; color: red"></div>
+							<div id="userId_error" class="error"></div>
+							<div id="userId_error1" class="error"></div>
 						</div>
 						<div class="form-group">
 							<input class="form-control" placeholder="Password"
 								autocomplete="off" id="password"  name="password"
 								type="password" value="" maxlength="50" >
-							<div id="password_error" style="font-size: 13px; color: red"></div>
-							<div id="password_error1" style="font-size: 13px; color: red"></div>
+							<div id="password_error" class="error"></div>
+							<div id="password_error1" class="error"></div>
 						</div>
             			<hr>
 						<button onclick="validate();userId_validate();password_validate()"

@@ -230,3 +230,8 @@ hr {
 		height: 100px;
 	}
 } */
+
+.error{
+	font-size:10px !important;
+	color: red !important;
+}

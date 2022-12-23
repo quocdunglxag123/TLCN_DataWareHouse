@@ -69,7 +69,11 @@
 		<div id="totalVolumePieChartArea" class="pieChart">		
 			<button onclick="hideChart()">X</button>
 		</div>
-		<div id="totalPricePieChartArea"  class="pieChart"> <a id="totalVolumePieChartArea" class="pieChart" onclick="hideChart()">&times;</a></div>
+		<div class="popup-container">
+			<div id="totalPricePieChartArea"  class="pieChart"> </div>
+			<a id="totalVolumePieChartArea" class="pieChart" onclick="hideChart()">&times;</a>
+		</div>
+		
 		<div id="totalMarketCapitalizationPieChartArea" class="pieChart" ></div>
 		<div id="totalVolumeBarChartArea" class="barChart"></div>
 		<div id="totalPriceBarChartArea" class="barChart"></div>
@@ -125,8 +129,8 @@
 		</div>
 
 	<!-- Search Page -->
-	<input type="text" name="search" plac/>
-	<button type="submit" name="search" value="search">Search</button>
+	<input type="text" name="search" placeholder="Search" id="input-search"/>
+	<button type="submit" name="search" value="search" id="btn-search">Search</button>
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
 
