@@ -113,7 +113,7 @@ button:hover {
 <body onload="checkStatus()">
 	<div class="background">
 		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
-			width="12%" height="12%" alt="logo">
+			width="12%" height="12%" alt="logo" class="img">
 	</div>
 	<div class="cicle-1"></div>
 	<div class="cicle-2"></div>
@@ -122,16 +122,156 @@ button:hover {
 			<form action="EditCompany" method="post" class="form-login"
 				id="form-login" name="form">
 				<c:if test="${chooseView == 'viewExchange'}">
-					<label style="background-color:red">
+					<h1>Edit Exchange</h1>
+					<div class="tab">
+						Exchange ID 
+						<p>
+							<textarea class="form-control" id="exchangeId" name="exchangeId"
+								type="text" style="resize: none;" rows="1"
+								cols="40" readonly>${exchange.id}</textarea>
+						</p>
+						Symbol 
+						<p>
+							<input placeholder="Exchange Symbol" id="companySymbol"
+								name="companySymbol" type="text" value="${exchange.symbol}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Name 
+						<p>
+							<input placeholder="Exchange Symbol" id="companySymbol"
+								name="companySymbol" type="text" value="${exchange.name}"
+								required>
+						</p>
+						Information
+						<p>
+							<input placeholder="Name" name="companyName"
+								value="${exchange.info}" required>
+						</p>
+					</div>
+					<div style="overflow: auto;">
+						<div>
+							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
+								style="float: left;">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1)"
+								style="float: right;">Next</button>
+						</div>
+						<br></br>
+						<div class="form-group" style="float: right;">
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align: center; margin-top: 4%;">
+						<span class="step"></span> <span class="step"></span> 
+					</div>
+				<%-- 	<label style="background-color:red">
 						${exchange.id} <br />
 						${exchange.symbol}<br />
 						${exchange.name}<br />
 						${exchange.info}<br />
-					</label>
+					</label> --%>
 					
 				</c:if>
 				<c:if test="${chooseView == 'viewFactBusinessResult'}">
-					<label style="background-color:red">
+				<h1>Edit Business Result</h1>
+					<div class="tab">
+						ID 
+						<p>
+							<textarea class="form-control" id="businessId" name="businessId"
+								type="text" style="resize: none;" rows="1"
+								cols="40" readonly>${factBusinessResult.id}</textarea>
+						</p>
+						Date ID
+						<p>
+							<input placeholder="Date ID" id="businessDate"
+								name="companySymbol" type="text" value="${factBusinessResult.id_date}"
+								required>
+						</p>
+						Company ID
+						<p>
+							<input placeholder="Exchange Symbol" id="companySymbol"
+								name="companySymbol" type="text" value="${factBusinessResult.id_company}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Exchange ID 
+						<p>
+							<input placeholder="Exchange ID" id="exchangeId"
+								name="exchangeId" type="text" value="${factBusinessResult.id_exchange}"
+								required>
+						</p>
+						Status
+						<p>
+							<input placeholder="Status" name="businessStatus"
+								value="${factBusinessResult.status}" required>
+						</p>
+						Profit
+						<p>
+							<input placeholder="Profit" name="businessProfit "
+								value="${factBusinessResult.profit}" required>
+						</p>
+					</div>
+					<div class="tab">
+						Previous period
+						<p>
+							<input placeholder="Previous period" id="previousPeriod"
+								name="previousPeriod" type="text" value="${factBusinessResult.previous_period}"
+								required>
+						</p>
+						Same period
+						<p>
+							<input placeholder="Same period" name="samePeriod"
+								value="${factBusinessResult.same_period}" required>
+						</p>
+						Profit cummulative
+						<p>
+							<input placeholder="Profit cummulative" name="profitCummulative "
+								value="${factBusinessResult.profit_cummulative}" required>
+						</p>
+					</div>
+					<div class="tab">
+						Eps profit
+						<p>
+							<input placeholder="Eps profit" id="epsPprofit"
+								name="epsProfit" type="text" value="${factBusinessResult.eps_profit}"
+								required>
+						</p>
+						Eps cummulative
+						<p>
+							<input placeholder="Eps cummulative" name="epsCummulative"
+								value="${factBusinessResult.eps_cummulative}" required>
+						</p>
+						Price earning ratio
+						<p>
+							<input placeholder="Price earning ratio" name="priceEarningRatio "
+								value="${factBusinessResult.price_earning_ratio}" required>
+						</p>
+					</div>
+					<div style="overflow: auto;">
+						<div>
+							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
+								style="float: left;">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1)"
+								style="float: right;">Next</button>
+						</div>
+						<br></br>
+						<div class="form-group" style="float: right;">
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align: center; margin-top: 4%;">
+						<span class="step"></span> <span class="step"></span> 
+						<span class="step"></span> <span class="step"></span>
+					</div>
+					<%-- <label style="background-color:red">
 					${factBusinessResult.id}<br />
 					${factBusinessResult.id_date}<br />
 					${factBusinessResult.id_company}<br />
@@ -144,7 +284,7 @@ button:hover {
 					${factBusinessResult.eps_profit}<br />
 					${factBusinessResult.eps_cummulative}<br />
 					${factBusinessResult.price_earning_ratio}<br />
-					</label>	
+					</label>	 --%>
 				</c:if>
 				
 				
@@ -187,7 +327,7 @@ button:hover {
 						Company ID
 						<p>
 							<textarea class="form-control" id="companyId" name="companyId"
-								type="text" style="resize: none;" name="companyInfo" rows="1"
+								type="text" style="resize: none;" rows="1"
 								cols="40" readonly>${company.id}</textarea>
 						</p>
 						Symbol
@@ -263,7 +403,7 @@ button:hover {
 						Date Trade ID
 						<p>
 							<textarea class="form-control" id="dateTradeId" name="dateTradeId"
-								type="text" style="resize: none;" name="companyInfo" rows="1"
+								type="text" style="resize: none;" rows="1"
 								cols="40" readonly>${dateTradedto.id}</textarea>
 						</p>
 						Date Trade
@@ -356,7 +496,7 @@ button:hover {
 						Fact Trade ID
 						<p>
 							<textarea class="form-control" id="factTradeId" name="factTradeId"
-							type="text" style="resize: none;" name="companyInfo" rows="1"
+							type="text" style="resize: none;" rows="1"
 							cols="40" readonly>${factTrade.id}</textarea>
 						</p>
 						Date Trade ID

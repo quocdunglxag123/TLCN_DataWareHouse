@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 body {
-	background-color: #fff;
+	background-color: #7895B2;
 
 }
 
@@ -85,6 +85,11 @@ form{
  .background{
  	margin-top: 1%;
  	margin-left: 5%;
+ 	z-index: 4;
+ 	
+ }
+ .img{
+ z-index: 5;
  }
 
  
