@@ -170,7 +170,136 @@ button:hover {
 					</div>			
 				</c:if>
 				<c:if test="${chooseView == 'viewFactForeignInvestorAuction'}">
-					<label style="background-color:red">
+					<h1>Edit Foreign Investor Auction</h1>
+					<div class="tab">
+						Foreign Investor Auction ID 
+						<p>
+							<textarea class="form-control" id="factForeignInvestorAuctionId" name="factForeignInvestorAuctionId"
+								type="text" style="resize: none;" rows="1"
+								cols="40" readonly>${factForeignInvestorAuction.id}</textarea>
+						</p>
+						Date Id 
+						<p>
+							<input placeholder="Date Id" id="id_date"
+								name="id_date" type="text" value="${factForeignInvestorAuction.id_date}"
+								required>
+						</p>
+						Company Id 
+						<p>
+							<input placeholder="Company Id" id="id_company"
+								name="id_company" type="text" value="${factForeignInvestorAuction.id_company}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Room 
+						<p>
+							<input placeholder="Room" id="room"
+								name="room" type="text" value="${factForeignInvestorAuction.room}"
+								required>
+						</p>
+						Percent owned
+						<p>
+							<input placeholder="Percent owned" name="percent_owned"
+								value="${factForeignInvestorAuction.percent_owned}" required>
+						</p>
+						Room available
+						<p>
+							<input placeholder="Room available" id="room_available"
+								name="room_available" type="text" value="${factForeignInvestorAuction.room_available}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Percent room available 
+						<p>
+							<input placeholder="Percent room available" id="percent_room_available"
+								name="percent_room_available" type="text" value="${factForeignInvestorAuction.percent_room_available}"
+								required>
+						</p>
+						Buy volume auction
+						<p>
+							<input placeholder="Buy volume auction" name="buy_volume_auction"
+								value="${factForeignInvestorAuction.buy_volume_auction}" required>
+						</p>
+						Percent buy volume auction market
+						<p>
+							<input placeholder="Percent buy volume auction market" id="percent_buy_volume_auction_market"
+								name="percent_buy_volume_auction_market" type="text" value="${factForeignInvestorAuction.percent_buy_volume_auction_market}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Sell volume auction
+						<p>
+							<input placeholder="Sell volume auction" id="sell_volume_auction"
+								name="sell_volume_auction" type="text" value="${factForeignInvestorAuction.sell_volume_auction}"
+								required>
+						</p>
+						Percent sell volume auction market
+						<p>
+							<input placeholder="Percent sell volume auction market" name="percent_sell_volume_auction_market"
+								value="${factForeignInvestorAuction.percent_sell_volume_auction_market}" required>
+						</p>
+						Buy price auction
+						<p>
+							<input placeholder="Buy price auction" id="buy_price_auction"
+								name="buy_price_auction" type="text" value="${factForeignInvestorAuction.buy_price_auction}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Percent buy price auction market
+						<p>
+							<input placeholder="Percent buy price auction market" id="percent_buy_price_auction_market"
+								name="percent_buy_price_auction_market" type="text" value="${factForeignInvestorAuction.percent_buy_price_auction_market}"
+								required>
+						</p>
+						Sell price auction
+						<p>
+							<input placeholder="Sell price auction" name="sell_price_auction"
+								value="${factForeignInvestorAuction.sell_price_auction}" required>
+						</p>
+						Percent sell price auction market
+						<p>
+							<input placeholder="Percent sell price auction market" id="percent_sell_price_auction_market"
+								name="percent_sell_price_auction_market" type="text" value="${factForeignInvestorAuction.percent_sell_price_auction_market}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Difference volume
+						<p>
+							<input placeholder="Difference volume" id="difference_volume"
+								name="difference_volume" type="text" value="${factForeignInvestorAuction.difference_volume}"
+								required>
+						</p>
+						Difference price
+						<p>
+							<input placeholder="Difference price" name="difference_price"
+								value="${factForeignInvestorAuction.difference_price}" required>
+						</p>
+					</div>
+					<div style="overflow: auto;">
+						<div>
+							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
+								style="float: left;">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1)"
+								style="float: right;">Next</button>
+						</div>
+						<br></br>
+						<div class="form-group" style="float: right;">
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align: center; margin-top: 4%;">
+						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
+						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
+					</div>
+					<%-- <label style="background-color:red">
 						${factForeignInvestorAuction.id} <br />
 						${factForeignInvestorAuction.id_date}<br />
 						${factForeignInvestorAuction.id_company}<br />
@@ -188,10 +317,133 @@ button:hover {
 						${factForeignInvestorAuction.percent_sell_price_auction_market}<br />
 						${factForeignInvestorAuction.difference_volume}<br />
 						${factForeignInvestorAuction.difference_price}<br />
-					</label>
+					</label> --%>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactStockOrder'}">
-				<label style="background-color:red">
+				<h1>Edit Fact Stock Order</h1>
+					<div class="tab">
+						ID 
+						<p>
+							<textarea class="form-control" id="id" name="id"
+								type="text" style="resize: none;" rows="1"
+								cols="40" readonly>${factStockOrder.id}</textarea>
+						</p>
+						Date Id 
+						<p>
+							<input placeholder="Date Id" id="id_date"
+								name="id_date" type="text" value="${factStockOrder.id_date}"
+								required>
+						</p>
+						Company Id 
+						<p>
+							<input placeholder="Company Id" id="id_company"
+								name="id_company" type="text" value="${factStockOrder.id_company}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Price close 
+						<p>
+							<input placeholder="Price close" id="price_close"
+								name="price_close" type="text" value="${factStockOrder.price_close}"
+								required>
+						</p>
+						Total volume auction
+						<p>
+							<input placeholder="Total volume auction" name="total_volume_auction"
+								value="${factStockOrder.total_volume_auction}" required>
+						</p>
+						Total price auction
+						<p>
+							<input placeholder="Total price auction" id="total_price_auction"
+								name="total_price_auction" type="text" value="${factStockOrder.total_price_auction}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Best buy price
+						<p>
+							<input placeholder="Best buy price" id="best_buy_price"
+								name="best_buy_price" type="text" value="${factStockOrder.best_buy_price}"
+								required>
+						</p>
+						Best buy volume
+						<p>
+							<input placeholder="Best buy volume" name="best_buy_volume"
+								value="${factStockOrder.best_buy_volume}" required>
+						</p>
+						Best sell price
+						<p>
+							<input placeholder="Best sell price" id="best_sell_price"
+								name="best_sell_price" type="text" value="${factStockOrder.best_sell_price}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Best sell volume
+						<p>
+							<input placeholder="Best sell volume" id="best_sell_volume"
+								name="best_sell_volume" type="text" value="${factStockOrder.best_sell_volume}"
+								required>
+						</p>
+						Total order buy
+						<p>
+							<input placeholder="Total order buy" name="total_order_buy"
+								value="${factStockOrder.total_order_buy}" required>
+						</p>
+						Total order sell
+						<p>
+							<input placeholder="Total order sell" id="total_order_sell"
+								name="total_order_sell" type="text" value="${factStockOrder.total_order_sell}"
+								required>
+						</p>
+					</div>
+					<div class="tab">
+						Total order buy minus sell
+						<p>
+							<input placeholder="Total order buy minus sell" id="total_order_buy_minus_sell"
+								name="total_order_buy_minus_sell" type="text" value="${factStockOrder.total_order_buy_minus_sell}"
+								required>
+						</p>
+						Total volume buy
+						<p>
+							<input placeholder="Total volume buy" name="total_volume_buy"
+								value="${factStockOrder.total_volume_buy}" required>
+						</p>
+					</div>
+					<div class="tab">
+						Total volume sell
+						<p>
+							<input placeholder="Total volume sell" id="total_volume_sell"
+								name="total_volume_sell" type="text" value="${factStockOrder.total_volume_sell}"
+								required>
+						</p>
+						Total volume buy minus sell
+						<p>
+							<input placeholder="Total volume buy minus sell" name="total_volume_buy_minus_sell"
+								value="${factStockOrder.total_volume_buy_minus_sell}" required>
+						</p>
+					</div>
+					<div style="overflow: auto;">
+						<div>
+							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
+								style="float: left;">Previous</button>
+							<button type="button" id="nextBtn" onclick="nextPrev(1)"
+								style="float: right;">Next</button>
+						</div>
+						<br></br>
+						<div class="form-group" style="float: right;">
+							<button value="edit" name="buttonEdit" type="submit">Submit</button>
+							<button type="reset">Reset Value</button>
+							<a href="SearchCompany"><button type="button">Cancel</button></a>
+						</div>
+					</div>
+					<!-- Circles which indicates the steps of the form: -->
+					<div style="text-align: center; margin-top: 4%;">
+						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
+						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
+					</div>
+				<%-- <label style="background-color:red">
 						${factStockOrder.id} <br />
 						${factStockOrder.id_date}<br />
 						${factStockOrder.id_company}<br />
@@ -208,7 +460,7 @@ button:hover {
 						${factStockOrder.total_volume_buy}<br />
 						${factStockOrder.total_volume_sell}<br />
 						${factStockOrder.total_volume_buy_minus_sell}<br />
-					</label>
+					</label> --%>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactBusinessResult'}">
 				<h1>Edit Business Result</h1>
@@ -417,7 +669,7 @@ button:hover {
 					<!-- Circles which indicates the steps of the form: -->
 					<div style="text-align: center; margin-top: 4%;">
 						<span class="step"></span> <span class="step"></span> <span
-							class="step"></span> <span class="step"></span>
+							class="step"></span> 
 					</div>
 				</c:if>
 				<c:if test="${chooseView == 'viewDateTrade'}">
