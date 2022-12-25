@@ -70,10 +70,21 @@
 								onClick="totalPriceBarChart()">totalPriceBarChart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn5"
 								onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn5"
+								onClick="totalOrderBuySellPieChart()">totalOrderBuySellPieChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn5"
+								onClick="totalVolumeBuySellPieChart()">totalVolumeBuySellPieChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn5"
+								onClick="totalRoomRoomAvailablePieChart()">totalRoomRoomAvailablePieChart</button></li>
 					</ul></li>
 				<li><a href="Login" class="logout navbar-brand">Logout</a></li>
 			</ul>
 		</div>
+		
+		<div id="totalOrderBuySellPieChartArea" class="pieChart"></div>
+		<div id="totalVolumeBuySellPieChartArea" class="pieChart"></div>
+		<div id="totalRoomRoomAvailablePieChartArea" class="pieChart"></div>
+		
 		
 		<div class="popup-container">
 			<div class="popup-content">
@@ -542,7 +553,23 @@ function hideChart(){
 	document.getElementById("totalVolumeBarChartArea").style.display="none";
 	document.getElementById("totalPriceBarChartArea").style.display="none";
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
+	document.getElementById("totalOrderBuySellPieChartArea").style.display="none";
+	document.getElementById("totalVolumeBuySellPieChartArea").style.display="none";
+	document.getElementById("totalRoomRoomAvailablePieChartArea").style.display="none";
+	
+}
+//Hide chart loai tru chart duoc truyen vao
+function hideChartByValue(notHideChart){
+	const charts = ["totalVolumePieChartArea", "totalPricePieChartArea", "totalMarketCapitalizationPieChartArea", "totalVolumeBarChartArea", 
+		"totalPriceBarChartArea", "totalMarketCapitalizationBarChartArea","totalOrderBuySellPieChartArea", 
+		"totalVolumeBuySellPieChartArea","totalRoomRoomAvailablePieChartArea"];
+	for (let i = 0; i < charts.length; i++) {
+	  if(notHideChart !== charts[i]){
+		  document.getElementById(charts[i]).style.display="none";
+	  }
+	}
 
+	
 }
 
 /* --------------Pie Chart Fact--------------*/
@@ -553,11 +580,7 @@ function totalVolumePieChart(){
 	//Show Chart VoulmePie
 	document.getElementById("totalVolumePieChartArea").style.display="block";
 	//Hide Chart Con Lai
-	document.getElementById("totalPricePieChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationPieChartArea").style.display="none";
-	document.getElementById("totalVolumeBarChartArea").style.display="none";
-	document.getElementById("totalPriceBarChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
+	hideChartByValue("totalVolumePieChartArea");
 	
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
@@ -594,11 +617,7 @@ function totalPricePieChart(){
 	//Show total Price Pie Chart 
 	document.getElementById("totalPricePieChartArea").style.display="block";
 	//Hide Chart Con Lai
-	document.getElementById("totalVolumePieChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationPieChartArea").style.display="none";
-	document.getElementById("totalVolumeBarChartArea").style.display="none";
-	document.getElementById("totalPriceBarChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
+	hideChartByValue("totalPricePieChartArea");
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
 	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
@@ -633,11 +652,8 @@ function totalMarketCapitalizationPieChart(){
 	document.getElementById("totalMarketCapitalizationPieChartArea").style.display="block";
 	
 	//Hide Chart Con Lai
-	document.getElementById("totalVolumePieChartArea").style.display="none";
-	document.getElementById("totalPricePieChartArea").style.display="none";
-	document.getElementById("totalVolumeBarChartArea").style.display="none";
-	document.getElementById("totalPriceBarChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
+	hideChartByValue("totalMarketCapitalizationPieChartArea");
+
 		
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
@@ -667,6 +683,151 @@ function totalMarketCapitalizationPieChart(){
 	chart.draw(data, options);
 	}	
 }
+//Show total Order Buy And Sell Pie Chart 
+function totalOrderBuySellPieChart(){
+	//Show total Order Buy And Sell Pie Chart 
+	document.getElementById("totalOrderBuySellPieChartArea").style.display="block";
+	
+	//Hide Chart Con Lai
+	hideChartByValue("totalOrderBuySellPieChartArea");
+
+		
+	//Get String total Order Buy and add to array
+	var totalOrderBuyChart = new Array();
+	var totalOrderBuyChartTemp= "<%=request.getAttribute("totalOrderBuyDataChart")%>";
+	totalOrderBuyChart = totalOrderBuyChartTemp.split(',');
+	totalOrderBuyChart =totalOrderBuyChart.map(parseFloat); 
+	let sumTotalOrderBuy = 0;
+	for (const value of totalOrderBuyChart) {
+		sumTotalOrderBuy += value;
+	}
+	
+	//Get String total Order Sell and add to array
+	var totalOrderSellChart = new Array();
+	var totalOrderSellChartTemp= "<%=request.getAttribute("totalOrderSellDataChart")%>";
+	totalOrderSellChart = totalOrderSellChartTemp.split(',');
+	totalOrderSellChart =totalOrderSellChart.map(parseFloat); 
+	
+	let sumTotalOrderSell = 0;
+	for (const value of totalOrderSellChart) {
+		sumTotalOrderSell += value;
+	}
+	
+	//Create chart
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable(
+				[
+					  ['Buy-Sell', 'Total'],
+					  ['Stock Buy',sumTotalOrderBuy],
+					  ['Stock Sell',sumTotalOrderSell],
+					]
+				,false);
+		var options = {
+		 title:'Total Buy Sell Order', 	
+		};
+	var chart = new google.visualization.PieChart(document.getElementById('totalOrderBuySellPieChartArea'));
+	chart.draw(data, options);
+	}	
+}
+
+//Show total Volume Buy And Sell Pie Chart 
+function totalVolumeBuySellPieChart(){
+	//Show total Volume Buy And Sell Pie Chart 
+	document.getElementById("totalVolumeBuySellPieChartArea").style.display="block";
+	
+	//Hide Chart Con Lai
+	hideChartByValue("totalVolumeBuySellPieChartArea");
+
+	
+	//Get String total Volume Buy and add to array
+	var totalVolumeBuyChart = new Array();
+	var totalVolumeBuyChartTemp= "<%=request.getAttribute("totalVolumeBuyDataChart")%>";
+	totalVolumeBuyChart = totalVolumeBuyChartTemp.split(',');
+	totalVolumeBuyChart =totalVolumeBuyChart.map(parseFloat); 
+	let sumTotalVolumeBuy = 0;
+	for (const value of totalVolumeBuyChart) {
+		sumTotalVolumeBuy += value;
+	}
+	
+	//Get String  total Volume sell and add to array
+	var totalVolumeSellChart = new Array();
+	var totalVolumeSellChartTemp= "<%=request.getAttribute("totalVolumeSellDataChart")%>";
+	totalVolumeSellChart = totalVolumeSellChartTemp.split(',');
+	totalVolumeSellChart =totalVolumeSellChart.map(parseFloat); 
+	
+	let sumTotalVolumeSell = 0;
+	for (const value of totalVolumeSellChart) {
+		sumTotalVolumeSell += value;
+	}
+	
+	//Create chart
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable(
+				[
+					  ['Buy-Sell', 'Total'],
+					  ['Volume Buy',sumTotalVolumeBuy],
+					  ['Volume Sell',sumTotalVolumeSell],
+					]
+				,false);
+		var options = {
+		 title:'Total Buy Sell Volume', 	
+		};
+	var chart = new google.visualization.PieChart(document.getElementById('totalVolumeBuySellPieChartArea'));
+	chart.draw(data, options);
+	}	
+}
+
+//Show total room And roomAvailable Pie Chart 
+function totalRoomRoomAvailablePieChart(){
+	//Show total Room and Room Abailable Pie Chart 
+	document.getElementById("totalRoomRoomAvailablePieChartArea").style.display="block";
+	
+	//Hide Chart Con Lai
+	hideChartByValue("totalRoomRoomAvailablePieChartArea");
+
+	//Get String total room and add to array
+	var totalRoomChart = new Array();
+	var totalRoomChartTemp= "<%=request.getAttribute("roomDataChart")%>";
+	totalRoomChart = totalRoomChartTemp.split(',');
+	totalRoomChart =totalRoomChart.map(parseFloat); 
+	let sumTotalRoom = 0;
+	for (const value of totalRoomChart) {
+		sumTotalRoom += value;
+	}
+	
+	//Get String  total Volume sell and add to array
+	var totalRoomAvailableChart = new Array();
+	var totalRoomAvailableChartTemp= "<%=request.getAttribute("roomAvailableDataChart")%>";
+	totalRoomAvailableChart = totalRoomAvailableChartTemp.split(',');
+	totalRoomAvailableChart =totalRoomAvailableChart.map(parseFloat); 
+	
+	let sumtotalRoomAvailable = 0;
+	for (const value of totalRoomAvailableChart) {
+		sumtotalRoomAvailable += value;
+	}
+	
+	//Create chart
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable(
+				[
+					  ['Room - Room Available', 'Total'],
+					  ['Total Room',sumTotalRoom],
+					  ['Total Room Available',sumtotalRoomAvailable],
+					]
+				,false);
+		var options = {
+		 title:'Total Room - Room Available', 	
+		};
+	var chart = new google.visualization.PieChart(document.getElementById('totalRoomRoomAvailablePieChartArea'));
+	chart.draw(data, options);
+	}	
+}
 /* -------------------End Pie Chart Fact--------------------- */
  
  /* --------------Bar Chart Fact--------------*/
@@ -677,11 +838,8 @@ function totalVolumeBarChart(){
 	//Show Chart VoulmePie
 	document.getElementById("totalVolumeBarChartArea").style.display="block";
 	//Hide Chart Con Lai
-	document.getElementById("totalVolumePieChartArea").style.display="none";
-	document.getElementById("totalPricePieChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationPieChartArea").style.display="none";
-	document.getElementById("totalPriceBarChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
+		hideChartByValue("totalVolumeBarChartArea");
+
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
 	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
@@ -753,11 +911,8 @@ function totalPriceBarChart(){
 	//Show Chart VoulmePie
 	document.getElementById("totalPriceBarChartArea").style.display="block";
 	//Hide Chart Con Lai
-	document.getElementById("totalVolumePieChartArea").style.display="none";
-	document.getElementById("totalPricePieChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationPieChartArea").style.display="none";
-	document.getElementById("totalVolumeBarChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="none";
+	hideChartByValue("totalPriceBarChartArea");
+
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
 	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
@@ -829,11 +984,9 @@ function totalMarketCapitalizationBarChart(){
 	//Show Chart VoulmePie
 	document.getElementById("totalMarketCapitalizationBarChartArea").style.display="block";
 	//Hide Chart Con Lai
-	document.getElementById("totalVolumePieChartArea").style.display="none";
-	document.getElementById("totalPricePieChartArea").style.display="none";
-	document.getElementById("totalMarketCapitalizationPieChartArea").style.display="none";
-	document.getElementById("totalVolumeBarChartArea").style.display="none";
-	document.getElementById("totalPriceBarChartArea").style.display="none";
+	hideChartByValue("totalMarketCapitalizationBarChartArea");
+
+
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
 	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
@@ -903,7 +1056,11 @@ function totalMarketCapitalizationBarChart(){
 			Plotly.newPlot("totalMarketCapitalizationBarChartArea", data,
 					layout);
 		}
+/* -------------------End Bar Chart Fact--------------------- */
+
 	</script>
+	
+	
 	<script>
 		function openNav() {
 		  document.getElementById("mySidenav").style.width = "25%";

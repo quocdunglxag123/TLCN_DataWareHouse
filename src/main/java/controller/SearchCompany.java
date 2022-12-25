@@ -147,6 +147,21 @@ public class SearchCompany extends HttpServlet {
 		request.setAttribute("totalPriceDataChart", elementFactChart.get(2));
 		request.setAttribute("totalMarketCapitalizationDataChart", elementFactChart.get(3));
 		
+		//Data Fact Stock Order To analystic --> send to js to show chart
+		List<String> elementFactStockOrderChart = daoFactStockOrderImpl.getFactStockOrderToChart();
+		request.setAttribute("companyNameDataChart", elementFactStockOrderChart.get(0));
+		request.setAttribute("totalOrderBuyDataChart", elementFactStockOrderChart.get(1));
+		request.setAttribute("totalOrderSellDataChart", elementFactStockOrderChart.get(2));
+		request.setAttribute("totalVolumeBuyDataChart", elementFactStockOrderChart.get(3));
+		request.setAttribute("totalVolumeSellDataChart", elementFactStockOrderChart.get(4));
+
+		//Data Fact Foreign Investor Auction To analystic --> send to js to show chart
+		List<String> elementFactForeignInvestorAuctionChart = daoFactForeignInvestorAuctionImpl.getFactForeignInvestorAuctionToChart();
+		request.setAttribute("companyNameDataChart", elementFactForeignInvestorAuctionChart.get(0));
+		request.setAttribute("roomDataChart", elementFactForeignInvestorAuctionChart.get(1));
+		request.setAttribute("roomAvailableDataChart", elementFactForeignInvestorAuctionChart.get(2));
+
+		
 		
 		//Set Value To Search JSP
 		request.setAttribute("chooseView", chooseView);

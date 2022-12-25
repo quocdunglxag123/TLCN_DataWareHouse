@@ -23,31 +23,33 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 	 * @return list thong tin FactForeignInvestorAuction
 	 */
 	@Override
-	public List<FactForeignInvestorAuctionDto> getFactForeignInvestorAuctionByPage(String page,String search) {
+	public List<FactForeignInvestorAuctionDto> getFactForeignInvestorAuctionByPage(String page, String search) {
 		List<FactForeignInvestorAuctionDto> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		StringBuilder query =new StringBuilder( "select F.id, DD.datetrade, DC.symbol, F.room, F.percent_owned, F.room_available\r\n"
-				+ "	, F.percent_room_available, F.buy_volume_auction, F.percent_buy_volume_auction_market,\r\n"
-				+ "	F.sell_volume_auction, F.percent_sell_volume_auction_market, F.buy_price_auction,\r\n"
-				+ "	F.percent_buy_price_auction_market, F.sell_price_auction,F.percent_sell_price_auction_market,F.difference_volume,F.difference_price\r\n"
-				+ "	from Fact_ForeignInvestorAuction as F, Dim_Company as DC, Dim_Date as DD \r\n"
-				+ "	where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
-				
-				if (search != "" && search != null) {
-					query.append("and  DC.symbol like "+"'%"+search+"%'");
-				}	
-				
-				query.append(" ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
+		StringBuilder query = new StringBuilder(
+				"select F.id, DD.datetrade, DC.symbol, F.room, F.percent_owned, F.room_available\r\n"
+						+ "	, F.percent_room_available, F.buy_volume_auction, F.percent_buy_volume_auction_market,\r\n"
+						+ "	F.sell_volume_auction, F.percent_sell_volume_auction_market, F.buy_price_auction,\r\n"
+						+ "	F.percent_buy_price_auction_market, F.sell_price_auction,F.percent_sell_price_auction_market,F.difference_volume,F.difference_price\r\n"
+						+ "	from Fact_ForeignInvestorAuction as F, Dim_Company as DC, Dim_Date as DD \r\n"
+						+ "	where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
+
+		if (search != "" && search != null) {
+			query.append("and  DC.symbol like " + "'%" + search + "%'");
+		}
+
+		query.append(" ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query.toString());
 			ps.setInt(1, pageDB);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				list.add(new FactForeignInvestorAuctionDto(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getBigDecimal(4),
-						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
-						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
-						rs.getBigDecimal(13), rs.getBigDecimal(14),rs.getBigDecimal(15),rs.getBigDecimal(16),rs.getBigDecimal(17)));
+				list.add(new FactForeignInvestorAuctionDto(rs.getInt(1), rs.getDate(2), rs.getString(3),
+						rs.getBigDecimal(4), rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7),
+						rs.getBigDecimal(8), rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11),
+						rs.getBigDecimal(12), rs.getBigDecimal(13), rs.getBigDecimal(14), rs.getBigDecimal(15),
+						rs.getBigDecimal(16), rs.getBigDecimal(17)));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -55,7 +57,6 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 		return list;
 	}
 
-	
 	/**
 	 * Get element Fact to Chart
 	 * 
@@ -63,33 +64,34 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 	 */
 	@Override
 	public List<String> getFactForeignInvestorAuctionToChart() {
-		return null;
-		/*
-		 * List<String> listElementFactChart = new ArrayList<>(); StringBuilder
-		 * companyNameChart = new StringBuilder(); StringBuilder totalVolumeChart = new
-		 * StringBuilder(); StringBuilder totalPriceChart = new StringBuilder();
-		 * StringBuilder totalMarketCapitalizationChart = new StringBuilder();
-		 * 
-		 * String query =
-		 * "select name, total_volume, total_price, total_marketcapitalization " +
-		 * "from Fact_ForeignInvestorAuction join Dim_Company on Fact_ForeignInvestorAuction.id_company = Dim_Company.id where Fact_ForeignInvestorAuction.isDelete=0 "
-		 * ; try { conn = DBConnection.getConnection(); ps =
-		 * conn.prepareStatement(query); rs = ps.executeQuery(); while (rs.next()) {
-		 * companyNameChart.append(","+rs.getString(1));
-		 * totalVolumeChart.append(","+Integer.toString(rs.getInt(2)));
-		 * totalPriceChart.append(","+Integer.toString(rs.getInt(3)));
-		 * totalMarketCapitalizationChart.append(","+Integer.toString(rs.getInt(4))); }
-		 * } catch (Exception e) { System.out.println(e); }
-		 * listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalVolumeChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalPriceChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalMarketCapitalizationChart.toString().
-		 * replaceFirst(",", "")); return listElementFactChart;
-		 */
-		
+
+		List<String> listElementFactChart = new ArrayList<>();
+		StringBuilder companyNameChart = new StringBuilder();
+		StringBuilder roomChart = new StringBuilder();
+		StringBuilder roomAvailableChart = new StringBuilder();
+
+		String query = "select name, room, room_available\r\n"
+				+ "	from Fact_ForeignInvestorAuction join Dim_Company on Fact_ForeignInvestorAuction.id_company = Dim_Company.id \r\n"
+				+ "	where Fact_ForeignInvestorAuction.isDelete=0 ";
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(query);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				companyNameChart.append("," + rs.getString(1));
+				roomChart.append("," + Float.toString(rs.getInt(2)));
+				roomAvailableChart.append("," + Float.toString(rs.getInt(3)));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(roomChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(roomAvailableChart.toString().replaceFirst(",", ""));
+		return listElementFactChart;
+
 	}
 
-	
 	/**
 	 * get end page FactForeignInvestorAuction
 	 * 
@@ -99,13 +101,13 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 	public int getEndPageFactForeignInvestorAuction(String search) {
 		int endPage = 0;
 		int count = 0;
-		StringBuilder query =new StringBuilder( "select count(*)"
-				+ "from Fact_ForeignInvestorAuction as F, Dim_Company as DC, Dim_Date as DD \r\n"
-				+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
-				
-				if (search != "" && search != null) {
-					query.append("and  DC.symbol like "+"'%"+search+"%'");
-				}	
+		StringBuilder query = new StringBuilder(
+				"select count(*)" + "from Fact_ForeignInvestorAuction as F, Dim_Company as DC, Dim_Date as DD \r\n"
+						+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
+
+		if (search != "" && search != null) {
+			query.append("and  DC.symbol like " + "'%" + search + "%'");
+		}
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query.toString());
@@ -135,7 +137,7 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 		}
 		String[] s = ids.split(",");
 		int[] idArray = new int[s.length];
-		
+
 		for (int i = 0; i < s.length; i++) {
 			idArray[i] = Integer.parseInt(s[i]);
 		}
@@ -143,7 +145,7 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 		for (int i = 0; i < idArray.length; i++) {
 			query.append(",?");
 		}
-		
+
 		query.append(")");
 		try {
 			conn = DBConnection.getConnection();
@@ -177,16 +179,18 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				FactForeignInvestorAuction = new FactForeignInvestorAuction(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
-						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
-						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
-						rs.getBigDecimal(13), rs.getBigDecimal(14),rs.getBigDecimal(15),rs.getBigDecimal(16),rs.getBigDecimal(17));
+				FactForeignInvestorAuction = new FactForeignInvestorAuction(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+						rs.getBigDecimal(4), rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7),
+						rs.getBigDecimal(8), rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11),
+						rs.getBigDecimal(12), rs.getBigDecimal(13), rs.getBigDecimal(14), rs.getBigDecimal(15),
+						rs.getBigDecimal(16), rs.getBigDecimal(17));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return FactForeignInvestorAuction;
 	}
+
 	/**
 	 * edit FactForeignInvestorAuction By Id
 	 * 
@@ -198,8 +202,7 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 				+ "set id_date = ?,id_company= ?, room =?, percent_owned =?,room_available =?, percent_room_available=?, buy_volume_auction=?, "
 				+ "percent_buy_volume_auction_market=?, sell_volume_auction=?, percent_sell_volume_auction_market=?, buy_price_auction=?, "
 				+ "percent_buy_price_auction_market=?, sell_price_auction=?,"
-				+ " percent_sell_price_auction_market=?, difference_volume=?, difference_price=?"
-				+ "where id = ?;";
+				+ " percent_sell_price_auction_market=?, difference_volume=?, difference_price=?" + "where id = ?;";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -226,6 +229,7 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 			System.out.println(e);
 		}
 	}
+
 	/**
 	 * add FactForeignInvestorAuction
 	 * 
@@ -269,14 +273,15 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 			System.out.println(e);
 		}
 	}
+
 	/**
-	 * check Id  Dim Company is Delete before insert or edit
+	 * check Id Dim Company is Delete before insert or edit
 	 * 
 	 * @param FactForeignInvestorAuction thong tin FactForeignInvestorAuction
 	 * 
 	 * @return boolean thong tin true(is delete)/ flase(not delete)
 	 */
-	private boolean  checkIdDimCompanyDelete(FactForeignInvestorAuction factForeignInvestorAuction){
+	private boolean checkIdDimCompanyDelete(FactForeignInvestorAuction factForeignInvestorAuction) {
 		String query = "select * from Dim_Company where id =? and isDelete= 0";
 		try {
 			conn = DBConnection.getConnection();
@@ -291,6 +296,7 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 		}
 		return true;
 	}
+
 	/**
 	 * check Id Dim Date is Delete before insert or edit
 	 * 
@@ -298,7 +304,7 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 	 * 
 	 * @return boolean thong tin true(is delete)/ false(not delete)
 	 */
-	private boolean  checkIdDimDateDelete(FactForeignInvestorAuction factForeignInvestorAuction){
+	private boolean checkIdDimDateDelete(FactForeignInvestorAuction factForeignInvestorAuction) {
 		String query = "select * from Dim_Date where id =? and isDelete= 0";
 		try {
 			conn = DBConnection.getConnection();
@@ -314,5 +320,4 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 		return true;
 	}
 
-	
 }

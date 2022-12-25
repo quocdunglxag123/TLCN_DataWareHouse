@@ -62,30 +62,35 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 	 */
 	@Override
 	public List<String> getFactStockOrderToChart() {
-		return null;
-		/*
-		 * List<String> listElementFactChart = new ArrayList<>(); StringBuilder
-		 * companyNameChart = new StringBuilder(); StringBuilder totalVolumeChart = new
-		 * StringBuilder(); StringBuilder totalPriceChart = new StringBuilder();
-		 * StringBuilder totalMarketCapitalizationChart = new StringBuilder();
-		 * 
-		 * String query =
-		 * "select name, total_volume, total_price, total_marketcapitalization " +
-		 * "from Fact_StockOrder join Dim_Company on Fact_StockOrder.id_company = Dim_Company.id where Fact_StockOrder.isDelete=0 "
-		 * ; try { conn = DBConnection.getConnection(); ps =
-		 * conn.prepareStatement(query); rs = ps.executeQuery(); while (rs.next()) {
-		 * companyNameChart.append(","+rs.getString(1));
-		 * totalVolumeChart.append(","+Integer.toString(rs.getInt(2)));
-		 * totalPriceChart.append(","+Integer.toString(rs.getInt(3)));
-		 * totalMarketCapitalizationChart.append(","+Integer.toString(rs.getInt(4))); }
-		 * } catch (Exception e) { System.out.println(e); }
-		 * listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalVolumeChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalPriceChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalMarketCapitalizationChart.toString().
-		 * replaceFirst(",", "")); return listElementFactChart;
-		 */
 		
+		  List<String> listElementFactChart = new ArrayList<>(); StringBuilder
+		  companyNameChart = new StringBuilder(); 
+		  StringBuilder totalOrderBuyChart = new StringBuilder(); 
+		  StringBuilder totalOrderSellChart = new StringBuilder();
+		  StringBuilder totalVolumeBuyChart = new StringBuilder();
+		  StringBuilder totalVolumeSellChart = new StringBuilder();
+		  String query =
+		  "select name, total_order_buy, total_order_sell, total_volume_buy, total_volume_sell " +
+		  "from Fact_StockOrder join Dim_Company on Fact_StockOrder.id_company = Dim_Company.id where Fact_StockOrder.isDelete=0 "; 
+		  try { conn = DBConnection.getConnection(); 
+		  	ps =conn.prepareStatement(query); rs = ps.executeQuery(); while (rs.next()) {
+			  companyNameChart.append(","+rs.getString(1));
+			  totalOrderBuyChart.append(","+Float.toString(rs.getFloat(2)));
+			  totalOrderSellChart.append(","+Float.toString(rs.getFloat(3)));
+			  totalVolumeBuyChart.append(","+Float.toString(rs.getFloat(4)));
+			  totalVolumeSellChart.append(","+Float.toString(rs.getFloat(5)));
+		  	}
+		  	
+		  } catch (Exception e) { 
+			  System.out.println(e); 
+		  }
+		  listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
+		  listElementFactChart.add(totalOrderBuyChart.toString().replaceFirst(",", ""));
+		  listElementFactChart.add(totalOrderSellChart.toString().replaceFirst(",", ""));
+		  listElementFactChart.add(totalVolumeBuyChart.toString().replaceFirst(",", "")); 
+		  listElementFactChart.add(totalVolumeSellChart.toString().replaceFirst(",", "")); 
+
+		  return listElementFactChart;
 	}
 
 	
