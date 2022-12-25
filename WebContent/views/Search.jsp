@@ -32,7 +32,7 @@
 	href="<%=request.getContextPath()%>/css/Search.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/css/Chart.css">
-	
+
 <script language="javascript"
 	src="<%=request.getContextPath()%>/js/Search.js"></script>
 
@@ -40,6 +40,12 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
 
 </head>
 <body onload="checkView('${chooseView}','${endPage}')">
@@ -52,33 +58,101 @@
 				<li><a class="navbar-brand">Hello ${userName}</a></li>
 				<li><a class="navbar-brand">Menu Chart</a>
 					<ul>
-						<li><button type="button" id="btn-chart" onClick="totalVolumePieChart()">totalVolumePieChart</button></li>
-						<li><button type="button" id="btn-chart" onClick="totalPricePieChart()">totalPriceChart</button></li>
-						<li><button type="button" id="btn-chart"
+						<li><button type="button" id="btn-chart" class="stats-btn"
+								onClick="totalVolumePieChart()">totalVolumePieChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn1"
+								onClick="totalPricePieChart()">totalPriceChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn2"
 								onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button></li>
-						<li><button type="button" id="btn-chart" onClick="totalVolumeBarChart()">totalVolumeBarChart</button></li>
-						<li><button type="button" id="btn-chart" onClick="totalPriceBarChart()">totalPriceBarChart</button></li>
-						<li><button type="button" id="btn-chart"
+						<li><button type="button" id="btn-chart" class="stats-btn3"
+								onClick="totalVolumeBarChart()">totalVolumeBarChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn4"
+								onClick="totalPriceBarChart()">totalPriceBarChart</button></li>
+						<li><button type="button" id="btn-chart" class="stats-btn5"
 								onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button></li>
-					</ul>
-				</li>
+					</ul></li>
 				<li><a href="Login" class="logout navbar-brand">Logout</a></li>
 			</ul>
 		</div>
 		
-		<div id="totalVolumePieChartArea" class="pieChart">		
-			<button onclick="hideChart()">X</button>
-		</div>
 		<div class="popup-container">
-			<div id="totalPricePieChartArea"  class="pieChart"> </div>
-			<a id="totalVolumePieChartArea" class="pieChart" onclick="hideChart()">&times;</a>
+			<div class="popup-content">
+				<div class="chart-container">
+					<div id="totalVolumePieChartArea" class="pieChart"></div>
+				</div>
+				<div class="close-btn">
+					<button class="btn-quick" onclick="hideChart()" >&times;</button>
+					<!-- onclick="hideChart()" -->
+				</div>
+			</div>
+			<!-- <div id="totalPricePieChartArea" class="pieChart"></div>
+			<a id="totalVolumePieChartArea" class="pieChart"
+				onclick="hideChart()">&times;</a> -->
+		</div>
+
+		<div class="popup-container1">
+			<div class="popup-content1">
+				<div class="chart-container1">
+					<div id="totalPricePieChartArea" class="pieChart"></div>
+				</div>
+				<div class="close-btn1">
+					<button onclick="hideChart()" >&times;</button>
+					<!-- onclick="hideChart()" -->
+				</div>
+			</div>
 		</div>
 		
-		<div id="totalMarketCapitalizationPieChartArea" class="pieChart" ></div>
+		<div class="popup-container2">
+			<div class="popup-content2">
+				<div class="chart-container2">
+					<div id="totalMarketCapitalizationPieChartArea" class="pieChart"></div>
+				</div>
+				<div class="close-btn2">
+					<button onclick="hideChart()" >&times;</button>
+					<!-- onclick="hideChart()" -->
+				</div>
+			</div>
+		</div>
+		<div class="popup-container3">
+			<div class="popup-content3">
+				<div class="chart-container3">
+					<div id="totalVolumeBarChartArea" class="barChart"></div>
+				</div>
+				<div class="close-btn3">
+					<button onclick="hideChart()">&times;</button>
+					<!-- onclick="hideChart()" -->
+				</div>
+			</div>
+		</div>
+		<div class="popup-container4">
+			<div class="popup-content4">
+				<div class="chart-container4">
+					<div id="totalPriceBarChartArea" class="barChart"></div>
+				</div>
+				<div class="close-btn4">
+					<button onclick="hideChart()">&times;</button>
+					<!-- onclick="hideChart()" -->
+				</div>
+			</div>
+		</div>
+		<div class="popup-container5">
+			<div class="popup-content5">
+				<div class="chart-container5">
+					<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div>
+				</div>
+				<div class="close-btn5">
+					<button onclick="hideChart()">&times;</button>
+					<!-- onclick="hideChart()" -->
+				</div>
+			</div>
+		</div>
+		
+
+<!-- 		<div id="totalMarketCapitalizationPieChartArea" class="pieChart"></div>
 		<div id="totalVolumeBarChartArea" class="barChart"></div>
 		<div id="totalPriceBarChartArea" class="barChart"></div>
-		<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div>
-		
+		<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div> -->
+
 
 		<%-- <nav class="navbar navbar-light bg-light justify-content-between">
 			<a class="navbar-brand">Hello ${userName}</a>
@@ -91,11 +165,10 @@
 			value="${endPage}" /> <input type="hidden" id="listNodeChecked"
 			name="listNodeChecked" ReadOnly value="" />
 		<div class="select">
-		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-		<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
-				width="75px" height="75px" alt="logo">
-			 <label for="cars">ChooseView:</label> <select name="chooseView"
-				id="chooseView" class="form-select"
+			<span style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
+			<img src="<%=request.getContextPath()%>/img/STOCKtrade1.png"
+				width="75px" height="75px" alt="logo"> <label for="cars">ChooseView:</label>
+			<select name="chooseView" id="chooseView" class="form-select"
 				aria-label="Default select example">
 				<option value="viewCompany">View Company</option>
 				<option value="viewExchange">View Exchange</option>
@@ -130,9 +203,10 @@
 			</div>
 		</div>
 
-	<!-- Search Page -->
-	<input type="text" name="search" placeholder="Search" id="input-search"/>
-	<button type="submit" name="search" value="search" id="btn-search">Search</button>
+		<!-- Search Page -->
+		<input type="text" name="search" placeholder="Search"
+			id="input-search" />
+		<button type="submit" name="search" value="search" id="btn-search">Search</button>
 		<!-- View Company -->
 		<c:if test="${chooseView == 'viewCompany'}">
 
@@ -245,7 +319,7 @@
 
 		<!-- View Fact Trade -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
-		
+
 			<div class="form w-100">
 				<h2>View Fact Trade List</h2>
 				<table class="table ">
@@ -297,9 +371,9 @@
 				</table>
 			</div>
 		</c:if>
-			<!-- View Fact BusinessResult -->
+		<!-- View Fact BusinessResult -->
 		<c:if test="${chooseView == 'viewFactBusinessResult'}">
-		
+
 			<div class="form w-100">
 				<h2>View Fact Business Result List</h2>
 				<table class="table ">
@@ -349,8 +423,8 @@
 		</c:if>
 	</form>
 
-		
-<script>
+
+	<script>
 //Hide all chart
 function hideChart(){
 	document.getElementById("totalVolumePieChartArea").style.display="none";
@@ -731,6 +805,84 @@ function totalMarketCapitalizationBarChart(){
 		}
 
 	</script>
+	<script>
+      const popupContainer = document.querySelector(".popup-container");
+      const statsBtn = document.querySelector(".stats-btn");
+      const closeBtn = document.querySelector(".popup-container .close-btn");
+
+      statsBtn.addEventListener("click", () => {
+        popupContainer.classList.add("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        popupContainer.classList.remove("active");
+      });
+    </script>
+    <script>
+      const popupContainer1 = document.querySelector(".popup-container1");
+      const statsBtn1 = document.querySelector(".stats-btn1");
+      const closeBtn1 = document.querySelector(".popup-container1 .close-btn1");
+
+      statsBtn1.addEventListener("click", () => {
+        popupContainer1.classList.add("active");
+      });
+
+      closeBtn1.addEventListener("click", () => {
+        popupContainer1.classList.remove("active");
+      });
+    </script>
+    <script>
+      const popupContainer2 = document.querySelector(".popup-container2");
+      const statsBtn2 = document.querySelector(".stats-btn2");
+      const closeBtn2 = document.querySelector(".popup-container2 .close-btn2");
+
+      statsBtn2.addEventListener("click", () => {
+        popupContainer2.classList.add("active");
+      });
+
+      closeBtn2.addEventListener("click", () => {
+        popupContainer2.classList.remove("active");
+      });
+    </script>
+     <script>
+      const popupContainer3 = document.querySelector(".popup-container3");
+      const statsBtn3 = document.querySelector(".stats-btn3");
+      const closeBtn3 = document.querySelector(".popup-container3 .close-btn3");
+
+      statsBtn3.addEventListener("click", () => {
+        popupContainer3.classList.add("active");
+      });
+
+      closeBtn3.addEventListener("click", () => {
+        popupContainer3.classList.remove("active");
+      });
+    </script>
+    <script>
+      const popupContainer4 = document.querySelector(".popup-container4");
+      const statsBtn4 = document.querySelector(".stats-btn4");
+      const closeBtn4 = document.querySelector(".popup-container4 .close-btn4");
+
+      statsBtn4.addEventListener("click", () => {
+        popupContainer4.classList.add("active");
+      });
+
+      closeBtn4.addEventListener("click", () => {
+        popupContainer4.classList.remove("active");
+      });
+    </script>
+    <script>
+      const popupContainer5 = document.querySelector(".popup-container5");
+      const statsBtn5 = document.querySelector(".stats-btn5");
+      const closeBtn5 = document.querySelector(".popup-container5 .close-btn5");
+
+      statsBtn5.addEventListener("click", () => {
+        popupContainer5.classList.add("active");
+      });
+
+      closeBtn5.addEventListener("click", () => {
+        popupContainer5.classList.remove("active");
+      });
+    </script>
 </body>
 
 </html>
