@@ -14,8 +14,12 @@ import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
 import dao.Impl.DaoExchangeImpl;
 import dao.Impl.DaoFactBusinessResultImpl;
+import dao.Impl.DaoFactForeignInvestorAuctionImpl;
+import dao.Impl.DaoFactStockOrderImpl;
 import dao.Impl.DaoFactTradeImpl;
 import dto.FactBusinessResultDto;
+import dto.FactForeignInvestorAuctionDto;
+import dto.FactStockOrderDto;
 import dto.FactTradeDto;
 import model.Company;
 import model.DateTrade;
@@ -32,8 +36,9 @@ public class SearchCompany extends HttpServlet {
 	DaoFactTradeImpl daoFactTradeImpl = new DaoFactTradeImpl();
 	DaoExchangeImpl daoExchangeImpl = new DaoExchangeImpl();
 	DaoFactBusinessResultImpl daoFactBusinessResultImpl = new DaoFactBusinessResultImpl();
-	
-	
+	DaoFactStockOrderImpl daoFactStockOrderImpl = new DaoFactStockOrderImpl();
+	DaoFactForeignInvestorAuctionImpl daoFactForeignInvestorAuctionImpl = new DaoFactForeignInvestorAuctionImpl();
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
@@ -118,8 +123,19 @@ public class SearchCompany extends HttpServlet {
 			// Truong hop choose view Fact-Trade
 			List<FactBusinessResultDto> factBusinessResults = daoFactBusinessResultImpl.getFactBusinessResultByPage(page,search);
 			int endPage = daoFactBusinessResultImpl.getEndPageFactBusinessResult(search);
-			
 			request.setAttribute("list", factBusinessResults);
+			request.setAttribute("endPage", endPage);
+		}else if (chooseView.equals("viewFactStockOrder")) {
+			// Truong hop choose view Fact-StockOrder
+			List<FactStockOrderDto> factStockOrders = daoFactStockOrderImpl.getFactStockOrderByPage(page,search);
+			int endPage = daoFactStockOrderImpl.getEndPageFactStockOrder(search);
+			request.setAttribute("list", factStockOrders);
+			request.setAttribute("endPage", endPage);
+		}else if (chooseView.equals("viewFactForeignInvestorAuction")) {
+			// Truong hop choose view FactForeignInvestorAuction
+			List<FactForeignInvestorAuctionDto> factForeignInvestorAuctions = daoFactForeignInvestorAuctionImpl.getFactForeignInvestorAuctionByPage(page,search);
+			int endPage = daoFactStockOrderImpl.getEndPageFactStockOrder(search);
+			request.setAttribute("list", factForeignInvestorAuctions);
 			request.setAttribute("endPage", endPage);
 		}
 		

@@ -116,6 +116,12 @@ function checkView(chooseView, endPage){
 	if(chooseView==='viewFactBusinessResult'){
 		selected.options.selectedIndex=4;
 	}
+	if(chooseView==='viewFactStockOrder'){
+		selected.options.selectedIndex=5;
+	}
+	if(chooseView==='viewFactForeignInvestorAuction'){
+		selected.options.selectedIndex=6;
+	}
 	if(parseInt(page)===0){
 		enableLastPage();
 	}

@@ -8,11 +8,8 @@ import java.util.List;
 
 import connection.DBConnection;
 import dao.DaoBusinessResult;
-import dao.DaoFactTrade;
 import dto.FactBusinessResultDto;
-import dto.FactTradeDto;
 import model.FactBusinessResult;
-import model.FactTrade;
 
 public class DaoFactBusinessResultImpl implements DaoBusinessResult {
 	Connection conn = null;

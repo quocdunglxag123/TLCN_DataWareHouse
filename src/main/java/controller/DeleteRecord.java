@@ -13,6 +13,8 @@ import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
 import dao.Impl.DaoExchangeImpl;
 import dao.Impl.DaoFactBusinessResultImpl;
+import dao.Impl.DaoFactForeignInvestorAuctionImpl;
+import dao.Impl.DaoFactStockOrderImpl;
 import dao.Impl.DaoFactTradeImpl;
 
 /**
@@ -26,6 +28,8 @@ public class DeleteRecord extends HttpServlet {
 	DaoFactTradeImpl daoFactTradeImpl = new DaoFactTradeImpl();
 	DaoExchangeImpl daoExchangeImpl = new DaoExchangeImpl();
 	DaoFactBusinessResultImpl daoFactBusinessResultImpl = new DaoFactBusinessResultImpl();
+	DaoFactStockOrderImpl daoFactStockOrderImpl = new DaoFactStockOrderImpl();
+	DaoFactForeignInvestorAuctionImpl daoFactForeignInvestorAuctionImpl = new DaoFactForeignInvestorAuctionImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -66,10 +70,16 @@ public class DeleteRecord extends HttpServlet {
 		// Truong hop choose view Fact-BusinessResult
 		if (chooseView.equals("viewFactBusinessResult")) {
 			daoFactBusinessResultImpl.deleteFactBusinessResult(listNodeChecked);
-
+		}
+		// Truong hop choose view Fact-StockOrder
+		if (chooseView.equals("viewFactStockOrder")) {
+			daoFactStockOrderImpl.deleteFactStockOrder(listNodeChecked);
+		}
+		// Truong hop choose view Fact Foreign Investor Auction
+		if (chooseView.equals("vieFactForeignInvestorAuction")) {
+			daoFactForeignInvestorAuctionImpl.deleteFactForeignInvestorAuction(listNodeChecked);
 		}
 		session.setAttribute("isReturnSearch", "1");// Delete Return to Search
-
 		request.getRequestDispatcher("SearchCompany").forward(request, response);
 	}
 

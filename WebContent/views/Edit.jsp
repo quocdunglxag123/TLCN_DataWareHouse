@@ -167,14 +167,48 @@ button:hover {
 					<!-- Circles which indicates the steps of the form: -->
 					<div style="text-align: center; margin-top: 4%;">
 						<span class="step"></span> <span class="step"></span> 
-					</div>
-				<%-- 	<label style="background-color:red">
-						${exchange.id} <br />
-						${exchange.symbol}<br />
-						${exchange.name}<br />
-						${exchange.info}<br />
-					</label> --%>
-					
+					</div>			
+				</c:if>
+				<c:if test="${chooseView == 'viewFactForeignInvestorAuction'}">
+					<label style="background-color:red">
+						${factForeignInvestorAuction.id} <br />
+						${factForeignInvestorAuction.id_date}<br />
+						${factForeignInvestorAuction.id_company}<br />
+						${factForeignInvestorAuction.room}<br />
+						${factForeignInvestorAuction.percent_owned}<br />
+						${factForeignInvestorAuction.room_available}<br />
+						${factForeignInvestorAuction.percent_room_available}<br />
+						${factForeignInvestorAuction.buy_volume_auction}<br />
+						${factForeignInvestorAuction.percent_buy_volume_auction_market}<br />
+						${factForeignInvestorAuction.sell_volume_auction}<br />
+						${factForeignInvestorAuction.percent_sell_volume_auction_market}<br />
+						${factForeignInvestorAuction.buy_price_auction}<br />
+						${factForeignInvestorAuction.percent_buy_price_auction_market}<br />
+						${factForeignInvestorAuction.sell_price_auction}<br />
+						${factForeignInvestorAuction.percent_sell_price_auction_market}<br />
+						${factForeignInvestorAuction.difference_volume}<br />
+						${factForeignInvestorAuction.difference_price}<br />
+					</label>
+				</c:if>
+				<c:if test="${chooseView == 'viewFactStockOrder'}">
+				<label style="background-color:red">
+						${factStockOrder.id} <br />
+						${factStockOrder.id_date}<br />
+						${factStockOrder.id_company}<br />
+						${factStockOrder.price_close}<br />
+						${factStockOrder.total_volume_auction} <br />
+						${factStockOrder.total_price_auction}<br />
+						${factStockOrder.best_buy_price}<br />
+						${factStockOrder.best_buy_volume}<br />
+						${factStockOrder.best_sell_price} <br />
+						${factStockOrder.best_sell_volume}<br />
+						${factStockOrder.total_order_buy}<br />
+						${factStockOrder.total_order_sell}<br />
+						${factStockOrder.total_order_buy_minus_sell} <br />
+						${factStockOrder.total_volume_buy}<br />
+						${factStockOrder.total_volume_sell}<br />
+						${factStockOrder.total_volume_buy_minus_sell}<br />
+					</label>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactBusinessResult'}">
 				<h1>Edit Business Result</h1>

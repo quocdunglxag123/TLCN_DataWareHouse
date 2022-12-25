@@ -147,19 +147,6 @@
 			</div>
 		</div>
 		
-
-<!-- 		<div id="totalMarketCapitalizationPieChartArea" class="pieChart"></div>
-		<div id="totalVolumeBarChartArea" class="barChart"></div>
-		<div id="totalPriceBarChartArea" class="barChart"></div>
-		<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div> -->
-
-
-		<%-- <nav class="navbar navbar-light bg-light justify-content-between">
-			<a class="navbar-brand">Hello ${userName}</a>
-			<div class="form-inline">
-				<a href="Login" class="logout">Logout</a>
-			</div>
-		</nav> --%>
 		<input type="hidden" id="page" name="page" ReadOnly value="${page}" />
 		<input type="hidden" id="endPage" name="endPage" ReadOnly
 			value="${endPage}" /> <input type="hidden" id="listNodeChecked"
@@ -175,6 +162,8 @@
 				<option value="viewDateTrade">View Date</option>
 				<option value="viewFactTrade">View Fact Trade</option>
 				<option value="viewFactBusinessResult">View Business Result</option>
+				<option value="viewFactStockOrder">View Stock Order</option>
+				<option value="viewFactForeignInvestorAuction">View Fact Foreign Investor Auction</option>
 			</select>
 			<button type="submit" class="btn">Choose</button>
 			<div class="crud">
@@ -414,6 +403,126 @@
 								<td scope="row">${item.eps_profit}</td>
 								<td scope="row">${item.eps_cummulative}</td>
 								<td scope="row">${item.price_earning_ratio}</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
+		</c:if>
+		
+			<!-- View Fact StockOrder -->
+		<c:if test="${chooseView == 'viewFactStockOrder'}">
+
+			<div class="form w-100">
+				<h2>View Fact Stock Order List</h2>
+				<table class="table ">
+					<thead class="table-header">
+						<tr>
+							<th scope="col"><input type="checkbox" id="root" name="root"
+								onChange="checkRoot()"></th>
+							<th scope="col">ID</th>
+							<th scope="col">Date Stock Order</th>
+							<th scope="col">Company Name</th>
+							<th scope="col">Price Close</th>
+							<th scope="col">Total Volume Auction</th>
+							<th scope="col">Total Price Auction</th>
+							<th scope="col">Best Buy Price</th>
+							<th scope="col">Best Buy Volume </th>
+							<th scope="col">Best Sell Price </th>
+							<th scope="col">Best Sell Volume </th>
+							<th scope="col">Total Order Buy </th>
+							<th scope="col">Total Order Sell  </th>
+							<th scope="col">Total Order Buy Minus Sell  </th>
+							<th scope="col">Total Volume Buy  </th>
+							<th scope="col">Total Volume Sell  </th>
+							<th scope="col">Total Volume Buy Minus Sell  </th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="item">
+
+							<tr class="tr-son">
+								<td scope="row"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
+								<td class="td-son"><a
+									href="EditCompany?factStockOrderId=${item.id}">${item.id}</a></td>
+								<td scope="row">${item.dateStockOrder}</td>
+								<td scope="row">${item.companyName}</td>
+								<td scope="row">${item.price_close}</td>
+								<td scope="row">${item.total_volume_auction}</td>
+								<td scope="row">${item.total_price_auction}</td>
+								<td scope="row">${item.best_buy_price}</td>
+								<td scope="row">${item.best_buy_volume}</td>
+								<td scope="row">${item.best_sell_price}</td>
+								<td scope="row">${item.best_sell_volume}</td>
+								<td scope="row">${item.total_order_buy}</td>
+								<td scope="row">${item.total_order_sell}</td>
+								<td scope="row">${item.total_order_buy_minus_sell}</td>
+								<td scope="row">${item.total_volume_buy}</td>
+								<td scope="row">${item.total_volume_sell}</td>
+								<td scope="row">${item.total_volume_buy_minus_sell}</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
+		</c:if>
+		
+			<!-- View Fact Foreign Investor Auction -->
+		<c:if test="${chooseView == 'viewFactForeignInvestorAuction'}">
+
+			<div class="form w-100">
+				<h2>View Fact Foreign Investor Auction List</h2>
+				<table class="table ">
+					<thead class="table-header">
+						<tr>
+							<th scope="col"><input type="checkbox" id="root" name="root"
+								onChange="checkRoot()"></th>
+							<th scope="col">ID</th>
+							<th scope="col">Date Auction</th>
+							<th scope="col">Company Name</th>
+							<th scope="col">Room</th>
+							<th scope="col">Percent Owned</th>
+							<th scope="col">Room Available</th>
+							<th scope="col">Percent Room Available</th>
+							<th scope="col">Buy Volume Auction</th>
+							<th scope="col">Percent Buy Volume Auction Market</th>
+							<th scope="col">Sell Volume Auction</th>
+							<th scope="col">Percent Sell Volume Auction Market</th>
+							<th scope="col">Buy Price Auction</th>
+							<th scope="col">Percent Buy Price Auction Market</th>
+							<th scope="col">Sell Price Auction</th>
+							<th scope="col">Percent Sell Price Auction Market</th>
+							<th scope="col">Difference Volume</th>
+							<th scope="col">Difference Price</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${list}" var="item">
+
+							<tr class="tr-son">
+								<td scope="row"><input type="checkbox" id="node"
+									onChange="checkNode()" name="node" value="${item.id}"></td>
+								<td class="td-son"><a
+									href="EditCompany?factForeignInvestorAuctionId=${item.id}">${item.id}</a></td>
+								<td scope="row">${item.dateAuction}</td>
+								<td scope="row">${item.companyName}</td>
+								<td scope="row">${item.room}</td>
+								<td scope="row">${item.percent_owned}</td>
+								<td scope="row">${item.room_available}</td>
+								<td scope="row">${item.percent_room_available}</td>
+								<td scope="row">${item.buy_volume_auction}</td>
+								<td scope="row">${item.percent_buy_volume_auction_market}</td>
+								<td scope="row">${item.sell_volume_auction}</td>
+								<td scope="row">${item.percent_sell_volume_auction_market}</td>
+								<td scope="row">${item.buy_price_auction}</td>
+								<td scope="row">${item.percent_buy_price_auction_market}</td>
+								<td scope="row">${item.sell_price_auction}</td>
+								<td scope="row">${item.percent_sell_price_auction_market}</td>
+								<td scope="row">${item.difference_volume}</td>
+								<td scope="row">${item.difference_price}</td>
 							</tr>
 						</c:forEach>
 

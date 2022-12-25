@@ -16,11 +16,15 @@ import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
 import dao.Impl.DaoExchangeImpl;
 import dao.Impl.DaoFactBusinessResultImpl;
+import dao.Impl.DaoFactForeignInvestorAuctionImpl;
+import dao.Impl.DaoFactStockOrderImpl;
 import dao.Impl.DaoFactTradeImpl;
 import model.Company;
 import model.DateTrade;
 import model.Exchange;
 import model.FactBusinessResult;
+import model.FactForeignInvestorAuction;
+import model.FactStockOrder;
 import model.FactTrade;
 
 /**
@@ -44,6 +48,8 @@ public class EditCompany extends HttpServlet {
 		DaoFactTradeImpl daoFactTradeImpl = new DaoFactTradeImpl();
 		DaoExchangeImpl daoExchangeImpl = new DaoExchangeImpl();
 		DaoFactBusinessResultImpl daoFactBusinessResultImpl = new DaoFactBusinessResultImpl();
+		DaoFactStockOrderImpl daoFactStockOrderImpl = new DaoFactStockOrderImpl();
+		DaoFactForeignInvestorAuctionImpl daoFactForeignInvestorAuctionImpl = new DaoFactForeignInvestorAuctionImpl();
 		
 		if (!Login.checkLogin(session)) {
 			// Truong hop chua login
@@ -218,7 +224,92 @@ public class EditCompany extends HttpServlet {
 					FactBusinessResult factBusinessResult = daoFactBusinessResultImpl.getFactBusinessResultById(factBusinessResultId);
 					request.setAttribute("factBusinessResult", factBusinessResult);
 				}
+			}else if (chooseView.equals("viewFactStockOrder")) {
+				// Get View Stock Order
+				FactStockOrder factStockOrderInput = new FactStockOrder();
+				String factStockOrderId = (String) request.getParameter("factStockOrderId");
+
+				if (buttonEdit != null) {
+					// Set data fact Stock Order from input edit view
+					factStockOrderInput.setId_date(Integer.parseInt(request.getParameter("id_date")));
+					factStockOrderInput.setId_company(Integer.parseInt(request.getParameter("id_company")));
+					factStockOrderInput.setPrice_close(new BigDecimal(request.getParameter("price_close")));
+					factStockOrderInput.setTotal_volume_auction(new BigDecimal(request.getParameter("total_volume_auction")));
+					factStockOrderInput.setTotal_price_auction(new BigDecimal(request.getParameter("total_price_auction")));
+					factStockOrderInput.setBest_buy_price(new BigDecimal(request.getParameter("best_buy_price")));
+					factStockOrderInput.setBest_buy_volume(new BigDecimal(request.getParameter("best_buy_volume")));
+					factStockOrderInput.setBest_sell_price(new BigDecimal(request.getParameter("best_sell_price")));
+					factStockOrderInput.setBest_sell_volume(new BigDecimal(request.getParameter("best_sell_volume")));
+					factStockOrderInput.setTotal_order_buy(new BigDecimal(request.getParameter("total_order_buy")));
+					factStockOrderInput.setTotal_order_sell(new BigDecimal(request.getParameter("total_order_sell")));
+					factStockOrderInput.setTotal_order_buy_minus_sell(new BigDecimal(request.getParameter("total_order_buy_minus_sell")));
+					factStockOrderInput.setTotal_volume_buy(new BigDecimal(request.getParameter("total_volume_buy")));
+					factStockOrderInput.setTotal_volume_sell(new BigDecimal(request.getParameter("total_volume_sell")));
+					factStockOrderInput.setTotal_volume_buy_minus_sell(new BigDecimal(request.getParameter("total_volume_buy_minus_sell")));
+
+					if (!factStockOrderId.equals("")) {
+						// Truong hop factStockOrderId khac Null --> Edit Fact_StockOrder
+						factStockOrderInput.setId(Integer.parseInt(factStockOrderId));
+						daoFactStockOrderImpl.editFactStockOrder(factStockOrderInput);
+
+					} else {
+						// Truong hop factStockOrderId Null --> Add Fact_StockOrder
+						daoFactStockOrderImpl.addFactStockOrder(factStockOrderInput);
+						request.getRequestDispatcher("SearchCompany").forward(request, response);
+						return;
+					}
+				}
+				// Get date StockOrder by Id To show Edit
+				if (factStockOrderId != null) {
+					FactStockOrder factStockOrder = daoFactStockOrderImpl.getFactStockOrderById(factStockOrderId);
+					request.setAttribute("factStockOrder", factStockOrder);
+				}
+				//*****************************************************
+			}else if (chooseView.equals("viewFactForeignInvestorAuction")) {
+				// Get View Stock Order
+				FactForeignInvestorAuction factForeignInvestorAuctionInput = new FactForeignInvestorAuction();
+				String factForeignInvestorAuctionId = (String) request.getParameter("factForeignInvestorAuctionId");
+
+				if (buttonEdit != null) {
+					// Set data fact Stock Order from input edit view
+					factForeignInvestorAuctionInput.setId_date(Integer.parseInt(request.getParameter("id_date")));
+					factForeignInvestorAuctionInput.setId_company(Integer.parseInt(request.getParameter("id_company")));
+					factForeignInvestorAuctionInput.setRoom(new BigDecimal(request.getParameter("room")));
+					factForeignInvestorAuctionInput.setPercent_owned(new BigDecimal(request.getParameter("percent_owned")));
+					factForeignInvestorAuctionInput.setRoom_available(new BigDecimal(request.getParameter("room_available")));
+					factForeignInvestorAuctionInput.setPercent_room_available(new BigDecimal(request.getParameter("percent_room_available")));
+					factForeignInvestorAuctionInput.setBuy_volume_auction(new BigDecimal(request.getParameter("buy_volume_auction")));
+					factForeignInvestorAuctionInput.setPercent_buy_volume_auction_market(new BigDecimal(request.getParameter("percent_buy_volume_auction_market")));
+					factForeignInvestorAuctionInput.setSell_volume_auction(new BigDecimal(request.getParameter("sell_volume_auction")));
+					factForeignInvestorAuctionInput.setPercent_sell_volume_auction_market(new BigDecimal(request.getParameter("percent_sell_volume_auction_market")));
+					factForeignInvestorAuctionInput.setBuy_price_auction(new BigDecimal(request.getParameter("buy_price_auction")));
+					factForeignInvestorAuctionInput.setPercent_buy_price_auction_market(new BigDecimal(request.getParameter("percent_buy_price_auction_market")));
+					factForeignInvestorAuctionInput.setSell_price_auction(new BigDecimal(request.getParameter("sell_price_auction")));
+					factForeignInvestorAuctionInput.setPercent_sell_price_auction_market(new BigDecimal(request.getParameter("percent_sell_price_auction_market")));
+					factForeignInvestorAuctionInput.setDifference_volume(new BigDecimal(request.getParameter("difference_volume")));
+					factForeignInvestorAuctionInput.setDifference_price(new BigDecimal(request.getParameter("difference_price")));
+
+					if (!factForeignInvestorAuctionId.equals("")) {
+						// Truong hop factfactForeignInvestorAuctionInputId khac Null --> Edit Fact_ForeignInvestorAuctionInput
+						factForeignInvestorAuctionInput.setId(Integer.parseInt(factForeignInvestorAuctionId));
+						daoFactForeignInvestorAuctionImpl.editFactForeignInvestorAuction(factForeignInvestorAuctionInput);
+
+					} else {
+						// Truong hop factForeignInvestorAuctionId Null --> Add Fact_ForeignInvestorAuction
+						daoFactForeignInvestorAuctionImpl.addFactForeignInvestorAuction(factForeignInvestorAuctionInput);
+						request.getRequestDispatcher("SearchCompany").forward(request, response);
+						return;
+					}
+				}
+				// Get date trade by Id To show Edit
+				if (factForeignInvestorAuctionId != null) {
+					FactForeignInvestorAuction factForeignInvestorAuction = daoFactForeignInvestorAuctionImpl.getFactForeignInvestorAuctionById(factForeignInvestorAuctionId);
+					request.setAttribute("factForeignInvestorAuction", factForeignInvestorAuction);
+				}
 			}
+			
+			
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

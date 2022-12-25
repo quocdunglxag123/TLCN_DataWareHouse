@@ -181,7 +181,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 				FactTrade = new FactTrade(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
 						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
 						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
-						rs.getBigDecimal(13), rs.getBigDecimal(14),rs.getInt(15));
+						rs.getBigDecimal(13), rs.getBigDecimal(14));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -283,7 +283,7 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 		return true;
 	}
 	/**
-	 * check Id Dim Company is Delete before insert or edit
+	 * check Id Dim Date is Delete before insert or edit
 	 * 
 	 * @param FactTrade thong tin FactTrade
 	 * 
