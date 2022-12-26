@@ -153,7 +153,7 @@ button:hover {
 					<div style="overflow: auto;">
 						<div>
 							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
-								style="float: left;">Previous</button>
+								style="float: left;">Prev</button>
 							<button type="button" id="nextBtn" onclick="nextPrev(1)"
 								style="float: right;">Next</button>
 						</div>
@@ -283,7 +283,7 @@ button:hover {
 					<div style="overflow: auto;">
 						<div>
 							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
-								style="float: left;">Previous</button>
+								style="float: left;">Prev</button>
 							<button type="button" id="nextBtn" onclick="nextPrev(1)"
 								style="float: right;">Next</button>
 						</div>
@@ -427,7 +427,7 @@ button:hover {
 					<div style="overflow: auto;">
 						<div>
 							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
-								style="float: left;">Previous</button>
+								style="float: left;">Prev</button>
 							<button type="button" id="nextBtn" onclick="nextPrev(1)"
 								style="float: right;">Next</button>
 						</div>
@@ -541,7 +541,7 @@ button:hover {
 					<div style="overflow: auto;">
 						<div>
 							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
-								style="float: left;">Previous</button>
+								style="float: left;">Prev</button>
 							<button type="button" id="nextBtn" onclick="nextPrev(1)"
 								style="float: right;">Next</button>
 						</div>
@@ -655,7 +655,7 @@ button:hover {
 					<div style="overflow: auto;">
 						<div>
 							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
-								style="float: left;">Previous</button>
+								style="float: left;">Prev</button>
 							<button type="button" id="nextBtn" onclick="nextPrev(1)"
 								style="float: right;">Next</button>
 						</div>
@@ -862,7 +862,7 @@ button:hover {
 					<div style="overflow: auto;">
 						<div>
 							<button type="button" id="prevBtn" onclick="nextPrev(-1)"
-								style="float: left;">Previous</button>
+								style="float: left;">Prev</button>
 							<button type="button" id="nextBtn" onclick="nextPrev(1)"
 								style="float: right;">Next</button>
 						</div>
