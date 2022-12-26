@@ -1,7 +1,6 @@
 package dao.Impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -149,7 +148,7 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
-			ps.setDate(1, (Date) dateTrade.getDateTrade());
+			ps.setDate(1, new java.sql.Date(dateTrade.getDateTrade().getTime()));
 			ps.setInt(2, dateTrade.getId());
 			ps.executeUpdate();
 
@@ -164,11 +163,11 @@ public class DaoDateTradeImpl implements DaoDateTrade {
 	 */
 	@Override
 	public void addDateTrade(DateTrade dateTrade) {
-		String query = "INSERT INTO Dim_Date(dateTrades) VALUES (?)";
+		String query = "INSERT INTO Dim_Date(dateTrade) VALUES (?)";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
-			ps.setDate(1, (Date) dateTrade.getDateTrade());
+			ps.setDate(1, new java.sql.Date(dateTrade.getDateTrade().getTime()));
 			ps.executeUpdate();
 
 		} catch (Exception e) {

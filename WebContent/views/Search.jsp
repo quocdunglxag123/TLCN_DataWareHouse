@@ -167,7 +167,6 @@
 				</div>
 				<div class="close-btn7">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
-					<!-- onclick="hideChart()" -->
 				</div>
 			</div>
 		</div>
@@ -179,7 +178,6 @@
 				</div>
 				<div class="close-btn8">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
-					<!-- onclick="hideChart()" -->
 				</div>
 			</div>
 		</div>
@@ -230,14 +228,7 @@
 			</div>
 
 		<!-- Search Page -->
-		<%-- <div>
-			<input type="text" name="search" placeholder="Search"
-				id="input-search" />
-			<button type="submit" name="search" value="search" id="btn-search">
-				<img src="<%=request.getContextPath()%>/img/search.png" width="27px"
-					height=27px " alt="search">
-			</button>
-		</div> --%>
+	
 		<div class="search-container">
 			<form>
 				<input type="text" name="search" placeholder="Search" id="input-search" />
@@ -349,7 +340,7 @@
 							<tr class="tr-son">
 								<td scope="row"><input type="checkbox" id="node"
 									onChange="checkNode()" name="node" value="${item.id}"></td>
-								<td scope="row"><a href="EditCompany?dateId=${item.id}">${item.id}</a></td>
+								<td scope="row"><a href="EditCompany?dateTradeId=${item.id}">${item.id}</a></td>
 								<td scope="row">${item.dateTrade}</td>
 							</tr>
 						</c:forEach>

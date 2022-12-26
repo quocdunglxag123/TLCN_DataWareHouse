@@ -673,15 +673,6 @@ button:hover {
 					</div>
 				</c:if>
 				<c:if test="${chooseView == 'viewDateTrade'}">
-					<%-- <div class="form-group">
-						<input class="form-control" id="dateTradeId" name="dateTradeId"
-							type="text" value="${dateTradedto.id}" readonly>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="Date Trade"
-							id="dateTrade" name="dateTrade" type="text"
-							value="${dateTradeDto.dateTrade}" required>
-					</div> --%>
 					
 					<h1>Edit Date Trade</h1>
 					<!-- One "tab" for each step in the form: -->
@@ -690,7 +681,7 @@ button:hover {
 						<p>
 							<textarea class="form-control" id="dateTradeId" name="dateTradeId"
 								type="text" style="resize: none;" rows="1"
-								cols="40" readonly>${dateTradedto.id}</textarea>
+								cols="40" readonly>${dateTradeDto.id}</textarea>
 						</p>
 						Date Trade
 						<p>
