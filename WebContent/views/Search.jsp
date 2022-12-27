@@ -45,12 +45,14 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;900&display=swap"
 	rel="stylesheet" />
-	
-	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body onload="checkView('${chooseView}','${endPage}')">
+<body onload="checkView('${chooseView}','${endPage}');myFunction()">
+	<div id="loader"></div>
 	<form action="SearchCompany" id="ViewCompany" method="post"
 		onsubmit="listNodeCheckedLogic()" class="form-login">
 		<!-- menucustorm -->
@@ -86,97 +88,97 @@
 
 
 
-		<div class="popup-container">
-			<div class="popup-content">
-				<div class="chart-container">
+		<div class="popup-container" id="popup-container">
+			<div class="popup-content" id="popup-content">
+				<div class="chart-container" id="chart-container">
 					<div id="totalVolumePieChartArea" class="pieChart"></div>
 				</div>
-				<div class="close-btn">
+				<div class="close-btn" id="close-btn">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="popup-container1">
+		<div class="popup-container1" id="popup-container1">
 			<div class="popup-content1">
 				<div class="chart-container1">
 					<div id="totalPricePieChartArea" class="pieChart"></div>
 				</div>
-				<div class="close-btn1">
+				<div class="close-btn1" id="close-btn1">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="popup-container2">
+		<div class="popup-container2" id="popup-container2">
 			<div class="popup-content2">
 				<div class="chart-container2">
 					<div id="totalMarketCapitalizationPieChartArea" class="pieChart"></div>
 				</div>
-				<div class="close-btn2">
+				<div class="close-btn2" id="close-btn2">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
-		<div class="popup-container3">
+		<div class="popup-container3" id="popup-container3">
 			<div class="popup-content3">
 				<div class="chart-container3">
 					<div id="totalVolumeBarChartArea" class="barChart"></div>
 				</div>
-				<div class="close-btn3">
+				<div class="close-btn3" id="close-btn3">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
-		<div class="popup-container4">
+		<div class="popup-container4" id="popup-container4">
 			<div class="popup-content4">
 				<div class="chart-container4">
 					<div id="totalPriceBarChartArea" class="barChart"></div>
 				</div>
-				<div class="close-btn4">
+				<div class="close-btn4" id="close-btn4">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
-		<div class="popup-container5">
+		<div class="popup-container5" id="popup-container5">
 			<div class="popup-content5">
 				<div class="chart-container5">
 					<div id="totalMarketCapitalizationBarChartArea" class="barChart"></div>
 				</div>
-				<div class="close-btn5">
+				<div class="close-btn5" id="close-btn5">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="popup-container6">
+		<div class="popup-container6" id="popup-container6">
 			<div class="popup-content6">
 				<div class="chart-container6">
 					<div id="totalOrderBuySellPieChartArea" class="pieChart"></div>
 				</div>
-				<div class="close-btn6">
+				<div class="close-btn6" id="close-btn6">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="popup-container7">
+		<div class="popup-container7" id="popup-container7">
 			<div class="popup-content7">
 				<div class="chart-container7">
 					<div id="totalVolumeBuySellPieChartArea" class="pieChart"></div>
 				</div>
-				<div class="close-btn7">
+				<div class="close-btn7" id="close-btn7">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
 		</div>
 
-		<div class="popup-container8">
+		<div class="popup-container8" id="popup-container8">
 			<div class="popup-content8">
 				<div class="chart-container8">
 					<div id="totalRoomRoomAvailablePieChartArea" class="pieChart"></div>
 				</div>
-				<div class="close-btn8">
+				<div class="close-btn8" id="close-btn8">
 					<button class="btn-quick" onclick="hideChart()">&times;</button>
 				</div>
 			</div>
@@ -201,7 +203,7 @@
 				<option value="viewFactForeignInvestorAuction">View Fact
 					Foreign Investor Auction</option>
 			</select>
-			<button type="submit" class="btn">Choose</button>
+			<button type="submit" class="btn btn-choose">Choose</button>
 			<div class="crud">
 				<a href="EditCompany">
 					<button type="button" class="btn btn-primary"
@@ -227,66 +229,69 @@
 					class="btn" type="button">&gt;&gt;</button>
 			</div>
 
-		<!-- Search Page -->
-	
-		<div class="search-container">
-			<form>
-				<input type="text" name="search" placeholder="Search" id="input-search" />
-				<button type="submit">
-					<i class="fa fa-search"></i>
-				</button>
-			</form>
-		</div>
+			<!-- Search Page -->
 
-		<!-- View Company -->
-		<c:if test="${chooseView == 'viewCompany'}">
-
-			<div class="form w-100">
-				<h2>View Company List</h2>
-				<table class="table ">
-					<thead>
-						<tr class="table-header">
-							<th scope="col"><input type="checkbox" id="root" name="root"
-								onChange="checkRoot()"></th>
-							<th scope="col">ID</th>
-							<th scope="col">Symbol</th>
-							<th scope="col">Name</th>
-							<th scope="col">Major</th>
-							<th scope="col">Phone</th>
-							<th scope="col">Info</th>
-							<th scope="col">Address</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list}" var="item">
-
-							<tr class="tr-son">
-								<td scope="row"><input type="checkbox" id="node"
-									onChange="checkNode()" name="node" value="${item.id}"></td>
-								<td class="td-son"><a
-									href="EditCompany?companyId=${item.id}">${item.id}</a></td>
-								<td scope="row"><p>${item.symbol}</p></td>
-								<td scope="row"><p>${item.name}</p></td>
-								<td scope="row">
-									<p>${item.major}</p>
-								</td>
-								<td scope="row"><p>${item.phone}</p></td>
-								<td scope="row"><p>${item.info}</p></td>
-								<td scope="row"><p>${item.address}</p></td>
-							</tr>
-						</c:forEach>
-
-					</tbody>
-				</table>
-				
-		</div>
+			<div class="search-container">
+				<form>
+					<input type="text" name="search" placeholder="Search"
+						id="input-search" />
+					<button type="submit">
+						<i class="fa fa-search"></i>
+					</button>
+				</form>
 			</div>
+
+			<!-- View Company -->
+			<c:if test="${chooseView == 'viewCompany'}">
+
+				<div class="form w-100 animate-bottom" style="display: none;"
+					id="myDiv">
+					<h2>View Company List</h2>
+					<table class="table ">
+						<thead>
+							<tr class="table-header">
+								<th scope="col"><input type="checkbox" id="root"
+									name="root" onChange="checkRoot()"></th>
+								<th scope="col">ID</th>
+								<th scope="col">Symbol</th>
+								<th scope="col">Name</th>
+								<th scope="col">Major</th>
+								<th scope="col">Phone</th>
+								<th scope="col">Info</th>
+								<th scope="col">Address</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list}" var="item">
+
+								<tr class="tr-son">
+									<td scope="row"><input type="checkbox" id="node"
+										onChange="checkNode()" name="node" value="${item.id}"></td>
+									<td class="td-son"><a
+										href="EditCompany?companyId=${item.id}">${item.id}</a></td>
+									<td scope="row"><p>${item.symbol}</p></td>
+									<td scope="row"><p>${item.name}</p></td>
+									<td scope="row">
+										<p>${item.major}</p>
+									</td>
+									<td scope="row"><p>${item.phone}</p></td>
+									<td scope="row"><p>${item.info}</p></td>
+									<td scope="row"><p>${item.address}</p></td>
+								</tr>
+							</c:forEach>
+
+						</tbody>
+					</table>
+
+				</div>
+		</div>
 
 		</c:if>
 		<!-- View Exchange -->
 		<c:if test="${chooseView == 'viewExchange'}">
 
-			<div class="form w-100">
+			<div class="form w-100 animate-bottom" style="display: none;"
+				id="myDiv">
 				<h2>View Exchange List</h2>
 				<table class="table ">
 					<thead>
@@ -323,7 +328,8 @@
 		<!-- View Date -->
 		<c:if test="${chooseView == 'viewDateTrade'}">
 
-			<div class="from w-100">
+			<div class="form w-100 animate-bottom" style="display: none;"
+				id="myDiv">
 				<h2>View Date Trade List</h2>
 				<table class="table ">
 					<thead>
@@ -340,7 +346,8 @@
 							<tr class="tr-son">
 								<td scope="row"><input type="checkbox" id="node"
 									onChange="checkNode()" name="node" value="${item.id}"></td>
-								<td scope="row"><a href="EditCompany?dateTradeId=${item.id}">${item.id}</a></td>
+								<td scope="row"><a
+									href="EditCompany?dateTradeId=${item.id}">${item.id}</a></td>
 								<td scope="row">${item.dateTrade}</td>
 							</tr>
 						</c:forEach>
@@ -353,7 +360,8 @@
 		<!-- View Fact Trade -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
 
-			<div class="form w-100">
+			<div class="form w-100 animate-bottom" style="display: none;"
+				id="myDiv">
 				<h2>View Fact Trade List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -407,7 +415,8 @@
 		<!-- View Fact BusinessResult -->
 		<c:if test="${chooseView == 'viewFactBusinessResult'}">
 
-			<div class="form w-100">
+			<div class="form w-100 animate-bottom" style="display: none;"
+				id="myDiv">
 				<h2>View Fact Business Result List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -458,7 +467,8 @@
 		<!-- View Fact StockOrder -->
 		<c:if test="${chooseView == 'viewFactStockOrder'}">
 
-			<div class="form w-100">
+			<div class="form w-100 animate-bottom" style="display: none;"
+				id="myDiv">
 				<h2>View Fact Stock Order List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -517,7 +527,7 @@
 		<!-- View Fact Foreign Investor Auction -->
 		<c:if test="${chooseView == 'viewFactForeignInvestorAuction'}">
 
-			<div class="form w-100">
+			<div class="form w-100 animate-bottom" style="display: none;" id="myDiv">
 				<h2>View Fact Foreign Investor Auction List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -574,9 +584,9 @@
 				</table>
 			</div>
 		</c:if>
-		
+
 	</form>
-	
+
 
 
 	<script>
@@ -1113,6 +1123,15 @@ function totalMarketCapitalizationBarChart(){
 		
 		statsBtn.addEventListener("click", () => {
 		  popupContainer.classList.add("active");
+			document.getElementById("popup-container").style.visibility="visible";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 		});
 		
 		closeBtn.addEventListener("click", () => {
@@ -1125,7 +1144,16 @@ function totalMarketCapitalizationBarChart(){
 	    const closeBtn1 = document.querySelector(".popup-container1 .close-btn1");
 	
 	    statsBtn1.addEventListener("click", () => {
-	      popupContainer1.classList.add("active");
+	     	popupContainer1.classList.add("active");
+	     	document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="visible";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	    });
 	
 	    closeBtn1.addEventListener("click", () => {
@@ -1140,6 +1168,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	    statsBtn2.addEventListener("click", () => {
 	      popupContainer2.classList.add("active");
+	      document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="visible";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	    });
 	
 	    closeBtn2.addEventListener("click", () => {
@@ -1154,6 +1191,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	     statsBtn3.addEventListener("click", () => {
 	       popupContainer3.classList.add("active");
+	       document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="visible";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	     });
 	
 	     closeBtn3.addEventListener("click", () => {
@@ -1168,6 +1214,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	    statsBtn4.addEventListener("click", () => {
 	      popupContainer4.classList.add("active");
+	      document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="visible";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	    });
 	
 	    closeBtn4.addEventListener("click", () => {
@@ -1181,6 +1236,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	    statsBtn5.addEventListener("click", () => {
 	      popupContainer5.classList.add("active");
+	      document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="visible";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	    });
 	
 	    closeBtn5.addEventListener("click", () => {
@@ -1194,6 +1258,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	     statsBtn6.addEventListener("click", () => {
 	       popupContainer6.classList.add("active");
+	       document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="visible";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	     });
 	
 	     closeBtn6.addEventListener("click", () => {
@@ -1208,6 +1281,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	    statsBtn7.addEventListener("click", () => {
 	      popupContainer7.classList.add("active");
+	      document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="visible";
+			document.getElementById("popup-container8").style.visibility="hidden";
 	    });
 	
 	    closeBtn7.addEventListener("click", () => {
@@ -1221,6 +1303,15 @@ function totalMarketCapitalizationBarChart(){
 	
 	    statsBtn8.addEventListener("click", () => {
 	      popupContainer8.classList.add("active");
+	      document.getElementById("popup-container").style.visibility="hidden";
+			document.getElementById("popup-container1").style.visibility="hidden";
+			document.getElementById("popup-container2").style.visibility="hidden";
+			document.getElementById("popup-container3").style.visibility="hidden";
+			document.getElementById("popup-container4").style.visibility="hidden";
+			document.getElementById("popup-container5").style.visibility="hidden";
+			document.getElementById("popup-container6").style.visibility="hidden";
+			document.getElementById("popup-container7").style.visibility="hidden";
+			document.getElementById("popup-container8").style.visibility="visible";
 	    });
 	
 	    closeBtn8.addEventListener("click", () => {
@@ -1228,14 +1319,34 @@ function totalMarketCapitalizationBarChart(){
 	    });
 	</script>
 
+	<script>
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                  "body").style.visibility = "hidden";
+                document.querySelector(
+                  "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                  "#loader").style.display = "none";
+                document.querySelector(
+                  "body").style.visibility = "visible";
+            }
+        };
+    </script>
 
-
-
-
-
-
-
-
+	<script>
+		var myVar;
+		
+		function myFunction() {
+		  myVar = setTimeout(showPage, 2000);
+		}
+		
+		function showPage() {
+		  document.getElementById("loader").style.display = "none";
+		  document.getElementById("myDiv").style.display = "block";
+		}
+	</script>
 
 </body>
 

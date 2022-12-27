@@ -119,10 +119,10 @@ button:hover {
 	<div class="cicle-2"></div>
 	<div class="container">
 		<div class="panel-body">
-			<form action="EditCompany" method="post" class="form-login"
+			<form action="EditCompany" method="post" class="form-login" 
 				id="form-login" name="form">
 				<c:if test="${chooseView == 'viewExchange'}">
-					<h1>Edit Exchange</h1>
+					<h1>Exchange</h1>
 					<div class="tab">
 						Exchange ID 
 						<p>
@@ -299,25 +299,6 @@ button:hover {
 						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
 						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
 					</div>
-					<%-- <label style="background-color:red">
-						${factForeignInvestorAuction.id} <br />
-						${factForeignInvestorAuction.id_date}<br />
-						${factForeignInvestorAuction.id_company}<br />
-						${factForeignInvestorAuction.room}<br />
-						${factForeignInvestorAuction.percent_owned}<br />
-						${factForeignInvestorAuction.room_available}<br />
-						${factForeignInvestorAuction.percent_room_available}<br />
-						${factForeignInvestorAuction.buy_volume_auction}<br />
-						${factForeignInvestorAuction.percent_buy_volume_auction_market}<br />
-						${factForeignInvestorAuction.sell_volume_auction}<br />
-						${factForeignInvestorAuction.percent_sell_volume_auction_market}<br />
-						${factForeignInvestorAuction.buy_price_auction}<br />
-						${factForeignInvestorAuction.percent_buy_price_auction_market}<br />
-						${factForeignInvestorAuction.sell_price_auction}<br />
-						${factForeignInvestorAuction.percent_sell_price_auction_market}<br />
-						${factForeignInvestorAuction.difference_volume}<br />
-						${factForeignInvestorAuction.difference_price}<br />
-					</label> --%>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactStockOrder'}">
 				<h1>Edit Fact Stock Order</h1>
@@ -443,24 +424,6 @@ button:hover {
 						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
 						<span class="step"></span> <span class="step"></span> <span class="step"></span> 
 					</div>
-				<%-- <label style="background-color:red">
-						${factStockOrder.id} <br />
-						${factStockOrder.id_date}<br />
-						${factStockOrder.id_company}<br />
-						${factStockOrder.price_close}<br />
-						${factStockOrder.total_volume_auction} <br />
-						${factStockOrder.total_price_auction}<br />
-						${factStockOrder.best_buy_price}<br />
-						${factStockOrder.best_buy_volume}<br />
-						${factStockOrder.best_sell_price} <br />
-						${factStockOrder.best_sell_volume}<br />
-						${factStockOrder.total_order_buy}<br />
-						${factStockOrder.total_order_sell}<br />
-						${factStockOrder.total_order_buy_minus_sell} <br />
-						${factStockOrder.total_volume_buy}<br />
-						${factStockOrder.total_volume_sell}<br />
-						${factStockOrder.total_volume_buy_minus_sell}<br />
-					</label> --%>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactBusinessResult'}">
 				<h1>Edit Business Result</h1>
@@ -557,56 +520,10 @@ button:hover {
 						<span class="step"></span> <span class="step"></span> 
 						<span class="step"></span> <span class="step"></span>
 					</div>
-					<%-- <label style="background-color:red">
-					${factBusinessResult.id}<br />
-					${factBusinessResult.id_date}<br />
-					${factBusinessResult.id_company}<br />
-					${factBusinessResult.id_exchange}<br />
-					${factBusinessResult.status}<br />
-					${factBusinessResult.profit}<br />
-					${factBusinessResult.previous_period}<br />
-					${factBusinessResult.same_period}<br />
-					${factBusinessResult.profit_cummulative}<br />
-					${factBusinessResult.eps_profit}<br />
-					${factBusinessResult.eps_cummulative}<br />
-					${factBusinessResult.price_earning_ratio}<br />
-					</label>	 --%>
 				</c:if>
 				
 				
 				<c:if test="${chooseView == 'viewCompany'}">
-					<%-- <div class="form-group">
-						<input class="form-control" id="companyId" name="companyId"
-							type="text" value="${company.id}" readonly>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="Symbol"
-							id="companySymbol" name="companySymbol" type="text"
-							value="${company.symbol}" required>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="Name" name="companyName"
-							value="${company.name}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="Major"
-							name="companyMajor" value="${company.major}">
-
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="Phone"
-							name="companyPhone" value="${company.phone}">
-
-					</div>
-					<div class="form-group">
-						<textarea style="resize: none;" name="companyInfo" rows="4"
-							cols="40">${company.info}</textarea>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="Address"
-							name="companyAddress" value="${company.address}">
-					</div>
- --%>
 					<h1>Edit Company</h1>
 					<!-- One "tab" for each step in the form: -->
 					<div class="tab">
@@ -698,75 +615,6 @@ button:hover {
 					</div>
 				</c:if>
 				<c:if test="${chooseView == 'viewFactTrade'}">
-					<%-- <div class="form-group">
-						<input class="form-control" id="factTradeId" name="factTradeId"
-							type="text" value="${factTrade.id}" readonly>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="id_date Trade"
-							id="id_date" name="id_date" type="text"
-							value="${factTrade.id_date}" required>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="id_company Trade"
-							id="id_company" name="id_company" type="text"
-							value="${factTrade.id_company}" required>
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="price_reference Trade"
-							id="price_reference" name="price_reference" type="text"
-							value="${factTrade.price_reference}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="price_open Trade"
-							id="price_open" name="price_open" type="text"
-							value="${factTrade.price_open}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="price_close Trade"
-							id="price_close" name="price_close" type="text"
-							value="${factTrade.price_close}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="price_ceiling Trade"
-							id="price_ceiling" name="price_ceiling" type="text"
-							value="${factTrade.price_ceiling}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="price_floor Trade"
-							id="price_floor" name="price_floor" type="text"
-							value="${factTrade.price_floor}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="mean Trade" id="mean"
-							name="mean" type="text" value="${factTrade.mean}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="volatility Trade"
-							id="volatility" name="volatility" type="text"
-							value="${factTrade.volatility}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="volatility_percent Trade"
-							id="volatility_percent" name="volatility_percent" type="text"
-							value="${factTrade.volatility_percent}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="total_volume Trade"
-							id="total_volume" name="total_volume" type="text"
-							value="${factTrade.total_volume}">
-					</div>
-					<div class="form-group">
-						<input class="form-control" placeholder="total_price Trade"
-							id="total_price" name="total_price" type="text"
-							value="${factTrade.total_price}">
-					</div>
-					<div class="form-group">
-						<input class="form-control"
-							placeholder="total_marketcapitalization Trade"
-							id="total_marketcapitalization" name="total_marketcapitalization"
-							type="text" value="${factTrade.total_marketcapitalization}">
-					</div> --%>
 					<h1>Edit Fact Company</h1>
 					<!-- One "tab" for each step in the form: -->
 					<div class="tab">
@@ -881,81 +729,6 @@ button:hover {
 	<script language="javascript"
 		src="<%=request.getContextPath()%>/js/Edit.js"></script>
 
-	<!-- <script>
-		var currentTab = 0; // Current tab is set to be the first tab (0)
-		showTab(currentTab); // Display the current tab
-
-		function showTab(n) {
-			// This function will display the specified tab of the form...
-			var x = document.getElementsByClassName("tab");
-			x[n].style.display = "block";
-			//... and fix the Previous/Next buttons:
-			if (n == 0) {
-				document.getElementById("prevBtn").style.display = "none";
-			} else {
-				document.getElementById("prevBtn").style.display = "inline";
-			}
-			if (n == (x.length - 1)) {
-				document.getElementById("nextBtn").style.display = "none";
-			} else {
-				document.getElementById("nextBtn").innerHTML = "Next";
-			}
-			//... and run a function that will display the correct step indicator:
-			fixStepIndicator(n)
-		}
-
-		function nextPrev(n) {
-			// This function will figure out which tab to display
-			var x = document.getElementsByClassName("tab");
-			// Exit the function if any field in the current tab is invalid:
-			if (n == 1 && !validateForm())
-				return false;
-			// Hide the current tab:
-			x[currentTab].style.display = "none";
-			// Increase or decrease the current tab by 1:
-			currentTab = currentTab + n;
-			// if you have reached the end of the form...
-			if (currentTab >= x.length) {
-				// ... the form gets submitted:
-				document.getElementById("regForm").submit();
-				return false;
-			}
-			// Otherwise, display the correct tab:
-			showTab(currentTab);
-		}
-
-		function validateForm() {
-			// This function deals with validation of the form fields
-			var x, y, i, valid = true;
-			x = document.getElementsByClassName("tab");
-			y = x[currentTab].getElementsByTagName("input");
-			// A loop that checks every input field in the current tab:
-			for (i = 0; i < y.length; i++) {
-				// If a field is empty...
-				if (y[i].value == "") {
-					// add an "invalid" class to the field:
-					y[i].className += " invalid";
-					// and set the current valid status to false
-					valid = false;
-				}
-			}
-			// If the valid status is true, mark the step as finished and valid:
-			if (valid) {
-				document.getElementsByClassName("step")[currentTab].className += " finish";
-			}
-			return valid; // return the valid status
-		}
- 
-		function fixStepIndicator(n) {
-			// This function removes the "active" class of all steps...
-			var i, x = document.getElementsByClassName("step");
-			for (i = 0; i < x.length; i++) {
-				x[i].className = x[i].className.replace(" active", "");
-			}
-			//... and adds the "active" class on the current step:
-			x[n].className += " active";
-		}
-	</script> -->
 	<script>
 		var currentTab = 0; // Current tab is set to be the first tab (0)
 		showTab(currentTab); // Display the current tab
@@ -1032,7 +805,6 @@ button:hover {
 			x[n].className += " active";
 		}
 	</script>
-
 
 </body>
 </html>
