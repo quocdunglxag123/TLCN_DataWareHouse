@@ -51,8 +51,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body onload="checkView('${chooseView}','${endPage}');myFunction()">
-	<div id="loader"></div>
+<body onload="checkView('${chooseView}','${endPage}')">
 	<form action="SearchCompany" id="ViewCompany" method="post"
 		onsubmit="listNodeCheckedLogic()" class="form-login">
 		<!-- menucustorm -->
@@ -1335,18 +1334,7 @@ function totalMarketCapitalizationBarChart(){
         };
     </script>
 
-	<script>
-		var myVar;
-		
-		function myFunction() {
-		  myVar = setTimeout(showPage, 2000);
-		}
-		
-		function showPage() {
-		  document.getElementById("loader").style.display = "none";
-		  document.getElementById("myDiv").style.display = "block";
-		}
-	</script>
+
 
 </body>
 
