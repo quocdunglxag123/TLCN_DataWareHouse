@@ -243,8 +243,7 @@
 			<!-- View Company -->
 			<c:if test="${chooseView == 'viewCompany'}">
 
-				<div class="form w-100 animate-bottom" style="display: none;"
-					id="myDiv">
+				<div class="form w-100 animate-bottom" id="myDiv">
 					<h2>View Company List</h2>
 					<table class="table ">
 						<thead>
@@ -289,8 +288,7 @@
 		<!-- View Exchange -->
 		<c:if test="${chooseView == 'viewExchange'}">
 
-			<div class="form w-100 animate-bottom" style="display: none;"
-				id="myDiv">
+			<div class="form w-100 animate-bottom" id="myDiv">
 				<h2>View Exchange List</h2>
 				<table class="table ">
 					<thead>
@@ -327,8 +325,7 @@
 		<!-- View Date -->
 		<c:if test="${chooseView == 'viewDateTrade'}">
 
-			<div class="form w-100 animate-bottom" style="display: none;"
-				id="myDiv">
+			<div class="form w-100 animate-bottom" id="myDiv">
 				<h2>View Date Trade List</h2>
 				<table class="table ">
 					<thead>
@@ -359,8 +356,7 @@
 		<!-- View Fact Trade -->
 		<c:if test="${chooseView == 'viewFactTrade'}">
 
-			<div class="form w-100 animate-bottom" style="display: none;"
-				id="myDiv">
+			<div class="form w-100 animate-bottom" id="myDiv">
 				<h2>View Fact Trade List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -414,8 +410,7 @@
 		<!-- View Fact BusinessResult -->
 		<c:if test="${chooseView == 'viewFactBusinessResult'}">
 
-			<div class="form w-100 animate-bottom" style="display: none;"
-				id="myDiv">
+			<div class="form w-100 animate-bottom" id="myDiv">
 				<h2>View Fact Business Result List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -466,8 +461,7 @@
 		<!-- View Fact StockOrder -->
 		<c:if test="${chooseView == 'viewFactStockOrder'}">
 
-			<div class="form w-100 animate-bottom" style="display: none;"
-				id="myDiv">
+			<div class="form w-100 animate-bottom" id="myDiv">
 				<h2>View Fact Stock Order List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -526,7 +520,7 @@
 		<!-- View Fact Foreign Investor Auction -->
 		<c:if test="${chooseView == 'viewFactForeignInvestorAuction'}">
 
-			<div class="form w-100 animate-bottom" style="display: none;" id="myDiv">
+			<div class="form w-100 animate-bottom" id="myDiv">
 				<h2>View Fact Foreign Investor Auction List</h2>
 				<table class="table ">
 					<thead class="table-header">
@@ -1317,7 +1311,7 @@ function totalMarketCapitalizationBarChart(){
 	      popupContainer8.classList.remove("active");
 	    });
 	</script>
-
+<!-- 
 	<script>
         document.onreadystatechange = function() {
             if (document.readyState !== "complete") {
@@ -1334,7 +1328,18 @@ function totalMarketCapitalizationBarChart(){
         };
     </script>
 
-
+	<script>
+		var myVar;
+		
+		function myFunction() {
+		  myVar = setTimeout(showPage, 2000);
+		}
+		
+		function showPage() {
+		  document.getElementById("loader").style.display = "none";
+		  document.getElementById("myDiv").style.display = "block";
+		}
+	</script> -->
 
 </body>
 
