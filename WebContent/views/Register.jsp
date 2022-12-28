@@ -28,8 +28,7 @@
 		<div class="container">
 			<div class="left">
 				<div class="login">Register</div>
-				<div class="eula">By logging in you agree to the ridiculously
-					long terms that you didn't bother to read</div>
+				<div class="eula">By registering you can get a personal account</div>
 			</div>
 			<div class="right">
 				<form action="Register" method="post" class="form-login"

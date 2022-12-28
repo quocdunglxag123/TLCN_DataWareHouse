@@ -121,7 +121,7 @@ path {
   stroke-dasharray: 240 1386;
 }
 form {
-  margin: 10%;
+  margin: 15%;
   position: absolute;
 }
 
@@ -138,6 +138,7 @@ input {
   line-height: 20%;
   outline: none !important;
   width: 100%;
+	margin-bottom: 5%;
 }
 .form-group{
 	margin-bottom: 5%;

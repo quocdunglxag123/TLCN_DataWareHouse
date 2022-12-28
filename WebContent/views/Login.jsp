@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="left">
 				<div class="login">Login</div>
-				<div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+				<div class="eula">By logging in, you can monitor and manage data.</div>
 			</div>
 			<div class="right">
 				<form action="Login" method="post" class="form-login" id="form-login"
