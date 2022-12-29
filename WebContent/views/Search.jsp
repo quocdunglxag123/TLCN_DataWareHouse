@@ -62,23 +62,23 @@
 				<li><a class="navbar-brand">Menu Chart</a>
 					<ul>
 						<li><button type="button" id="btn-chart" class="stats-btn"
-								onClick="totalVolumePieChart()">totalVolumePieChart</button></li>
+								onClick="totalVolumePieChart()">Total Volume Pie Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn1"
-								onClick="totalPricePieChart()">totalPriceChart</button></li>
+								onClick="totalPricePieChart()">Total Price Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn2"
-								onClick="totalMarketCapitalizationPieChart()">totalMarketCapitalizationChart</button></li>
+								onClick="totalMarketCapitalizationPieChart()">Total Market Capitalization Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn3"
-								onClick="totalVolumeBarChart()">totalVolumeBarChart</button></li>
+								onClick="totalVolumeBarChart()">Total Volume Bar Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn4"
-								onClick="totalPriceBarChart()">totalPriceBarChart</button></li>
+								onClick="totalPriceBarChart()">Total Price Bar Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn5"
-								onClick="totalMarketCapitalizationBarChart()">totalMarketCapitalizationBarChart</button></li>
+								onClick="totalMarketCapitalizationBarChart()">Total Market Capitalization Bar Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn6"
-								onClick="totalOrderBuySellPieChart()">totalOrderBuySellPieChart</button></li>
+								onClick="totalOrderBuySellPieChart()">Total Order Buy Sell Pie Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn7"
-								onClick="totalVolumeBuySellPieChart()">totalVolumeBuySellPieChart</button></li>
+								onClick="totalVolumeBuySellPieChart()">Total Volume Buy Sell Pie Chart</button></li>
 						<li><button type="button" id="btn-chart" class="stats-btn8"
-								onClick="totalRoomRoomAvailablePieChart()">totalRoomRoomAvailablePieChart</button></li>
+								onClick="totalRoomRoomAvailablePieChart()">Total Room Available Pie Chart</button></li>
 					</ul></li>
 				<li><a href="Login" class="logout navbar-brand">Logout</a></li>
 			</ul>
