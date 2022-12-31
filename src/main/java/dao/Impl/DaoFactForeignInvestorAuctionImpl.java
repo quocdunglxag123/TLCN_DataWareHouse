@@ -63,19 +63,22 @@ public class DaoFactForeignInvestorAuctionImpl implements DaoFactForeignInvestor
 	 * @return list thong tin fact Chart
 	 */
 	@Override
-	public List<String> getFactForeignInvestorAuctionToChart() {
+	public List<String> getFactForeignInvestorAuctionToChart(String search) {
 
 		List<String> listElementFactChart = new ArrayList<>();
 		StringBuilder companyNameChart = new StringBuilder();
 		StringBuilder roomChart = new StringBuilder();
 		StringBuilder roomAvailableChart = new StringBuilder();
+		StringBuilder query = new StringBuilder("select company,room, room_available \r\n"
+				+ " from Fact_ForeignInvestorAuction_Chart where datetrade = '2022-12-29' ");
 
-		String query = "select name, room, room_available\r\n"
-				+ "	from Fact_ForeignInvestorAuction join Dim_Company on Fact_ForeignInvestorAuction.id_company = Dim_Company.id \r\n"
-				+ "	where Fact_ForeignInvestorAuction.isDelete=0 ";
+		if (search != "" && search != null) {
+			query.append(" and  company like " + "'%" + search + "%'");
+		}
+		
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				companyNameChart.append("," + rs.getString(1));

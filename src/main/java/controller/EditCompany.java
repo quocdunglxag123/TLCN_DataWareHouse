@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.request.Request;
+
 import dao.Impl.DaoCompanyImpl;
 import dao.Impl.DaoDateTradeImpl;
 import dao.Impl.DaoExchangeImpl;
@@ -41,6 +43,9 @@ public class EditCompany extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		HttpSession session = request.getSession();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		DaoCompanyImpl daoCompanyImpl = new DaoCompanyImpl();
@@ -74,7 +79,6 @@ public class EditCompany extends HttpServlet {
 					companyInput.setPhone(request.getParameter("companyPhone"));
 					companyInput.setInfo(request.getParameter("companyInfo"));
 					companyInput.setAddress(request.getParameter("companyAddress"));
-
 					if (!companyId.equals("")) {
 						// Truong hop companyId khac Null --> Edit Dim_Company
 						companyInput.setId(Integer.parseInt(companyId));
@@ -195,17 +199,17 @@ public class EditCompany extends HttpServlet {
 				String factBusinessResultId = (String) request.getParameter("factBusinessResultId");
 				if (buttonEdit != null) {
 					// Set data fact BusinessResult from input edit view
-					factBusinessResultInput.setId_date(Integer.parseInt(request.getParameter("id_date")));
-					factBusinessResultInput.setId_company(Integer.parseInt(request.getParameter("id_company")));
-					factBusinessResultInput.setId_exchange(Integer.parseInt(request.getParameter("id_exchange")));
+					factBusinessResultInput.setId_date(Integer.parseInt(request.getParameter("idDate")));
+					factBusinessResultInput.setId_company(Integer.parseInt(request.getParameter("idCompany")));
+					factBusinessResultInput.setId_exchange(Integer.parseInt(request.getParameter("idExchange")));
 					factBusinessResultInput.setStatus(request.getParameter("status"));
 					factBusinessResultInput.setProfit(Float.parseFloat(request.getParameter("profit")));
-					factBusinessResultInput.setPrevious_period(Float.parseFloat(request.getParameter("previous_period")));
-					factBusinessResultInput.setSame_period(Float.parseFloat(request.getParameter("same_period")));
-					factBusinessResultInput.setProfit_cummulative(Float.parseFloat(request.getParameter("profit_cummulative")));
-					factBusinessResultInput.setEps_profit(Float.parseFloat(request.getParameter("eps_profit")));
-					factBusinessResultInput.setEps_cummulative(Float.parseFloat(request.getParameter("eps_cummulative")));
-					factBusinessResultInput.setPrice_earning_ratio(Float.parseFloat(request.getParameter("price_earning_ratio")));
+					factBusinessResultInput.setPrevious_period(Float.parseFloat(request.getParameter("previousPeriod")));
+					factBusinessResultInput.setSame_period(Float.parseFloat(request.getParameter("samePeriod")));
+					factBusinessResultInput.setProfit_cummulative(Float.parseFloat(request.getParameter("profitCummulative")));
+					factBusinessResultInput.setEps_profit(Float.parseFloat(request.getParameter("epsProfit")));
+					factBusinessResultInput.setEps_cummulative(Float.parseFloat(request.getParameter("epsCummulative")));
+					factBusinessResultInput.setPrice_earning_ratio(Float.parseFloat(request.getParameter("priceEarningRatio")));
 
 					if (!factBusinessResultId.equals("")) {
 						// Truong hop factBusinessResultId khac Null --> Edit Fact_BusinessResult

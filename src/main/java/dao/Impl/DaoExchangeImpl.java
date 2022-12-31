@@ -146,13 +146,14 @@ public class DaoExchangeImpl implements DaoExchange{
 	 */
 	@Override
 	public void editExchange(Exchange exchange) {
-		String query = "update Dim_Exchange set name = ?, info =? where id = ?;";
+		String query = "update Dim_Exchange set symbol=?, name = ?, info =? where id = ?;";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
-			ps.setString(1, exchange.getName());
-			ps.setString(2, exchange.getInfo());
-			ps.setInt(3, exchange.getId());
+			ps.setString(1, exchange.getSymbol());
+			ps.setString(2, exchange.getName());
+			ps.setString(3, exchange.getInfo());
+			ps.setInt(4, exchange.getId());
 			
 			ps.executeUpdate();
 

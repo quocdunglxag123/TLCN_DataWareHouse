@@ -65,7 +65,9 @@ public class Login extends HttpServlet {
 		session.setAttribute("userName", "");
 		session.setAttribute("chooseView", "viewCompany");
 		session.setAttribute("isReturnSearch", "0");
-
+		
+		session.setAttribute("search", "");
+		session.setAttribute("companyNameFactTradeChart", "");
 	}
 	/**
 	 * check Login

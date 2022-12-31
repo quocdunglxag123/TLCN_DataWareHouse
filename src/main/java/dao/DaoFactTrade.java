@@ -7,7 +7,7 @@ import model.FactTrade;
 
 public interface DaoFactTrade {
 	List<FactTradeDto> getFactTradeByPage(String page,String search);
-	List<String> getFactTradeToChart();
+	List<String> getFactTradeToChart(String Search);
 	int getEndPageFactTrade(String search);
 	void deleteFactTrade(String ids);
 	FactTrade getFactTradeById(String id);

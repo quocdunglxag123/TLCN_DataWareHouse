@@ -61,18 +61,23 @@ public class DaoFactTradeImpl implements DaoFactTrade {
 	 * @return list thong tin fact Chart
 	 */
 	@Override
-	public List<String> getFactTradeToChart() {
+	public List<String> getFactTradeToChart(String search) {
 		List<String> listElementFactChart = new ArrayList<>();
 		StringBuilder companyNameChart = new StringBuilder();
 		StringBuilder totalVolumeChart = new StringBuilder();
 		StringBuilder totalPriceChart = new StringBuilder();
 		StringBuilder totalMarketCapitalizationChart = new StringBuilder();
 		
-		String query = "select name, total_volume, total_price, total_marketcapitalization "
-				+ "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id where Fact_Trade.isDelete=0 ";
+		
+		StringBuilder query =new StringBuilder( "select company, total_volume, total_price,total_marketcapitalization  "
+				+ "from Fact_Trade_Chart where datetrade = '2022-12-29' \r\n");
+				
+				if (search != "" && search != null) {
+					query.append("and company like "+"'%"+search+"%'");
+				}		
 		try {
 			conn = DBConnection.getConnection();
-			ps = conn.prepareStatement(query);
+			ps = conn.prepareStatement(query.toString());
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				companyNameChart.append(","+rs.getString(1));

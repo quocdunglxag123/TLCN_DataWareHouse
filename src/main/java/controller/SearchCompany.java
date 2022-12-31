@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +60,7 @@ public class SearchCompany extends HttpServlet {
 		String search = request.getParameter("search");//search page
 		String buttonDelete = request.getParameter("buttonDelete");
 		String chooseView = (String) request.getParameter("chooseView");
-		
+		String isSearch = request.getParameter("submitSearch");//isClickSearch
 		if (page != null) {
 			// Truong hop page gui ve tu jsp khac null
 			session.setAttribute("page", page);
@@ -91,7 +92,13 @@ public class SearchCompany extends HttpServlet {
 			}
 			
 		}
-
+		if(isSearch != "" && isSearch != null) {
+			session.setAttribute("search", search);
+		}else {
+			search= (String) session.getAttribute("search");
+		}
+			
+		
 		//Logic Show View
 		if (chooseView.equals("viewCompany")) {
 			// Truong hop choose view company
@@ -115,7 +122,7 @@ public class SearchCompany extends HttpServlet {
 		}else if (chooseView.equals("viewExchange")) {
 			// Truong hop choose view Exchange
 			List<Exchange> exchanges = daoExchangeImpl.getExchangeByPage(page,search);
-			int endPage = daoFactTradeImpl.getEndPageFactTrade(search);
+			int endPage = daoExchangeImpl.getEndPageExchange(search);
 			
 			request.setAttribute("list", exchanges);
 			request.setAttribute("endPage", endPage);
@@ -134,40 +141,59 @@ public class SearchCompany extends HttpServlet {
 		}else if (chooseView.equals("viewFactForeignInvestorAuction")) {
 			// Truong hop choose view FactForeignInvestorAuction
 			List<FactForeignInvestorAuctionDto> factForeignInvestorAuctions = daoFactForeignInvestorAuctionImpl.getFactForeignInvestorAuctionByPage(page,search);
-			int endPage = daoFactStockOrderImpl.getEndPageFactStockOrder(search);
+			int endPage = daoFactForeignInvestorAuctionImpl.getEndPageFactForeignInvestorAuction(search);
 			request.setAttribute("list", factForeignInvestorAuctions);
 			request.setAttribute("endPage", endPage);
 		}
+		String flagString= (String)session.getAttribute("companyNameFactTradeChart");
+		if ( (isSearch !="" && isSearch!=null) ||  flagString == "") {
+			//Data Fact Trade To analystic --> send to js to show chart
+			List<String> elementFactChart = daoFactTradeImpl.getFactTradeToChart(search);
+			//set to session
+			session.setAttribute("companyNameFactTradeChart", elementFactChart.get(0));
+			session.setAttribute("totalVolumeFactTradeChart", elementFactChart.get(1));
+			session.setAttribute("totalPriceFactTradeChart", elementFactChart.get(2));
+			session.setAttribute("totalMarketCapitalizationFactTradeChart", elementFactChart.get(3));
+			
+			//Data Fact Stock Order To analystic --> send to js to show chart
+			List<String> elementFactStockOrderChart = daoFactStockOrderImpl.getFactStockOrderToChart(search);
+			//set to session
+			session.setAttribute("companyNameFactStockOrderChart", elementFactStockOrderChart.get(0));
+			session.setAttribute("totalOrderBuyFactStockOrderChart", elementFactStockOrderChart.get(1));
+			session.setAttribute("totalOrderSellFactStockOrderChart", elementFactStockOrderChart.get(2));
+			session.setAttribute("totalVolumeBuyFactStockOrderChart", elementFactStockOrderChart.get(3));
+			session.setAttribute("totalVolumeSellFactStockOrderChart", elementFactStockOrderChart.get(4));
+			
+			//Data Fact Foreign Investor Auction To analystic --> send to js to show chart
+			List<String> elementFactForeignInvestorAuctionChart = daoFactForeignInvestorAuctionImpl.getFactForeignInvestorAuctionToChart(search);
+			
+			//set to session
+			session.setAttribute("companyNameFactForeignInvestorAuctionChart", elementFactForeignInvestorAuctionChart.get(0));
+			session.setAttribute("roomFactForeignInvestorAuctionChart", elementFactForeignInvestorAuctionChart.get(1));
+			session.setAttribute("roomAvailableFactForeignInvestorAuctionChart", elementFactForeignInvestorAuctionChart.get(2));
+			
+		}
 		
 		
-		//Data Fact Trade To analystic --> send to js to show chart
-		List<String> elementFactChart = daoFactTradeImpl.getFactTradeToChart();
-		request.setAttribute("companyNameDataChart", elementFactChart.get(0));
-		request.setAttribute("totalVolumeDataChart", elementFactChart.get(1));
-		request.setAttribute("totalPriceDataChart", elementFactChart.get(2));
-		request.setAttribute("totalMarketCapitalizationDataChart", elementFactChart.get(3));
+		request.setAttribute("companyNameFactTradeChart", session.getAttribute("companyNameFactTradeChart"));
+		request.setAttribute("totalVolumeFactTradeChart", session.getAttribute("totalVolumeFactTradeChart"));
+		request.setAttribute("totalPriceFactTradeChart", session.getAttribute("totalPriceFactTradeChart"));
+		request.setAttribute("totalMarketCapitalizationFactTradeChart", session.getAttribute("totalMarketCapitalizationFactTradeChart"));
 		
-		//Data Fact Stock Order To analystic --> send to js to show chart
-		List<String> elementFactStockOrderChart = daoFactStockOrderImpl.getFactStockOrderToChart();
-		request.setAttribute("companyNameDataChart", elementFactStockOrderChart.get(0));
-		request.setAttribute("totalOrderBuyDataChart", elementFactStockOrderChart.get(1));
-		request.setAttribute("totalOrderSellDataChart", elementFactStockOrderChart.get(2));
-		request.setAttribute("totalVolumeBuyDataChart", elementFactStockOrderChart.get(3));
-		request.setAttribute("totalVolumeSellDataChart", elementFactStockOrderChart.get(4));
-
-		//Data Fact Foreign Investor Auction To analystic --> send to js to show chart
-		List<String> elementFactForeignInvestorAuctionChart = daoFactForeignInvestorAuctionImpl.getFactForeignInvestorAuctionToChart();
-		request.setAttribute("companyNameDataChart", elementFactForeignInvestorAuctionChart.get(0));
-		request.setAttribute("roomDataChart", elementFactForeignInvestorAuctionChart.get(1));
-		request.setAttribute("roomAvailableDataChart", elementFactForeignInvestorAuctionChart.get(2));
-
+		request.setAttribute("companyNameFactStockOrderChart", session.getAttribute("companyNameFactStockOrderChart"));
+		request.setAttribute("totalOrderBuyFactStockOrderChart", session.getAttribute("totalOrderBuyFactStockOrderChart"));
+		request.setAttribute("totalOrderSellFactStockOrderChart", session.getAttribute("totalOrderSellFactStockOrderChart"));
+		request.setAttribute("totalVolumeBuyFactStockOrderChart", session.getAttribute("totalVolumeBuyFactStockOrderChart"));
+		request.setAttribute("totalVolumeSellFactStockOrderChart", session.getAttribute("totalVolumeSellFactStockOrderChart"));
 		
-		
+		request.setAttribute("companyNameFactForeignInvestorAuctionChart", session.getAttribute("companyNameFactForeignInvestorAuctionChart"));
+		request.setAttribute("roomFactForeignInvestorAuctionChart", session.getAttribute("roomFactForeignInvestorAuctionChart"));
+		request.setAttribute("roomAvailableFactForeignInvestorAuctionChart", session.getAttribute("roomAvailableFactForeignInvestorAuctionChart"));
 		//Set Value To Search JSP
 		request.setAttribute("chooseView", chooseView);
 		request.setAttribute("page", page);
 		request.setAttribute("userName", (String) session.getAttribute("userName"));
-
+		request.setAttribute("search",search);
 		request.getRequestDispatcher("/views/Search.jsp").forward(request, response);
 	}
 

@@ -23,20 +23,21 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 	 * @return list thong tin FactStockOrder
 	 */
 	@Override
-	public List<FactStockOrderDto> getFactStockOrderByPage(String page,String search) {
+	public List<FactStockOrderDto> getFactStockOrderByPage(String page, String search) {
 		List<FactStockOrderDto> list = new ArrayList<>();
 		int pageDB = Integer.parseInt(page);
-		StringBuilder query =new StringBuilder( "select F.id, DD.datetrade, DC.symbol, F.price_close, F.total_volume_auction, F.total_price_auction\r\n"
-				+ "			, F.best_buy_price, F.best_buy_volume, F.best_sell_price, F.best_sell_volume, F.total_order_buy, F.total_order_sell,\r\n"
-				+ "			 F.total_order_buy_minus_sell, F.total_volume_buy,F.total_volume_sell,F.total_volume_buy_minus_sell\r\n"
-				+ "			from Fact_StockOrder as F, Dim_Company as DC, Dim_Date as DD \r\n"
-				+ "		where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
-				
-				if (search != "" && search != null) {
-					query.append("and  DC.symbol like "+"'%"+search+"%'");
-				}	
-				
-				query.append(" ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
+		StringBuilder query = new StringBuilder(
+				"select F.id, DD.datetrade, DC.symbol, F.price_close, F.total_volume_auction, F.total_price_auction\r\n"
+						+ "			, F.best_buy_price, F.best_buy_volume, F.best_sell_price, F.best_sell_volume, F.total_order_buy, F.total_order_sell,\r\n"
+						+ "			 F.total_order_buy_minus_sell, F.total_volume_buy,F.total_volume_sell,F.total_volume_buy_minus_sell\r\n"
+						+ "			from Fact_StockOrder as F, Dim_Company as DC, Dim_Date as DD \r\n"
+						+ "		where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
+
+		if (search != "" && search != null) {
+			query.append("and  DC.symbol like " + "'%" + search + "%'");
+		}
+
+		query.append(" ORDER BY F.id OFFSET ?*10 ROWS FETCH NEXT 10 ROWS ONLY;");
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query.toString());
@@ -46,7 +47,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 				list.add(new FactStockOrderDto(rs.getInt(1), rs.getDate(2), rs.getString(3), rs.getBigDecimal(4),
 						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
 						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
-						rs.getBigDecimal(13), rs.getBigDecimal(14),rs.getBigDecimal(15),rs.getBigDecimal(16)));
+						rs.getBigDecimal(13), rs.getBigDecimal(14), rs.getBigDecimal(15), rs.getBigDecimal(16)));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -54,46 +55,51 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 		return list;
 	}
 
-	
 	/**
 	 * Get element Fact to Chart
 	 * 
 	 * @return list thong tin fact Chart
 	 */
 	@Override
-	public List<String> getFactStockOrderToChart() {
-		
-		  List<String> listElementFactChart = new ArrayList<>(); StringBuilder
-		  companyNameChart = new StringBuilder(); 
-		  StringBuilder totalOrderBuyChart = new StringBuilder(); 
-		  StringBuilder totalOrderSellChart = new StringBuilder();
-		  StringBuilder totalVolumeBuyChart = new StringBuilder();
-		  StringBuilder totalVolumeSellChart = new StringBuilder();
-		  String query =
-		  "select name, total_order_buy, total_order_sell, total_volume_buy, total_volume_sell " +
-		  "from Fact_StockOrder join Dim_Company on Fact_StockOrder.id_company = Dim_Company.id where Fact_StockOrder.isDelete=0 "; 
-		  try { conn = DBConnection.getConnection(); 
-		  	ps =conn.prepareStatement(query); rs = ps.executeQuery(); while (rs.next()) {
-			  companyNameChart.append(","+rs.getString(1));
-			  totalOrderBuyChart.append(","+Float.toString(rs.getFloat(2)));
-			  totalOrderSellChart.append(","+Float.toString(rs.getFloat(3)));
-			  totalVolumeBuyChart.append(","+Float.toString(rs.getFloat(4)));
-			  totalVolumeSellChart.append(","+Float.toString(rs.getFloat(5)));
-		  	}
-		  	
-		  } catch (Exception e) { 
-			  System.out.println(e); 
-		  }
-		  listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
-		  listElementFactChart.add(totalOrderBuyChart.toString().replaceFirst(",", ""));
-		  listElementFactChart.add(totalOrderSellChart.toString().replaceFirst(",", ""));
-		  listElementFactChart.add(totalVolumeBuyChart.toString().replaceFirst(",", "")); 
-		  listElementFactChart.add(totalVolumeSellChart.toString().replaceFirst(",", "")); 
+	public List<String> getFactStockOrderToChart(String search) {
 
-		  return listElementFactChart;
+		List<String> listElementFactChart = new ArrayList<>();
+		StringBuilder companyNameChart = new StringBuilder();
+		StringBuilder totalOrderBuyChart = new StringBuilder();
+		StringBuilder totalOrderSellChart = new StringBuilder();
+		StringBuilder totalVolumeBuyChart = new StringBuilder();
+		StringBuilder totalVolumeSellChart = new StringBuilder();
+		StringBuilder query = new StringBuilder("select company, total_order_buy, total_order_sell, total_volume_buy, total_volume_sell \r\n"
+				+ "from Fact_StockOrder_Chart where datetrade = '2022-12-29' ");
+
+		if (search != "" && search != null) {
+			query.append("and  company like " + "'%" + search + "%'");
+		}
+
+		try {
+			conn = DBConnection.getConnection();
+			ps = conn.prepareStatement(query.toString());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				companyNameChart.append("," + rs.getString(1));
+				totalOrderBuyChart.append("," + Float.toString(rs.getFloat(2)));
+				totalOrderSellChart.append("," + Float.toString(rs.getFloat(3)));
+				totalVolumeBuyChart.append("," + Float.toString(rs.getFloat(4)));
+				totalVolumeSellChart.append("," + Float.toString(rs.getFloat(5)));
+			}
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalOrderBuyChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalOrderSellChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalVolumeBuyChart.toString().replaceFirst(",", ""));
+		listElementFactChart.add(totalVolumeSellChart.toString().replaceFirst(",", ""));
+
+		return listElementFactChart;
 	}
 
-	
 	/**
 	 * get end page FactStockOrder
 	 * 
@@ -103,13 +109,13 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 	public int getEndPageFactStockOrder(String search) {
 		int endPage = 0;
 		int count = 0;
-		StringBuilder query =new StringBuilder( "select count(*)"
-				+ "from Fact_StockOrder as F, Dim_Company as DC, Dim_Date as DD \r\n"
-				+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
-				
-				if (search != "" && search != null) {
-					query.append("and  DC.symbol like "+"'%"+search+"%'");
-				}	
+		StringBuilder query = new StringBuilder(
+				"select count(*)" + "from Fact_StockOrder as F, Dim_Company as DC, Dim_Date as DD \r\n"
+						+ "where F.id_company = DC.id and F.id_date=DD.id and F.isDelete=0");
+
+		if (search != "" && search != null) {
+			query.append("and  DC.symbol like " + "'%" + search + "%'");
+		}
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query.toString());
@@ -139,7 +145,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 		}
 		String[] s = ids.split(",");
 		int[] idArray = new int[s.length];
-		
+
 		for (int i = 0; i < s.length; i++) {
 			idArray[i] = Integer.parseInt(s[i]);
 		}
@@ -147,7 +153,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 		for (int i = 0; i < idArray.length; i++) {
 			query.append(",?");
 		}
-		
+
 		query.append(")");
 		try {
 			conn = DBConnection.getConnection();
@@ -184,13 +190,14 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 				FactStockOrder = new FactStockOrder(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getBigDecimal(4),
 						rs.getBigDecimal(5), rs.getBigDecimal(6), rs.getBigDecimal(7), rs.getBigDecimal(8),
 						rs.getBigDecimal(9), rs.getBigDecimal(10), rs.getBigDecimal(11), rs.getBigDecimal(12),
-						rs.getBigDecimal(13), rs.getBigDecimal(14),rs.getBigDecimal(15),rs.getBigDecimal(16));
+						rs.getBigDecimal(13), rs.getBigDecimal(14), rs.getBigDecimal(15), rs.getBigDecimal(16));
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return FactStockOrder;
 	}
+
 	/**
 	 * edit FactStockOrder By Id
 	 * 
@@ -201,8 +208,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 		String query = "update Fact_StockOrder "
 				+ "set id_date = ?,id_company= ?, price_close =?, total_volume_auction =?,total_price_auction =?, best_buy_price=?, best_buy_volume=?, "
 				+ "best_sell_price=?, best_sell_volume=?, total_order_buy=?, total_order_sell=?, total_order_buy_minus_sell=?, total_volume_buy=?,"
-				+ " total_volume_sell=?, total_volume_buy_minus_sell=?"
-				+ "where id = ?;";
+				+ " total_volume_sell=?, total_volume_buy_minus_sell=?" + " where id = ?;";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);
@@ -228,6 +234,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 			System.out.println(e);
 		}
 	}
+
 	/**
 	 * add FactStockOrder
 	 * 
@@ -269,14 +276,15 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 			System.out.println(e);
 		}
 	}
+
 	/**
-	 * check Id  Dim Company is Delete before insert or edit
+	 * check Id Dim Company is Delete before insert or edit
 	 * 
 	 * @param FactStockOrder thong tin FactStockOrder
 	 * 
 	 * @return boolean thong tin true(is delete)/ flase(not delete)
 	 */
-	private boolean  checkIdDimCompanyDelete(FactStockOrder factStockOrder){
+	private boolean checkIdDimCompanyDelete(FactStockOrder factStockOrder) {
 		String query = "select * from Dim_Company where id =? and isDelete= 0";
 		try {
 			conn = DBConnection.getConnection();
@@ -291,6 +299,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 		}
 		return true;
 	}
+
 	/**
 	 * check Id Dim Date is Delete before insert or edit
 	 * 
@@ -298,7 +307,7 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 	 * 
 	 * @return boolean thong tin true(is delete)/ false(not delete)
 	 */
-	private boolean  checkIdDimDateDelete(FactStockOrder factStockOrder){
+	private boolean checkIdDimDateDelete(FactStockOrder factStockOrder) {
 		String query = "select * from Dim_Date where id =? and isDelete= 0";
 		try {
 			conn = DBConnection.getConnection();
@@ -314,5 +323,4 @@ public class DaoFactStockOrderImpl implements DaoFactStockOrder {
 		return true;
 	}
 
-	
 }

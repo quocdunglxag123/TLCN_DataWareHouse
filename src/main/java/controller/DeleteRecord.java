@@ -76,7 +76,7 @@ public class DeleteRecord extends HttpServlet {
 			daoFactStockOrderImpl.deleteFactStockOrder(listNodeChecked);
 		}
 		// Truong hop choose view Fact Foreign Investor Auction
-		if (chooseView.equals("vieFactForeignInvestorAuction")) {
+		if (chooseView.equals("viewFactForeignInvestorAuction")) {
 			daoFactForeignInvestorAuctionImpl.deleteFactForeignInvestorAuction(listNodeChecked);
 		}
 		session.setAttribute("isReturnSearch", "1");// Delete Return to Search

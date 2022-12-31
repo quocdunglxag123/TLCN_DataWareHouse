@@ -7,7 +7,7 @@ import model.FactStockOrder;
 
 public interface DaoFactStockOrder {
 	List<FactStockOrderDto> getFactStockOrderByPage(String page,String search);
-	List<String> getFactStockOrderToChart();
+	List<String> getFactStockOrderToChart(String Search);
 	int getEndPageFactStockOrder(String search);
 	void deleteFactStockOrder(String ids);
 	FactStockOrder getFactStockOrderById(String id);

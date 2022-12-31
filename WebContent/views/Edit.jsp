@@ -133,7 +133,7 @@ button:hover {
 						Symbol 
 						<p>
 							<input placeholder="Exchange Symbol" id="companySymbol"
-								name="companySymbol" type="text" value="${exchange.symbol}"
+								name="exchangeSymbol" type="text" value="${exchange.symbol}"
 								required>
 						</p>
 					</div>
@@ -141,12 +141,12 @@ button:hover {
 						Name 
 						<p>
 							<input placeholder="Exchange Symbol" id="companySymbol"
-								name="companySymbol" type="text" value="${exchange.name}"
+								name="exchangeName" type="text" value="${exchange.name}"
 								required>
 						</p>
 						Information
 						<p>
-							<input placeholder="Name" name="companyName"
+							<input placeholder="Name" name="exchangeInfo"
 								value="${exchange.info}" required>
 						</p>
 					</div>
@@ -305,7 +305,7 @@ button:hover {
 					<div class="tab">
 						ID 
 						<p>
-							<textarea class="form-control" id="id" name="id"
+							<textarea class="form-control" id="id" name="factStockOrderId"
 								type="text" style="resize: none;" rows="1"
 								cols="40" readonly>${factStockOrder.id}</textarea>
 						</p>
@@ -430,20 +430,20 @@ button:hover {
 					<div class="tab">
 						ID 
 						<p>
-							<textarea class="form-control" id="businessId" name="businessId"
+							<textarea class="form-control" id="businessId" name="factBusinessResultId"
 								type="text" style="resize: none;" rows="1"
 								cols="40" readonly>${factBusinessResult.id}</textarea>
 						</p>
 						Date ID
 						<p>
 							<input placeholder="Date ID" id="businessDate"
-								name="companySymbol" type="text" value="${factBusinessResult.id_date}"
+								name="idDate" type="text" value="${factBusinessResult.id_date}"
 								required>
 						</p>
 						Company ID
 						<p>
 							<input placeholder="Exchange Symbol" id="companySymbol"
-								name="companySymbol" type="text" value="${factBusinessResult.id_company}"
+								name="idCompany" type="text" value="${factBusinessResult.id_company}"
 								required>
 						</p>
 					</div>
@@ -451,17 +451,17 @@ button:hover {
 						Exchange ID 
 						<p>
 							<input placeholder="Exchange ID" id="exchangeId"
-								name="exchangeId" type="text" value="${factBusinessResult.id_exchange}"
+								name="idExchange" type="text" value="${factBusinessResult.id_exchange}"
 								required>
 						</p>
 						Status
 						<p>
-							<input placeholder="Status" name="businessStatus"
+							<input placeholder="Status" name="status"
 								value="${factBusinessResult.status}" required>
 						</p>
 						Profit
 						<p>
-							<input placeholder="Profit" name="businessProfit "
+							<input placeholder="Profit" name="profit"
 								value="${factBusinessResult.profit}" required>
 						</p>
 					</div>
@@ -479,7 +479,7 @@ button:hover {
 						</p>
 						Profit cummulative
 						<p>
-							<input placeholder="Profit cummulative" name="profitCummulative "
+							<input placeholder="Profit cummulative" name="profitCummulative"
 								value="${factBusinessResult.profit_cummulative}" required>
 						</p>
 					</div>
@@ -497,7 +497,7 @@ button:hover {
 						</p>
 						Price earning ratio
 						<p>
-							<input placeholder="Price earning ratio" name="priceEarningRatio "
+							<input placeholder="Price earning ratio" name="priceEarningRatio"
 								value="${factBusinessResult.price_earning_ratio}" required>
 						</p>
 					</div>
@@ -602,7 +602,7 @@ button:hover {
 						</p>
 						Date Trade
 						<p>
-							<input placeholder="Date Trade" id="dateTrade" name="dateTrade" type="text"
+							<input placeholder="Date Trade" id="dateTrade" name="dateTrade" type="date"
 								value="${dateTradeDto.dateTrade}" required>
 						</p>
 					</div>

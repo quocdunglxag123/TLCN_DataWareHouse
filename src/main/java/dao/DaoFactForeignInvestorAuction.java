@@ -7,7 +7,7 @@ import model.FactForeignInvestorAuction;
 
 public interface DaoFactForeignInvestorAuction {
 	List<FactForeignInvestorAuctionDto> getFactForeignInvestorAuctionByPage(String page,String search);
-	List<String> getFactForeignInvestorAuctionToChart();
+	List<String> getFactForeignInvestorAuctionToChart(String Search);
 	int getEndPageFactForeignInvestorAuction(String search);
 	void deleteFactForeignInvestorAuction(String ids);
 	FactForeignInvestorAuction getFactForeignInvestorAuctionById(String id);

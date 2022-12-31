@@ -52,40 +52,7 @@ public class DaoFactBusinessResultImpl implements DaoBusinessResult {
 		return list;
 	}
 
-	
-	/**
-	 * Get element Fact to Chart
-	 * 
-	 * @return list thong tin fact Chart
-	 */
-	@Override
-	public List<String> getFactBusinessResultToChart() {
-		/*
-		 * List<String> listElementFactChart = new ArrayList<>(); StringBuilder
-		 * companyNameChart = new StringBuilder(); StringBuilder totalVolumeChart = new
-		 * StringBuilder(); StringBuilder totalPriceChart = new StringBuilder();
-		 * StringBuilder totalMarketCapitalizationChart = new StringBuilder();
-		 * 
-		 * String query =
-		 * "select name, total_volume, total_price, total_marketcapitalization " +
-		 * "from Fact_Trade join Dim_Company on Fact_Trade.id_company = Dim_Company.id where Fact_Trade.isDelete=0 "
-		 * ; try { conn = DBConnection.getConnection(); ps =
-		 * conn.prepareStatement(query); rs = ps.executeQuery(); while (rs.next()) {
-		 * companyNameChart.append(","+rs.getString(1));
-		 * totalVolumeChart.append(","+Integer.toString(rs.getInt(2)));
-		 * totalPriceChart.append(","+Integer.toString(rs.getInt(3)));
-		 * totalMarketCapitalizationChart.append(","+Integer.toString(rs.getInt(4))); }
-		 * } catch (Exception e) { System.out.println(e); }
-		 * listElementFactChart.add(companyNameChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalVolumeChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalPriceChart.toString().replaceFirst(",", ""));
-		 * listElementFactChart.add(totalMarketCapitalizationChart.toString().
-		 * replaceFirst(",", "")); return listElementFactChart;
-		 */
-		return null ;
-	}
 
-	
 	/**
 	 * get end page Fact BusinessResult
 	 * 
@@ -191,10 +158,10 @@ public class DaoFactBusinessResultImpl implements DaoBusinessResult {
 	public void editFactBusinessResult(FactBusinessResult factBusinessResult) {
 		String query = "update Fact_BusinessResult "
 				+ "set id_date = ?,id_company= ?, id_exchange =?, "
-				+ 	  "status =?,profit =?, previous_period=?, same_period=?, "
-				+ 	  "profit_cummulative=?, eps_profit=?, eps_cummulative=?, "
-				+ 	  "price_earning_ratio=?"
-				+ "where id = ?;";
+				+"status =?,profit =?, previous_period=?, "
+				+ "same_period=?,profit_cummulative=?, eps_profit=?, "
+				+ "eps_cummulative=?, price_earning_ratio=?"
+				+ " where id = ?;";
 		try {
 			conn = DBConnection.getConnection();
 			ps = conn.prepareStatement(query);

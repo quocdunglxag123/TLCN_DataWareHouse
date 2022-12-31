@@ -231,13 +231,11 @@
 			<!-- Search Page -->
 
 			<div class="search-container">
-				<form>
-					<input type="text" name="search" placeholder="Search"
+					<input type="text" name="search" placeholder="Search" value ="${search}"
 						id="input-search" />
-					<button type="submit">
+					<button type="submit" name="submitSearch" value="searchNew">
 						<i class="fa fa-search"></i>
 					</button>
-				</form>
 			</div>
 
 			<!-- View Company -->
@@ -282,9 +280,10 @@
 					</table>
 
 				</div>
-		</div>
 
 		</c:if>
+	</div>
+		
 		<!-- View Exchange -->
 		<c:if test="${chooseView == 'viewExchange'}">
 
@@ -622,11 +621,11 @@ function totalVolumePieChart(){
 	
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameFactTradeChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalVolumeChart and add to array
 	var totalVolumeChart = new Array();
-	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeDataChart")%>";
+	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeFactTradeChart")%>";
 
 	totalVolumeChart = totalVolumeChartTemp.split(',');
 	totalVolumeChart =totalVolumeChart.map(parseFloat); 
@@ -658,11 +657,11 @@ function totalPricePieChart(){
 	hideChartByValue("totalPricePieChartArea");
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameFactTradeChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalVolumeChart and add to array
 	var totalPriceChart = new Array();
-	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceDataChart")%>";
+	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceFactTradeChart")%>";
 	totalPriceChart = totalPriceChartTemp.split(',');
 	totalPriceChart =totalPriceChart.map(parseFloat); 
     //Mege 2 array tren thanh 1 array
@@ -695,11 +694,11 @@ function totalMarketCapitalizationPieChart(){
 		
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameFactTradeChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalMarketCapitalizationChart and add to array
 	var totalMarketCapitalizationChart = new Array();
-	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart")%>";
+	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationFactTradeChart")%>";
 	totalMarketCapitalizationChart = totalMarketCapitalizationChartTemp.split(',');
 	totalMarketCapitalizationChart =totalMarketCapitalizationChart.map(parseFloat); 
     //Mege 2 array tren thanh 1 array
@@ -732,7 +731,7 @@ function totalOrderBuySellPieChart(){
 		
 	//Get String total Order Buy and add to array
 	var totalOrderBuyChart = new Array();
-	var totalOrderBuyChartTemp= "<%=request.getAttribute("totalOrderBuyDataChart")%>";
+	var totalOrderBuyChartTemp= "<%=request.getAttribute("totalOrderBuyFactStockOrderChart")%>";
 	totalOrderBuyChart = totalOrderBuyChartTemp.split(',');
 	totalOrderBuyChart =totalOrderBuyChart.map(parseFloat); 
 	let sumTotalOrderBuy = 0;
@@ -742,7 +741,7 @@ function totalOrderBuySellPieChart(){
 	
 	//Get String total Order Sell and add to array
 	var totalOrderSellChart = new Array();
-	var totalOrderSellChartTemp= "<%=request.getAttribute("totalOrderSellDataChart")%>";
+	var totalOrderSellChartTemp= "<%=request.getAttribute("totalOrderSellFactStockOrderChart")%>";
 	totalOrderSellChart = totalOrderSellChartTemp.split(',');
 	totalOrderSellChart =totalOrderSellChart.map(parseFloat); 
 	
@@ -781,7 +780,7 @@ function totalVolumeBuySellPieChart(){
 	
 	//Get String total Volume Buy and add to array
 	var totalVolumeBuyChart = new Array();
-	var totalVolumeBuyChartTemp= "<%=request.getAttribute("totalVolumeBuyDataChart")%>";
+	var totalVolumeBuyChartTemp= "<%=request.getAttribute("totalVolumeBuyFactStockOrderChart")%>";
 	totalVolumeBuyChart = totalVolumeBuyChartTemp.split(',');
 	totalVolumeBuyChart =totalVolumeBuyChart.map(parseFloat); 
 	let sumTotalVolumeBuy = 0;
@@ -791,7 +790,7 @@ function totalVolumeBuySellPieChart(){
 	
 	//Get String  total Volume sell and add to array
 	var totalVolumeSellChart = new Array();
-	var totalVolumeSellChartTemp= "<%=request.getAttribute("totalVolumeSellDataChart")%>";
+	var totalVolumeSellChartTemp= "<%=request.getAttribute("totalVolumeSellFactStockOrderChart")%>";
 	totalVolumeSellChart = totalVolumeSellChartTemp.split(',');
 	totalVolumeSellChart =totalVolumeSellChart.map(parseFloat); 
 	
@@ -829,7 +828,7 @@ function totalRoomRoomAvailablePieChart(){
 
 	//Get String total room and add to array
 	var totalRoomChart = new Array();
-	var totalRoomChartTemp= "<%=request.getAttribute("roomDataChart")%>";
+	var totalRoomChartTemp= "<%=request.getAttribute("roomFactForeignInvestorAuctionChart")%>";
 	totalRoomChart = totalRoomChartTemp.split(',');
 	totalRoomChart =totalRoomChart.map(parseFloat); 
 	let sumTotalRoom = 0;
@@ -839,7 +838,7 @@ function totalRoomRoomAvailablePieChart(){
 	
 	//Get String  total Volume sell and add to array
 	var totalRoomAvailableChart = new Array();
-	var totalRoomAvailableChartTemp= "<%=request.getAttribute("roomAvailableDataChart")%>";
+	var totalRoomAvailableChartTemp= "<%=request.getAttribute("roomAvailableFactForeignInvestorAuctionChart")%>";
 	totalRoomAvailableChart = totalRoomAvailableChartTemp.split(',');
 	totalRoomAvailableChart =totalRoomAvailableChart.map(parseFloat); 
 	
@@ -880,11 +879,11 @@ function totalVolumeBarChart(){
 
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameFactTradeChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalVolumeChart and add to array
 	var totalVolumeChart = new Array();
-	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeDataChart")%>";
+	var totalVolumeChartTemp= "<%=request.getAttribute("totalVolumeFactTradeChart")%>";
 	totalVolumeChart = totalVolumeChartTemp.split(',');
 	totalVolumeChart =totalVolumeChart.map(parseFloat); 
 	totalVolumeChartArrayTemp = totalVolumeChart.map(parseFloat); 
@@ -953,11 +952,11 @@ function totalPriceBarChart(){
 
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameFactTradeChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalPriceChart and add to array
 	var totalChart = new Array();
-	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceDataChart")%>";
+	var totalPriceChartTemp= "<%=request.getAttribute("totalPriceFactTradeChart")%>";
 	totalPriceChart = totalPriceChartTemp.split(',');
 	totalPriceChart =totalPriceChart.map(parseFloat); 
 	totalPriceChartArrayTemp = totalPriceChart.map(parseFloat); 
@@ -1027,11 +1026,11 @@ function totalMarketCapitalizationBarChart(){
 
 	//Get String companyNameChart and add to array
 	var companyNameChart = new Array();
-	var companyNameTemp= "<%=request.getAttribute("companyNameDataChart")%>";
+	var companyNameTemp= "<%=request.getAttribute("companyNameFactTradeChart")%>";
 	companyNameChart = companyNameTemp.split(',');
 	//Get String totalMarketCapitalizationChart and add to array
 	var totalChart = new Array();
-	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationDataChart")%>";
+	var totalMarketCapitalizationChartTemp= "<%=request.getAttribute("totalMarketCapitalizationFactTradeChart")%>";
 			totalMarketCapitalizationChart = totalMarketCapitalizationChartTemp
 					.split(',');
 			totalMarketCapitalizationChart = totalMarketCapitalizationChart
@@ -1311,35 +1310,6 @@ function totalMarketCapitalizationBarChart(){
 	      popupContainer8.classList.remove("active");
 	    });
 	</script>
-<!-- 
-	<script>
-        document.onreadystatechange = function() {
-            if (document.readyState !== "complete") {
-                document.querySelector(
-                  "body").style.visibility = "hidden";
-                document.querySelector(
-                  "#loader").style.visibility = "visible";
-            } else {
-                document.querySelector(
-                  "#loader").style.display = "none";
-                document.querySelector(
-                  "body").style.visibility = "visible";
-            }
-        };
-    </script>
-
-	<script>
-		var myVar;
-		
-		function myFunction() {
-		  myVar = setTimeout(showPage, 2000);
-		}
-		
-		function showPage() {
-		  document.getElementById("loader").style.display = "none";
-		  document.getElementById("myDiv").style.display = "block";
-		}
-	</script> -->
 
 </body>
 
